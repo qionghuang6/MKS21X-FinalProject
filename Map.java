@@ -27,11 +27,13 @@ public class Map{
     for (int a = 0; a < 10; a++ ) {
       int lastX = currentX;
       int lastY = currentY;
+      System.out.println("" + currentX + " " + currentY);
       int ranSize = ((int)(Math.random() * 7));
+      System.out.println(ranSize);
       if(Math.random() > 0.5){
-        startX += ranSize;
+        currentX += ranSize;
       } else{
-        startY += ranSize;
+        currentY += ranSize;
       }
       if(!buildArea(currentX,currentY,ranSize -1)){
         currentX = lastX;
@@ -55,7 +57,7 @@ public class Map{
   private boolean buildArea(int xS, int yS, int ranSize){
     int width = (2 * ((int) (Math.random() * 4)) + ranSize);
     int length = (2 * ((int) (Math.random() * 4)) + ranSize);
-    System.out.println("" + length + " " + width);
+    // System.out.println("" + length + " " + width);
     if (xS - (length - 1) / 2 < 0 || xS + (length - 1) / 2 > tileMap[0].length ||
         yS - (width - 1) / 2 < 0 || yS + (width - 1) / 2 > tileMap.length){
           return false;
