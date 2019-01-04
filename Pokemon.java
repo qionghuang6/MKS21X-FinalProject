@@ -4,6 +4,7 @@ public class Pokemon {
         //Instance Variables:
         private String name;
         private String type;
+        private String symbol;
         private int hp;
         private int color;
         private int level;
@@ -13,13 +14,14 @@ public class Pokemon {
         private ArrayList<Move> moveset;
 
         //Constructor:
-        public Pokemon(String n, String t, int h, int c, int l) {
+        public Pokemon(String n, String t, String s, int h, int c, int l) {
                exp = 0;
                name = n;
                type = t;
                hp = h;
                color = c;
                level = l;
+               symbol = s;
                moveset = new ArrayList<Move>();
                x = 0;
                y = 0;
@@ -50,6 +52,10 @@ public class Pokemon {
                 return level;
         }
 
+        public String getSymbol() {
+                return symbol;
+        }
+
         public ArrayList<Move> getMoveset() {
                 return moveset;
         }
@@ -66,6 +72,18 @@ public class Pokemon {
         public void setLocation(int x, int y) {
                 this.x = x;
                 this.y = y;
+        }
+
+        public void loseHp(int num) {
+                hp -= num;
+        }
+
+        public void healHp(int num) {
+                hp += num;
+        }
+
+        public void setSymbol(String s) {
+                symbol = s;
         }
 
         //toString()

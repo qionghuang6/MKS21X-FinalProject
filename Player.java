@@ -1,4 +1,4 @@
-public class Player extends Pokemon {
+public class Player {
         //Instance Variables:
         private Pokemon player;
         private Pokemon partner;
@@ -6,11 +6,20 @@ public class Player extends Pokemon {
         //private ArrayList<Pokemon> startingOptions: Starting pokemon the player can choose. Should be defined inside of the main program.
 
         //Constructor:
-        public Player(String n, String t, int h, int c, int l) {
-                super(n,t,h,c,l);
+        //Only defines the pokemon the player is using.
+        public Player(String n, String t, String s, int h, int c, int l) {
+                player = new Pokemon(n,t,s,h,c,l);
+        }
+
+        //Takes in a pokemon, set its variables = to it. Other params are for partner & gold.
+        public Player(Pokemon p, Pokemon pt, int g) {
+                player = p;
+                partner = pt;
+                gold = g;
         }
 
         //Accessor methods:
+
         public Pokemon getPlayer() {
                 return player;
         }
@@ -19,25 +28,25 @@ public class Player extends Pokemon {
                 return partner;
         }
 
-        public Pokemon getGold() {
+        public int getGold() {
                 return gold;
         }
 
         //Mutator methods:
         //This method would only be used at the start of the program.
-        public setPlayer(Pokemon p) {
+        public void setPlayer(Pokemon p) {
                 player = p;
         }
 
-        public setPartner(Pokemon p) {
+        public void setPartner(Pokemon p) {
                 partner = p;
         }
 
-        public addGold(int a) {
+        public void addGold(int a) {
                 gold += a;
         }
 
-        public decreaseGold(int d) {
+        public void decreaseGold(int d) {
                 gold -= d;
         }
 }
