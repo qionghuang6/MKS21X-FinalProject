@@ -1,4 +1,6 @@
 import java.lang.Math;
+import java.util.concurrent.TimeUnit;
+import java.util.Random;
 
 public class Map{
   private int startX, startY;
@@ -10,6 +12,7 @@ public class Map{
       throw new IllegalArgumentException();
     }
     tileMap = new Tile[width][length];
+    Random random = new Random();
     //sets up tiles on map
     for (int r = 0; r < tileMap.length; r++) {
       for(int c = 0; c < tileMap[0].length; c++){
@@ -24,18 +27,20 @@ public class Map{
     int currentY = startY;
     buildArea(startX,startY,3); //makes first area of movable land around start points
     //moves around building Areas
-    for (int a = 0; a < 10; a++ ) {
+    for (int a = 0; a < 30; a++ ) {
       int lastX = currentX;
       int lastY = currentY;
-      System.out.println("" + currentX + " " + currentY);
-      int ranSize = ((int)(Math.random() * 7));
-      System.out.println(ranSize);
-      if(Math.random() > 0.5){
+      System.out.print("X" + currentX + " Y" + currentY);
+      int lastRanSize = 0;
+      int ranSize = (random.nextBoolean() ? -1 : 1) * ((int)(Math.random() * 7) + 3);
+      double axis = 2.0 * Math.random() - 1.0;
+      if(axis > 0){
         currentX += ranSize;
       } else{
         currentY += ranSize;
       }
-      if(!buildArea(currentX,currentY,ranSize -1)){
+      if(currentX < 0 || currentX > tileMap[0].length || currentY < 0 || currentY > tileMap.length ||
+          !buildArea(currentX,currentY,ranSize -1)){
         currentX = lastX;
         currentY = lastY;
       }
@@ -55,11 +60,14 @@ public class Map{
   //width and length are randomly generated from 3 to 9
   //surrounds moveable area in walls
   private boolean buildArea(int xS, int yS, int ranSize){
-    int width = (2 * ((int) (Math.random() * 4)) + ranSize);
-    int length = (2 * ((int) (Math.random() * 4)) + ranSize);
+    int width = (2 * ((int) (Math.random() * 4))) + ranSize + 3;
+    int length = (2 * ((int) (Math.random() * 4))) + ranSize + 3;
+    System.out.print(" L" + length + " W" + width);
     // System.out.println("" + length + " " + width);
-    if (xS - (length - 1) / 2 < 0 || xS + (length - 1) / 2 > tileMap[0].length ||
-        yS - (width - 1) / 2 < 0 || yS + (width - 1) / 2 > tileMap.length){
+    System.out.print(" max x" + (xS - ((length - 1) / 2) < 0) + " " + (xS + ((length - 1) / 2)));
+    System.out.println(" max y" + (yS - (width - 1) / 2 < 0) + " " + yS + (width - 1) / 2);
+    if (xS - ((length - 1) / 2) < 0 || xS + ((length - 1) / 2) >= tileMap[0].length ||
+        yS - (width - 1) / 2 < 0 || yS + (width - 1) / 2 >= tileMap.length){
           return false;
         }
     for(int x = xS - ((length - 1) / 2); x <= xS + ((length - 1) / 2) ; x++){
