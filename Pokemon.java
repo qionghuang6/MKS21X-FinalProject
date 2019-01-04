@@ -8,6 +8,8 @@ public class Pokemon {
         private int color;
         private int level;
         private int exp;
+        private int x;
+        private int y;
         private ArrayList<Move> moveset;
 
         //Constructor:
@@ -19,6 +21,8 @@ public class Pokemon {
                color = c;
                level = l;
                moveset = new ArrayList<Move>();
+               x = 0;
+               y = 0;
         }
 
         //Accessor Methods:
@@ -57,6 +61,11 @@ public class Pokemon {
 
         public void addMove(String n, String t, int p, int l, int b) {
                 moveset.add(new Move(n, t, p, l, b));
+        }
+
+        public void setLocation(int x, int y) {
+                this.x = x;
+                this.y = y;
         }
 
         //toString()
