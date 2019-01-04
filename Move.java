@@ -43,11 +43,16 @@ public class Move {
         }
 
         //Mutator Methods:
-        private void decreasePP() {
+        public void decreasePp() {
                currentPp--; 
         }
 
-        private void restorePP() {
+        public void restorePp() {
                currentPp++; 
+        }
+
+        //toString
+        public String toString() {
+                return getName() + " PP:" + getCurrentPp() + "/" + getPp();
         }
 }

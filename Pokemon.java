@@ -18,6 +18,7 @@ public class Pokemon {
                hp = h;
                color = c;
                level = l;
+               moveset = new ArrayList<Move>();
         }
 
         //Accessor Methods:
@@ -45,6 +46,10 @@ public class Pokemon {
                 return level;
         }
 
+        public ArrayList<Move> getMoveset() {
+                return moveset;
+        }
+
         //Mutator methods:
         public void addMove(Move n) {
                 moveset.add(n);
@@ -52,5 +57,10 @@ public class Pokemon {
 
         public void addMove(String n, String t, int p, int l, int b) {
                 moveset.add(new Move(n, t, p, l, b));
+        }
+
+        //toString()
+        public String toString() {
+                return getName() + " LVL:" + getLevel() + " HP:" + getHp() + " EXP:" + getExp();
         }
 }
