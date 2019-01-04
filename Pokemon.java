@@ -18,5 +18,28 @@ public class Pokemon {
                level = l;
         }
 
+        //Accessor Methods:
+        public String getName() {
+                return name;
+        }
 
+        public String getType() {
+                return type;
+        }
+
+        public int getHp() {
+                return hp;
+        }
+
+        public int getColor() {
+                return color;
+        }
+
+        public int getExp() {
+                return exp;
+        }
+
+        public int getLevel() {
+                return level;
+        }
 }
