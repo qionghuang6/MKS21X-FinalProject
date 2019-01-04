@@ -9,6 +9,16 @@ public class Map{
       throw new IllegalArgumentException();
     }
     tileMap = new Tile[width][length];
+    startX = 5;
+    startY = 5;
+    buildArea(5,5);
+    for (int r = 0; r < tileMap.length; r++) {
+      for(int c = 0; c < tileMap[0].length; c++){
+        if(tileMap[r][c] == null){
+          tileMap[r][c] = new Tile (4,false);
+        }
+      }
+    }
   }
 
   public Map(){
@@ -19,23 +29,6 @@ public class Map{
     return tileMap;
   }
 
-  private void buildMap(){
-    int currentX = 5;
-    int currentY = 5;
-  }
-
-  private void buildStart(){
-    startX = 5;
-    startY = 5;
-    buildArea(5,5);
-    for (Tile[] tileRow: tileMap) {
-      for(Tile t: tileRow){
-        if(t == null){
-          t = new Tile (2,false);
-        }
-      }
-    }
-  }
   private boolean buildArea(int xS, int yS){
     int width = (2 * (int) Math.random() * 2) + 3;
     int length = (2 * (int) Math.random() * 2) + 3;
