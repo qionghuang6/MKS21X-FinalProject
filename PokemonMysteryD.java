@@ -29,11 +29,10 @@ public class PokemonMysteryD{
 
     Map testMap = new Map();
     Tile[][] mapMap = testMap.getMap();
-    System.out.println(mapMap[0][0].getColor());
     for (int x = 0; x < mapMap.length;x++) {
       for(int y = 0 ; y < mapMap[0].length;y++){
         terminal.moveCursor(x,y);
-        terminal.putCharacter(' ');
+        terminal.putCharacter(("" + x).charAt(0));
         if(mapMap[x][y].getColor() == 0){
           terminal.applyBackgroundColor(Terminal.Color.YELLOW);
         }
@@ -41,7 +40,7 @@ public class PokemonMysteryD{
           terminal.applyBackgroundColor(Terminal.Color.RED);
         }
         if(mapMap[x][y].getColor() == 4){
-          terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
+          terminal.applyBackgroundColor(Terminal.Color.GREEN);
         }
       }
     }
@@ -54,6 +53,7 @@ public class PokemonMysteryD{
           terminal.exitPrivateMode();
           System.exit(0);
         }
+        putString(1,35,terminal,key+"        ");
       }
     }
   }

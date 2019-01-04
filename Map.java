@@ -30,8 +30,10 @@ public class Map{
   }
 
   private boolean buildArea(int xS, int yS){
-    int width = (2 * (int) Math.random() * 2) + 3;
-    int length = (2 * (int) Math.random() * 2) + 3;
+    int width = 7;
+    int length = 5;
+    //int width = (2 * (int) Math.random() * 2) + 3;
+    //int length = (2 * (int) Math.random() * 2) + 3;
     if (xS - (length - 1) / 2 < 0 || xS + (length - 1) / 2 > tileMap[0].length ||
         yS - (width - 1) / 2 < 0 || yS + (width - 1) / 2 > tileMap.length){
           return false;
