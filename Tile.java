@@ -1,5 +1,5 @@
 public class Tile{
-  int color;
+  int color; //0: Normal Grass 1: Special walkable 2: unwalkable 3: special unwalkable 4: none
   boolean walkable;
   boolean revealed;
 
