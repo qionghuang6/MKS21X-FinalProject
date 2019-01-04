@@ -4,6 +4,7 @@ public class Map{
   int startX, startY;
   Tile[][] tileMap;
 
+  //sets up Map
   public Map(int width, int length){
     if(width < 10 || length < 10){
       throw new IllegalArgumentException();
@@ -11,7 +12,12 @@ public class Map{
     tileMap = new Tile[width][length];
     startX = 5;
     startY = 5;
-    buildArea(6,6);
+    int currentX = startX;
+    int currentY = startY;
+    buildArea(startX,startY);
+    for (int a = 0; a ; ) {
+
+    }
     for (int r = 0; r < tileMap.length; r++) {
       for(int c = 0; c < tileMap[0].length; c++){
         if(tileMap[r][c] == null){
@@ -25,10 +31,14 @@ public class Map{
     this(50,30);
   }
 
+  //getter for tile array
   public Tile[][] getMap(){
     return tileMap;
   }
 
+  //Creates a movable area centered at coordinates xS and yS
+  //width and length are randomly generated from 3 to 9
+  //surrounds moveable area in walls
   private boolean buildArea(int xS, int yS){
     int width = (2 * ((int) (Math.random() * 4)) + 3);
     int length = (2 * ((int) (Math.random() * 4)) + 3);
