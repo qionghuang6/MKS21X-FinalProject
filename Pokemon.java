@@ -7,4 +7,16 @@ public class Pokemon {
         private int level;
         private int exp;
         //private List<Move> moveset; //Remember to import List.java! 
+
+        //Constructor:
+        public Pokemon(String n, String t, int h, int c, int l) {
+               exp = 0;
+               name = n;
+               type = t;
+               hp = h;
+               color = c;
+               level = l;
+        }
+
+
 }
