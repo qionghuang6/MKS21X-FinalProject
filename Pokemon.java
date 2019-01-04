@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Pokemon {
         //Instance Variables:
         private String name;
@@ -6,7 +8,7 @@ public class Pokemon {
         private int color;
         private int level;
         private int exp;
-        //private List<Move> moveset; //Remember to import List.java! 
+        private ArrayList<Move> moveset;
 
         //Constructor:
         public Pokemon(String n, String t, int h, int c, int l) {
@@ -41,5 +43,14 @@ public class Pokemon {
 
         public int getLevel() {
                 return level;
+        }
+
+        //Mutator methods:
+        public void addMove(Move n) {
+                moveset.add(n);
+        }
+
+        public void addMove(String n, String t, int p, int l, int b) {
+                moveset.add(new Move(n, t, p, l, b));
         }
 }
