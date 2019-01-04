@@ -20,6 +20,10 @@ public class Tile{
     this(0,false);
   }
 
+  public void makeWalkable(int color){
+    setColor(color);
+    walkable = true;
+  }
   //setter for tile color
   public void setColor(int color){
     this.color = color;
