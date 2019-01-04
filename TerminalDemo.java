@@ -27,7 +27,7 @@ public class TerminalDemo {
 		int x = 10;
 		int y = 10;
 
-		Terminal terminal = TerminalFacade.createTerminal();
+		Terminal terminal = TerminalFacade.createUnixTerminal();
 		terminal.enterPrivateMode();
 
 		TerminalSize terminalSize = terminal.getTerminalSize();
