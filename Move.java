@@ -15,4 +15,24 @@ public class Move {
                 baseDamage = b;
         }
 
+        //Accessor Methods:
+        public String getName() {
+                return name;
+        }
+
+        public String getType() {
+                return type;
+        }
+
+        public int getPp() {
+                return pp;
+        }
+
+        public int getLevelRequirement() {
+                return levelRequirement;
+        }
+
+        public int getBaseDamage() {
+                return baseDamage;
+        }
 }
