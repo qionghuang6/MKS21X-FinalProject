@@ -32,7 +32,7 @@ public class PokemonMysteryD{
     for (int x = 0; x < mapMap.length;x++) {
       for(int y = 0 ; y < mapMap[0].length;y++){
         terminal.moveCursor(x,y);
-        terminal.putCharacter(("" + x).charAt(0));
+        terminal.putCharacter(("" + y).charAt(0));
         if(mapMap[x][y].getColor() == 0){
           terminal.applyBackgroundColor(Terminal.Color.YELLOW);
         }
@@ -44,6 +44,8 @@ public class PokemonMysteryD{
         }
       }
     }
+    terminal.moveCursor(5,5);
+    terminal.applyBackgroundColor(Terminal.Color.WHITE);
     boolean running = true;
     while (running){
       Key key = terminal.readInput();
