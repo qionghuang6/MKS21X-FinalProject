@@ -70,8 +70,8 @@ public class Map{
     // System.out.println("" + length + " " + width);
     //System.out.print(" max x" + (xS - ((length - 1) / 2)) + " " + (xS + ((length - 1) / 2)));
     //System.out.println(" max y" + (yS - (width - 1) / 2) + " " + yS + (width - 1) / 2);
-    if (xS - ((length - 1) / 2) < 1 || xS + ((length - 1) / 2) >= tileMap[0].length -1||
-        yS - (width - 1) / 2 < 1 || yS + (width - 1) / 2 >= tileMap.length - 1){
+    if (xS - ((length - 1) / 2) < 1 || xS + ((length - 1) / 2) >= tileMap[0].length -2||
+        yS - (width - 1) / 2 < 1 || yS + (width - 1) / 2 >= tileMap.length - 2){
           return false;
         }
     for(int x = xS - ((length - 1) / 2); x <= xS + ((length - 1) / 2) ; x++){
