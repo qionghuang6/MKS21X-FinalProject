@@ -21,19 +21,19 @@ public class Map{
         //}
       }
     }
-    startX = 20;
-    startY = 20;
+    startX =  ((int) (Math.random() * 20) + 10);
+    startY = ((int) (Math.random() * 20) + 10);
     int currentX = startX;
     int currentY = startY;
     buildArea(startX,startY,3); //makes first area of movable land around start points
     //moves around building Areas
-    for (int a = 0; a < 250; a++ ) {
+    for (int a = 0; a < 100; a++ ) {
       int lastX = currentX;
       int lastY = currentY;
-      System.out.print("X" + currentX + " Y" + currentY);
+      //System.out.print("X" + currentX + " Y" + currentY);
       int lastRanSize = 0;
       boolean goRight = true;
-      if(Math.random() < 0.125){
+      if(Math.random() < 0.5){
         goRight = false;
       }
       int ranSize = (goRight ? -1 : 1) * (2 * ((int)(Math.random() * 11)) + 1);
@@ -52,7 +52,7 @@ public class Map{
   }
 
   public Map(){
-    this(50,30);
+    this(70,30);
   }
 
   //getter for tile array
@@ -66,10 +66,10 @@ public class Map{
   private boolean buildArea(int xS, int yS, int ranSize){
     int width = (2 * ((int) (Math.random() * 4))) + Math.abs(ranSize) + 1;
     int length = (2 * ((int) (Math.random() * 4))) + Math.abs(ranSize) + 1;
-    System.out.print(" L" + length + " W" + width);
+    //System.out.print(" L" + length + " W" + width);
     // System.out.println("" + length + " " + width);
-    System.out.print(" max x" + (xS - ((length - 1) / 2)) + " " + (xS + ((length - 1) / 2)));
-    System.out.println(" max y" + (yS - (width - 1) / 2) + " " + yS + (width - 1) / 2);
+    //System.out.print(" max x" + (xS - ((length - 1) / 2)) + " " + (xS + ((length - 1) / 2)));
+    //System.out.println(" max y" + (yS - (width - 1) / 2) + " " + yS + (width - 1) / 2);
     if (xS - ((length - 1) / 2) < 1 || xS + ((length - 1) / 2) >= tileMap[0].length -1||
         yS - (width - 1) / 2 < 1 || yS + (width - 1) / 2 >= tileMap.length - 1){
           return false;
