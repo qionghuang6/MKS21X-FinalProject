@@ -37,3 +37,4 @@
 >> * Create accessor methods, mutator methods, etc.
 > * Update Driver with code utilizing the Player class.
 ### January 5th - 6th, 2019: Occupied with StuyPulse Robotics. (Start of Build Season)
+>>> To sleep or to work on APCS project? A wise pokemon trainer told me to sleep.
