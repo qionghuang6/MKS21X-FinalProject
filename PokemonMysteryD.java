@@ -35,13 +35,13 @@ public class PokemonMysteryD{
         terminal.putCharacter(' ');
         //terminal.putCharacter(("" + y).charAt(0));
         if(mapMap[x][y].getColor() == 0){
-          terminal.applyBackgroundColor(Terminal.Color.YELLOW);
+          terminal.applyBackgroundColor(131,203,58);
         }
         if(mapMap[x][y].getColor() == 2){
-          terminal.applyBackgroundColor(Terminal.Color.RED);
+          terminal.applyBackgroundColor(201,134,0);
         }
         if(mapMap[x][y].getColor() == 4){
-          terminal.applyBackgroundColor(Terminal.Color.GREEN);
+          terminal.applyBackgroundColor(52,111,18);
         }
       }
     }
@@ -56,7 +56,6 @@ public class PokemonMysteryD{
           terminal.exitPrivateMode();
           System.exit(0);
         }
-        putString(1,35,terminal,key+"        ");
       }
     }
   }
