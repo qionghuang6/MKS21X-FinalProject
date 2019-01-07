@@ -36,3 +36,4 @@
 > * Create Player Class that utilizes the Pokemon class.
 >> * Create accessor methods, mutator methods, etc.
 > * Update Driver with code utilizing the Player class.
+### January 5th - 6th, 2019: Occupied with StuyPulse Robotics. (Start of Build Season)
