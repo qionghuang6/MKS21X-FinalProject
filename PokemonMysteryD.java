@@ -13,35 +13,63 @@ import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
 public class PokemonMysteryD{
+  static Terminal terminal;
+  static TerminalSize terminalSize;
   public static void putString(int r, int c,Terminal t, String s){
 		t.moveCursor(r,c);
 		for(int i = 0; i < s.length();i++){
 			t.putCharacter(s.charAt(i));
 		}
 	}
+
   public static void main(String[] args) {
 
-    Terminal terminal = TerminalFacade.createUnixTerminal();
+    terminal = TerminalFacade.createUnixTerminal();
 		terminal.enterPrivateMode();
 
-		TerminalSize terminalSize = terminal.getTerminalSize();
+		terminalSize = terminal.getTerminalSize();
+		terminal.setCursorVisible(false);
+
+  public static void putString(int r, int c,Terminal t,
+        String s, Terminal.Color forg, Terminal.Color back ){
+    t.moveCursor(r,c);
+    t.applyBackgroundColor(forg);
+    t.applyForegroundColor(Terminal.Color.BLACK);
+
+    for(int i = 0; i < s.length();i++){
+      t.putCharacter(s.charAt(i));
+    }
+    t.applyBackgroundColor(Terminal.Color.DEFAULT);
+    t.applyForegroundColor(Terminal.Color.DEFAULT);
+  }
+  public static void setBg(Terminal t, int x, int y, int r, int g, int b){
+    t.moveCursor(x,y);
+    t.applyBackgroundColor(r,g,b);
+
+  }
+  public static void main(String[] args) {
+
+    terminal = TerminalFacade.createUnixTerminal();
+		terminal.enterPrivateMode();
+
+		terminalSize = terminal.getTerminalSize();
 		terminal.setCursorVisible(false);
 
     Map testMap = new Map();
     Tile[][] mapMap = testMap.getMap();
     for (int x = 0; x < mapMap.length;x++) {
       for(int y = 0 ; y < mapMap[0].length;y++){
-        terminal.moveCursor(x,y);
         terminal.putCharacter(' ');
         //terminal.putCharacter(("" + y).charAt(0));
         if(mapMap[x][y].getColor() == 0){
-          terminal.applyBackgroundColor(131,203,58);
+          setBg(terminal, x,y,131,203,58);
         }
         if(mapMap[x][y].getColor() == 2){
-          terminal.applyBackgroundColor(201,134,0);
+          setBg(terminal,x,y,201,134,0);
         }
         if(mapMap[x][y].getColor() == 4){
-          terminal.applyBackgroundColor(52,111,18);
+          setBg(terminal,x,y,52,111,18);
+
         }
       }
     }
