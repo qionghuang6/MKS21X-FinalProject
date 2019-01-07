@@ -7,7 +7,7 @@ public class Player {
 
         //Constructor:
         //Only defines the pokemon the player is using.
-        public Player(String n, String t, String s, int h, int c, int l) {
+        public Player(String n, String t, String s, int h, int[] c, int l) {
                 player = new Pokemon(n,t,s,h,c,l);
         }
 
@@ -48,5 +48,21 @@ public class Player {
 
         public void decreaseGold(int d) {
                 gold -= d;
+        }
+
+        public void moveLeft() {
+              player.setLocation(player.getX() - 1, player.getY());
+        }
+
+        public void moveRight() {
+              player.setLocation(player.getX() + 1, player.getY());
+        }
+
+        public void moveUp() {
+              player.setLocation(player.getX(), player.getY() + 1);
+        }
+
+        public void moveDown() {
+              player.setLocation(player.getX(), player.getY() - 1);
         }
 }
