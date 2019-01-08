@@ -22,17 +22,12 @@ public class PokemonMysteryD{
 		}
 	}
 
-  public static void putString(int r, int c,Terminal t,
-        String s, Terminal.Color forg, Terminal.Color back ){
-    t.moveCursor(r,c);
-    t.applyBackgroundColor(forg);
-    t.applyForegroundColor(Terminal.Color.BLACK);
-
-    for(int i = 0; i < s.length();i++){
-      t.putCharacter(s.charAt(i));
-    }
-    t.applyBackgroundColor(Terminal.Color.DEFAULT);
-    t.applyForegroundColor(Terminal.Color.DEFAULT);
+  public static void putPokemon(int x, int y,Terminal t,
+        String symbol, int[] rgb){
+    t.moveCursor(x,y);
+    t.applyBackgroundColor(rgb[0],rgb[1],rgb[2]);
+    t.applyForegroundColor(Terminal.Color.WHITE);
+    t.putCharacter(symbol.charAt(0));
   }
   public static void setBg(Terminal t, int x, int y, int r, int g, int b){
     t.moveCursor(x,y);
@@ -55,7 +50,7 @@ public class PokemonMysteryD{
     int[] squirtColor = {33,232,323};
     Pokemon charmander = new Pokemon("charmander", "fire", "@", 30, charColor, 5);
     Pokemon squirtle = new Pokemon("squirtle", "water", "O", 30, squirtColor, 5);
-    Player bryan = new Player(charmander, squirtle, 300);
+    Player player = new Player(charmander, squirtle, 300);
 
     terminal = TerminalFacade.createUnixTerminal();
 		terminal.enterPrivateMode();
@@ -70,10 +65,9 @@ public class PokemonMysteryD{
         terminal.putCharacter(' ');
         //terminal.putCharacter(("" + y).charAt(0));
         setBg(terminal,mapMap[x][y],x,y);
-
         }
       }
-
+    putPokemon(testMap.getStartX(),testMap.getStartY(),terminal,player.getPlayer().getSymbol(), player.getPlayer().getColorArr()) ;
     terminal.moveCursor(5,5);
     terminal.applyBackgroundColor(Terminal.Color.WHITE);
     boolean running = true;

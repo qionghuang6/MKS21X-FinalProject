@@ -55,6 +55,12 @@ public class Map{
     this(70,30);
   }
 
+  public int getStartX(){
+    return startX;
+  }
+  public int getStartY(){
+    return startY;
+  }
   //getter for tile array
   public Tile[][] getMap(){
     return tileMap;
