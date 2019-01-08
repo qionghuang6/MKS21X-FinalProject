@@ -1,5 +1,3 @@
-
-
 //API : http://mabe02.github.io/lanterna/apidocs/2.1/
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
@@ -29,7 +27,7 @@ public class TerminalDemo {
 		int x = 10;
 		int y = 10;
 
-		Terminal terminal = TerminalFacade.createTerminal();
+		Terminal terminal = TerminalFacade.createUnixTerminal();
 		terminal.enterPrivateMode();
 
 		TerminalSize terminalSize = terminal.getTerminalSize();
