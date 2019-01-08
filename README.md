@@ -38,3 +38,13 @@
 > * Update Driver with code utilizing the Player class.
 ### January 5th - 6th, 2019: Occupied with StuyPulse Robotics. (Start of Build Season)
 >>> To sleep or to work on APCS project? A wise pokemon trainer told me to sleep.
+### January 7th, 2019:
+#### Bryan Lai: <img src="http://data.whicdn.com/images/32538816/mudkip_by_cheepers-d46kd61_large.png" width="40" length="40">
+> * Merge the changes in bl/pokemon to master.
+> * Change int color to an array of ints to be used for specific methods dealing with background/fore-color in the lanterna documentation.
+> * Git rebase to remove changes in a previous commit that caused issues before merging.
+#### Qiong Zhou Huang: <img src = "https://pbs.twimg.com/profile_images/651942416866480128/chUjFeMM.jpg" width = "40" length = "40">
+> * Changed map starting size and randomized starting location near center on map
+> * Changed from using Terminal.color to using rgb values for the map
+> * Created setBg method to use replace how the background is currently set and to be used to reset background color after Pokemon has moved on it.
+> * Dealt with lots of problems after merging before pushing commits and messing up with moving the HEAD. 
