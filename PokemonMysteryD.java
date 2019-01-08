@@ -11,9 +11,12 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.ScreenCharacterStyle;
 
 public class PokemonMysteryD{
   static Terminal terminal;
+  static Screen options;
   static TerminalSize terminalSize;
   public static void putString(int r, int c,Terminal t, String s){
 		t.moveCursor(r,c);
@@ -40,13 +43,18 @@ public class PokemonMysteryD{
 
   }
   public static void main(String[] args) {
+        //Deals with terminal.
+          terminal = TerminalFacade.createUnixTerminal();
+          terminal.enterPrivateMode();
 
-    terminal = TerminalFacade.createUnixTerminal();
-		terminal.enterPrivateMode();
+          terminalSize = terminal.getTerminalSize();
+          terminal.setCursorVisible(false);
 
-		terminalSize = terminal.getTerminalSize();
-		terminal.setCursorVisible(false);
+        //Screen Options:
+        options = new Screen(terminal,terminalSize);
 
+
+    //Randomnly generated map for dungeons:
     Map testMap = new Map();
     Tile[][] mapMap = testMap.getMap();
     for (int x = 0; x < mapMap.length;x++) {
@@ -69,11 +77,22 @@ public class PokemonMysteryD{
     boolean running = true;
     while (running){
       Key key = terminal.readInput();
+      boolean optionsOn = false;
 			if (key != null){
         if (key.getKind() == Key.Kind.Escape) {
           running = false;
           terminal.exitPrivateMode();
           System.exit(0);
+        }
+        if (key.getKind() == Key.Kind.Backspace) {
+                if(!optionsOn) {
+                        options.startScreen();
+                        options.putString(50,30,"Options",Terminal.Color.BLUE,Terminal.Color.RED,ScreenCharacterStyle.Blinking);
+                        options.refresh();
+                        optionsOn = true;
+                }
+                else {
+                        options.stopScreen();}
         }
       }
     }
