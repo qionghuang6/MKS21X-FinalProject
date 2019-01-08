@@ -22,14 +22,6 @@ public class PokemonMysteryD{
 		}
 	}
 
-  public static void main(String[] args) {
-
-    terminal = TerminalFacade.createUnixTerminal();
-		terminal.enterPrivateMode();
-
-		terminalSize = terminal.getTerminalSize();
-		terminal.setCursorVisible(false);
-
   public static void putString(int r, int c,Terminal t,
         String s, Terminal.Color forg, Terminal.Color back ){
     t.moveCursor(r,c);
@@ -47,7 +39,23 @@ public class PokemonMysteryD{
     t.applyBackgroundColor(r,g,b);
 
   }
+  public static void setBg(Terminal terminal, Tile t, int x, int y){
+    if(t.getColor() == 0){
+      setBg(terminal, x,y,131,203,58);
+    }
+    if(t.getColor() == 2){
+      setBg(terminal,x,y,201,134,0);
+    }
+    if(t.getColor() == 4){
+      setBg(terminal,x,y,52,111,18);
+  }
+}
   public static void main(String[] args) {
+    int[] charColor = {3,4,5};
+    int[] squirtColor = {33,232,323};
+    Pokemon charmander = new Pokemon("charmander", "fire", "@", 30, charColor, 5);
+    Pokemon squirtle = new Pokemon("squirtle", "water", "O", 30, squirtColor, 5);
+    Player bryan = new Player(charmander, squirtle, 300);
 
     terminal = TerminalFacade.createUnixTerminal();
 		terminal.enterPrivateMode();
@@ -61,18 +69,11 @@ public class PokemonMysteryD{
       for(int y = 0 ; y < mapMap[0].length;y++){
         terminal.putCharacter(' ');
         //terminal.putCharacter(("" + y).charAt(0));
-        if(mapMap[x][y].getColor() == 0){
-          setBg(terminal, x,y,131,203,58);
-        }
-        if(mapMap[x][y].getColor() == 2){
-          setBg(terminal,x,y,201,134,0);
-        }
-        if(mapMap[x][y].getColor() == 4){
-          setBg(terminal,x,y,52,111,18);
+        setBg(terminal,mapMap[x][y],x,y);
 
         }
       }
-    }
+
     terminal.moveCursor(5,5);
     terminal.applyBackgroundColor(Terminal.Color.WHITE);
     boolean running = true;
@@ -84,6 +85,7 @@ public class PokemonMysteryD{
           terminal.exitPrivateMode();
           System.exit(0);
         }
+
       }
     }
   }
