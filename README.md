@@ -47,4 +47,4 @@
 > * Changed map starting size and randomized starting location near center on map
 > * Changed from using Terminal.color to using rgb values for the map
 > * Created setBg method to use replace how the background is currently set and to be used to reset background color after Pokemon has moved on it.
-
+> * Dealt with lots of problems after merging before pushing commits and messing up with moving the HEAD. 
