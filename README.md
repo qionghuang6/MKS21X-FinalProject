@@ -38,3 +38,8 @@
 > * Update Driver with code utilizing the Player class.
 ### January 5th - 6th, 2019: Occupied with StuyPulse Robotics. (Start of Build Season)
 >>> To sleep or to work on APCS project? A wise pokemon trainer told me to sleep.
+### January 7th, 2019:
+#### Bryan Lai: <img src="http://data.whicdn.com/images/32538816/mudkip_by_cheepers-d46kd61_large.png" width="40" length="40">
+> * Merge the changes in bl/pokemon to master.
+> * Change int color to an array of ints to be used for specific methods dealing with background/fore-color in the lanterna documentation.
+> * Git rebase to remove changes in a previous commit that caused issues before merging.
