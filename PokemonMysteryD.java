@@ -21,18 +21,7 @@ public class PokemonMysteryD{
 			t.putCharacter(s.charAt(i));
 		}
 	}
-<<<<<<< HEAD
-=======
 
-  public static void main(String[] args) {
-
-    terminal = TerminalFacade.createUnixTerminal();
-		terminal.enterPrivateMode();
-
-		terminalSize = terminal.getTerminalSize();
-		terminal.setCursorVisible(false);
-
->>>>>>> 9fed4bb906f20d0c288474f246d866d8516b12b2
   public static void putString(int r, int c,Terminal t,
         String s, Terminal.Color forg, Terminal.Color back ){
     t.moveCursor(r,c);
@@ -57,10 +46,7 @@ public class PokemonMysteryD{
 
 		terminalSize = terminal.getTerminalSize();
 		terminal.setCursorVisible(false);
-<<<<<<< HEAD
-=======
 
->>>>>>> 9fed4bb906f20d0c288474f246d866d8516b12b2
     Map testMap = new Map();
     Tile[][] mapMap = testMap.getMap();
     for (int x = 0; x < mapMap.length;x++) {
@@ -75,10 +61,6 @@ public class PokemonMysteryD{
         }
         if(mapMap[x][y].getColor() == 4){
           setBg(terminal,x,y,52,111,18);
-<<<<<<< HEAD
-=======
-
->>>>>>> 9fed4bb906f20d0c288474f246d866d8516b12b2
         }
       }
     }
