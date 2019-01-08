@@ -43,3 +43,8 @@
 > * Merge the changes in bl/pokemon to master.
 > * Change int color to an array of ints to be used for specific methods dealing with background/fore-color in the lanterna documentation.
 > * Git rebase to remove changes in a previous commit that caused issues before merging.
+#### Qiong Zhou Huang: <img src = "https://pbs.twimg.com/profile_images/651942416866480128/chUjFeMM.jpg" width = "40" length = "40">
+> * Changed map starting size and randomized starting location near center on map
+> * Changed from using Terminal.color to using rgb values for the map
+> * Created setBg method to use replace how the background is currently set and to be used to reset background color after Pokemon has moved on it.
+
