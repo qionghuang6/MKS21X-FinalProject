@@ -72,12 +72,13 @@ public class PokemonMysteryD{
         }
       }
     }
+
     terminal.moveCursor(5,5);
     terminal.applyBackgroundColor(Terminal.Color.WHITE);
     boolean running = true;
+      boolean optionsOn = false;
     while (running){
       Key key = terminal.readInput();
-      boolean optionsOn = false;
 			if (key != null){
         if (key.getKind() == Key.Kind.Escape) {
           running = false;
@@ -87,14 +88,35 @@ public class PokemonMysteryD{
         if (key.getKind() == Key.Kind.Backspace) {
                 if(!optionsOn) {
                         options.startScreen();
-                        options.putString(50,30,"Options",Terminal.Color.BLUE,Terminal.Color.RED,ScreenCharacterStyle.Blinking);
+                        options.putString(40,10,"Settings and Options",Terminal.Color.BLUE,Terminal.Color.RED,ScreenCharacterStyle.Blinking);
                         options.refresh();
                         optionsOn = true;
                 }
                 else {
-                        options.stopScreen();}
+                        terminal.clearScreen();
+                        options.stopScreen();
+                        options.refresh();
+                        optionsOn = false;
+                        terminal.enterPrivateMode();
+                        //Generates the map again.
+                        for (int x = 0; x < mapMap.length;x++) {
+                                for(int y = 0 ; y < mapMap[0].length;y++){
+                                        terminal.putCharacter(' ');
+                                        //terminal.putCharacter(("" + y).charAt(0));
+                                        if(mapMap[x][y].getColor() == 0){
+                                                setBg(terminal, x,y,131,203,58);
+                                        }
+                                        if(mapMap[x][y].getColor() == 2){
+                                                setBg(terminal,x,y,201,134,0);
+                                        }
+                                        if(mapMap[x][y].getColor() == 4){
+                                                setBg(terminal,x,y,52,111,18);
+                                        }
+                                }
+                        }
+                }
         }
-      }
+                        }
     }
   }
 }
