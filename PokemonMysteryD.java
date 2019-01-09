@@ -34,13 +34,16 @@ public class PokemonMysteryD{
   public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p){
     int curX = p.getX();
     int curY = p.getY();
+    //putString(70, 20,t,"" + curX + " " + curY);
+    t.putCharacter(' ');
+    setBg(t,mapMap[curY][curX],curX,curY);
     putPokemon(curX + dx, curY + dy, t, p);
-    setBg(t,mapMap[curY][curX],curY,curX);
   }
 
   public static void setBg(Terminal t, int x, int y, int r, int g, int b){
     t.moveCursor(y,x);
     t.applyBackgroundColor(r,g,b);
+    terminal.putCharacter(' ');
   }
   public static void setBg(Terminal terminal, Tile t, int x, int y){
     if(t.getColor() == 0){
@@ -66,7 +69,7 @@ public class PokemonMysteryD{
     putPokemon(m.getStartX(),m.getStartY(), t, player.getPlayer());
   }
   public static void main(String[] args) {
-    int[] charColor = {3,4,5};
+    int[] charColor = {240,10,23};
     int[] squirtColor = {33,232,323};
     Pokemon charmander = new Pokemon("charmander", "fire", "@", 30, charColor, 5);
     Pokemon squirtle = new Pokemon("squirtle", "water", "O", 30, squirtColor, 5);
