@@ -35,13 +35,12 @@ public class PokemonMysteryD{
     int curX = p.getX();
     int curY = p.getY();
     putPokemon(curX + dx, curY + dy, t, p);
-    setBg(terminal,mapMap[curX][curY],curX,curY);
+    setBg(t,mapMap[curY][curX],curY,curX);
   }
 
   public static void setBg(Terminal t, int x, int y, int r, int g, int b){
     t.moveCursor(y,x);
     t.applyBackgroundColor(r,g,b);
-
   }
   public static void setBg(Terminal terminal, Tile t, int x, int y){
     if(t.getColor() == 0){
