@@ -53,3 +53,8 @@
 > * Changed setBg
 > * Created method to spawn pokemon at given location
 > * Created methods to randomly spawn player pokemon
+#### Bryan Lai: <img src="http://data.whicdn.com/images/32538816/mudkip_by_cheepers-d46kd61_large.png" width="40" length="40">
+> * Started on options screen.
+> * Created new branch: "options"
+> * Understand Lanterna implementation
+>> * putString(), refresh(), etc.
