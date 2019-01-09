@@ -27,7 +27,7 @@ public class Map{
     int currentY = startY;
     buildArea(startX,startY,3); //makes first area of movable land around start points
     //moves around building Areas
-    for (int a = 0; a < 20; a++ ) {
+    for (int a = 0; a < 100; a++ ) {
       int lastX = currentX;
       int lastY = currentY;
       //System.out.print("X" + currentX + " Y" + currentY);

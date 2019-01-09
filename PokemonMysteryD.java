@@ -22,13 +22,19 @@ public class PokemonMysteryD{
 		}
 	}
 
-  public static void putPokemon(int x, int y,Terminal t,
-        String symbol, int[] rgb){
+  public static void putPokemon(int x, int y, Terminal t, Pokemon p){
+    int[] rgb = p.getColorArr();
     t.moveCursor(y,x);
     t.applyBackgroundColor(rgb[0],rgb[1],rgb[2]);
     t.applyForegroundColor(Terminal.Color.WHITE);
-    t.putCharacter(symbol.charAt(0));
+    t.putCharacter(p.getSymbol().charAt(0));
+    p.setLocation(x,y);
   }
+
+  public static void movePokemon(int dx, int dy, Terminal t, Pokemon p){
+    putPokemon(p.getX() + dx, p.getY() + dy, t, p);
+  }
+
   public static void setBg(Terminal t, int x, int y, int r, int g, int b){
     t.moveCursor(y,x);
     t.applyBackgroundColor(r,g,b);
@@ -55,8 +61,7 @@ public class PokemonMysteryD{
       }
   }
   public static void spawnPlayer(Player player, Terminal t, Map m){
-    putPokemon(m.getStartX(),m.getStartY(),
-    t,player.getPlayer().getSymbol(), player.getPlayer().getColorArr()) ;
+    putPokemon(m.getStartX(),m.getStartY(), t, player.getPlayer());
   }
   public static void main(String[] args) {
     int[] charColor = {3,4,5};
@@ -93,7 +98,18 @@ public class PokemonMysteryD{
           terminal.exitPrivateMode();
           System.exit(0);
         }
-
+        if (key.getKind() == Key.Kind.ArrowLeft) {
+          movePokemon(0,-1,terminal,player.getPlayer());
+				}
+				if (key.getKind() == Key.Kind.ArrowRight) {
+          movePokemon(0,1,terminal,player.getPlayer());
+				}
+				if (key.getKind() == Key.Kind.ArrowUp) {
+          movePokemon(-1,0,terminal,player.getPlayer());
+				}
+				if (key.getKind() == Key.Kind.ArrowDown) {
+          movePokemon(1,0,terminal,player.getPlayer());
+				}
       }
     }
   }
