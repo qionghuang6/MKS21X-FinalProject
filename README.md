@@ -48,3 +48,8 @@
 > * Changed from using Terminal.color to using rgb values for the map
 > * Created setBg method to use replace how the background is currently set and to be used to reset background color after Pokemon has moved on it.
 > * Dealt with lots of problems after merging before pushing commits and messing up with moving the HEAD. 
+### January 7th, 2019:
+#### Qiong Zhou Huang:
+> * Changed setBg
+> * Created method to spawn pokemon at given location
+> * Created methods to randomly spawn player pokemon
