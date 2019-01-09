@@ -31,8 +31,11 @@ public class PokemonMysteryD{
     p.setLocation(x,y);
   }
 
-  public static void movePokemon(int dx, int dy, Terminal t, Pokemon p){
-    putPokemon(p.getX() + dx, p.getY() + dy, t, p);
+  public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p){
+    int curX = p.getX();
+    int curY = p.getY();
+    putPokemon(curX + dx, curY + dy, t, p);
+    setBg(terminal,mapMap[curX][curY],curX,curY);
   }
 
   public static void setBg(Terminal t, int x, int y, int r, int g, int b){
@@ -99,16 +102,16 @@ public class PokemonMysteryD{
           System.exit(0);
         }
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          movePokemon(0,-1,terminal,player.getPlayer());
+          movePokemon(mapMap, 0,-1,terminal,player.getPlayer());
 				}
 				if (key.getKind() == Key.Kind.ArrowRight) {
-          movePokemon(0,1,terminal,player.getPlayer());
+          movePokemon(mapMap, 0,1,terminal,player.getPlayer());
 				}
 				if (key.getKind() == Key.Kind.ArrowUp) {
-          movePokemon(-1,0,terminal,player.getPlayer());
+          movePokemon(mapMap, -1,0,terminal,player.getPlayer());
 				}
 				if (key.getKind() == Key.Kind.ArrowDown) {
-          movePokemon(1,0,terminal,player.getPlayer());
+          movePokemon(mapMap, 1,0,terminal,player.getPlayer());
 				}
       }
     }
