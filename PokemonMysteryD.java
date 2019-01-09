@@ -13,6 +13,7 @@ import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.ScreenCharacterStyle;
+import com.googlecode.lanterna.terminal.TerminalSize;
 
 public class PokemonMysteryD{
   static Terminal terminal;
@@ -85,17 +86,27 @@ public class PokemonMysteryD{
           terminal.exitPrivateMode();
           System.exit(0);
         }
+        //When you click on Backspace in the game...
         if (key.getKind() == Key.Kind.Backspace) {
+                //This block of code is called when you're not in the options page.
                 if(!optionsOn) {
                         options.startScreen();
-                        options.putString(40,10,"Settings and Options",Terminal.Color.BLUE,Terminal.Color.RED,ScreenCharacterStyle.Blinking);
+                        options.updateScreenSize();
+                        for(int i = 0; i < options.getTerminalSize().getRows(); i++) {
+                                for(int x = 0; x < options.getTerminalSize().getColumns(); x++) {
+                                        options.putString(x,i,"#",Terminal.Color.BLACK,null,ScreenCharacterStyle.Bold);
+                                }
+                        }
+                        options.putString(80,5,"Instructions & Options:",Terminal.Color.GREEN,null,ScreenCharacterStyle.Bold);
+                        options.putString(65,8, "Instructions:", Terminal.Color.GREEN, null, ScreenCharacterStyle.Underline.Bold);
                         options.refresh();
                         optionsOn = true;
                 }
+                //This block of code is called when you're in the options page.
                 else {
                         terminal.clearScreen();
                         options.stopScreen();
-                        options.refresh();
+                        options.completeRefresh();
                         optionsOn = false;
                         terminal.enterPrivateMode();
                         //Generates the map again.
