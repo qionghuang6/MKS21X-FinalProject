@@ -27,7 +27,7 @@ public class Map{
     int currentY = startY;
     buildArea(startX,startY,3); //makes first area of movable land around start points
     //moves around building Areas
-    for (int a = 0; a < 100; a++ ) {
+    for (int a = 0; a < 20; a++ ) {
       int lastX = currentX;
       int lastY = currentY;
       //System.out.print("X" + currentX + " Y" + currentY);
@@ -70,8 +70,8 @@ public class Map{
   //width and length are randomly generated from 3 to 9
   //surrounds moveable area in walls
   private boolean buildArea(int xS, int yS, int ranSize){
-    int width = (2 * ((int) (Math.random() * 4))) + Math.abs(ranSize) + 2;
-    int length = (2 * ((int) (Math.random() * 4))) + Math.abs(ranSize) + 2;
+    int width = (2 * ((int) (Math.random() * 4))) + (2 * Math.abs(ranSize)) - 1;
+    int length = (2 * ((int) (Math.random() * 4))) + (2 * Math.abs(ranSize)) - 1;
     //System.out.print(" L" + length + " W" + width);
     // System.out.println("" + length + " " + width);
     //System.out.print(" max x" + (xS - ((length - 1) / 2)) + " " + (xS + ((length - 1) / 2)));

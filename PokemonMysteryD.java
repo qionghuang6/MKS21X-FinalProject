@@ -24,13 +24,13 @@ public class PokemonMysteryD{
 
   public static void putPokemon(int x, int y,Terminal t,
         String symbol, int[] rgb){
-    t.moveCursor(x,y);
+    t.moveCursor(y,x);
     t.applyBackgroundColor(rgb[0],rgb[1],rgb[2]);
     t.applyForegroundColor(Terminal.Color.WHITE);
     t.putCharacter(symbol.charAt(0));
   }
   public static void setBg(Terminal t, int x, int y, int r, int g, int b){
-    t.moveCursor(x,y+5);
+    t.moveCursor(y,x);
     t.applyBackgroundColor(r,g,b);
 
   }
@@ -50,12 +50,12 @@ public class PokemonMysteryD{
       for(int y = 0 ; y < mapMap[0].length;y++){
         terminal.putCharacter(' ');
         //terminal.putCharacter(("" + y).charAt(0));
-        setBg(terminal,mapMap[x][y],x,y);
+        setBg(terminal,mapMap[x][y],y,x);
         }
       }
   }
   public static void spawnPlayer(Player player, Terminal t, Map m){
-    putPokemon(m.getStartY(),m.getStartX(),
+    putPokemon(m.getStartX(),m.getStartY(),
     t,player.getPlayer().getSymbol(), player.getPlayer().getColorArr()) ;
   }
   public static void main(String[] args) {
@@ -76,16 +76,14 @@ public class PokemonMysteryD{
 
     buildMap(mapMap);
     spawnPlayer(player, terminal, testMap);
-    /*
-    while(mapMap[testMap.getStartX()][testMap.getStartY()].getColor() != 0){
+
+    while(mapMap[testMap.getStartY()][testMap.getStartX()].getColor() != 0){
       testMap = new Map();
       mapMap = testMap.getMap();
       buildMap(mapMap);
       spawnPlayer(player, terminal, testMap);
     }
-    */
-    terminal.moveCursor(5,5);
-    terminal.applyBackgroundColor(Terminal.Color.WHITE);
+
     boolean running = true;
     while (running){
       Key key = terminal.readInput();
