@@ -36,7 +36,7 @@ public class PokemonMysteryD{
     t.moveCursor(r,c);
     t.applyBackgroundColor(forg);
     t.applyForegroundColor(Terminal.Color.BLACK);
->
+}
   public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p){
     int curX = p.getX();
     int curY = p.getY();
