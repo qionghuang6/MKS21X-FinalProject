@@ -48,7 +48,7 @@
 > * Changed from using Terminal.color to using rgb values for the map
 > * Created setBg method to use replace how the background is currently set and to be used to reset background color after Pokemon has moved on it.
 > * Dealt with lots of problems after merging before pushing commits and messing up with moving the HEAD. 
-### January 7th, 2019:
+### January 8th, 2019:
 #### Qiong Zhou Huang:
 > * Changed setBg
 > * Created method to spawn pokemon at given location
@@ -58,3 +58,8 @@
 > * Created new branch: "options"
 > * Understand Lanterna implementation
 >> * putString(), refresh(), etc.
+### January 9th, 2019:
+#### Bryan Lai:
+> * Completed transition between options and gameplay.
+> * Background and color schemes were edited.
+> * Added new imports for "TerminalSize", etc.
