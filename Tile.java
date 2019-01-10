@@ -28,6 +28,9 @@ public class Tile{
     setColor(color);
     walkable = false;
   }
+  public boolean getWalkable(){
+    return walkable;
+  }
   //setter for tile color
   public void setColor(int color){
     this.color = color;

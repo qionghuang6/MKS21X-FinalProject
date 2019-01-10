@@ -99,23 +99,26 @@ public class PokemonMysteryD{
     while (running){
       Key key = terminal.readInput();
 			if (key != null){
+        int curX = player.getPlayer().getX();
+        int curY = player.getPlayer().getY();
         if (key.getKind() == Key.Kind.Escape) {
           running = false;
           terminal.exitPrivateMode();
           System.exit(0);
         }
-        if (key.getKind() == Key.Kind.ArrowLeft) {
+        if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY][curX - 1].getWalkable()) {
           movePokemon(mapMap, 0,-1,terminal,player.getPlayer());
 				}
-				if (key.getKind() == Key.Kind.ArrowRight) {
+				if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY][curX + 1].getWalkable()) {
           movePokemon(mapMap, 0,1,terminal,player.getPlayer());
 				}
-				if (key.getKind() == Key.Kind.ArrowUp) {
+				if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY - 1][curX].getWalkable()) {
           movePokemon(mapMap, -1,0,terminal,player.getPlayer());
 				}
-				if (key.getKind() == Key.Kind.ArrowDown) {
+				if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY + 1][curX].getWalkable()) {
           movePokemon(mapMap, 1,0,terminal,player.getPlayer());
 				}
+        putString(10,40,terminal," " + curX + " " + curY);
       }
     }
   }
