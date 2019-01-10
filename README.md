@@ -48,3 +48,24 @@
 > * Changed from using Terminal.color to using rgb values for the map
 > * Created setBg method to use replace how the background is currently set and to be used to reset background color after Pokemon has moved on it.
 > * Dealt with lots of problems after merging before pushing commits and messing up with moving the HEAD. 
+### January 8th, 2019:
+#### Qiong Zhou Huang: <img src="https://runes.lol/image/generated/championtiles/Teemo.jpg" width="40" length="40">
+> * Changed setBg
+> * Created method to spawn pokemon at given location
+> * Created methods to randomly spawn player pokemon
+#### Bryan Lai: <img src="http://data.whicdn.com/images/32538816/mudkip_by_cheepers-d46kd61_large.png" width="40" length="40">
+> * Started on options screen.
+> * Created new branch: "options"
+> * Understand Lanterna implementation
+>> * putString(), refresh(), etc.
+### January 9th, 2019:
+#### Bryan Lai:
+> * Completed transition between options and gameplay.
+> * Background and color schemes were edited.
+> * Added new imports for "TerminalSize", etc.
+#### Qiong Zhou Huang:<img src="https://images-na.ssl-images-amazon.com/images/I/8166xCVDGnL._SY355_.jpg" width="40" length="40">
+> * Made sure islands don't spawn on map
+> * Spawns moving pokemon
+> * Figured out how to revert to orignal colors on the path behind pokemon
+> * Made walls not walkable
+> * Made pokemon not move when it reaches a wall, but there's an unknown bug with that that freezes the pokemon
