@@ -52,7 +52,7 @@ public class Map{
   }
 
   public Map(){
-    this(70,30);
+    this(100,45);
   }
 
   public int getStartX(){

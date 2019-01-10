@@ -37,8 +37,10 @@ public class PokemonMysteryD{
     //putString(70, 20,t,"" + curX + " " + curY);
     t.moveCursor(curY,curX);
     setBg(t, mapMap[curY][curX], curX, curY);
+    t.moveCursor(curY,curX);
     terminal.putCharacter(' ');
     putPokemon(curX + dx, curY + dy, t, p);
+    //p.setLocation(curX + dx,y);
   }
 
   public static void setBg(Terminal t, int x, int y, int r, int g, int b){
@@ -106,18 +108,32 @@ public class PokemonMysteryD{
           terminal.exitPrivateMode();
           System.exit(0);
         }
-        if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY][curX - 1].getWalkable()) {
+        if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable()) {
           movePokemon(mapMap, 0,-1,terminal,player.getPlayer());
+
 				}
-				if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY][curX + 1].getWalkable()) {
+				if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 1][curX ].getWalkable()) {
           movePokemon(mapMap, 0,1,terminal,player.getPlayer());
-				}
-				if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY - 1][curX].getWalkable()) {
+
+        }
+				if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()) {
           movePokemon(mapMap, -1,0,terminal,player.getPlayer());
-				}
-				if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY + 1][curX].getWalkable()) {
+
+        }
+				if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY][curX + 1].getWalkable()) {
           movePokemon(mapMap, 1,0,terminal,player.getPlayer());
-				}
+        }
+        curX = player.getPlayer().getX();
+        curY = player.getPlayer().getY();
+        /*
+        boolean walkable = mapMap[curY][curX].getWalkable();
+        boolean walkableL = mapMap[curY][curX - 1].getWalkable();
+        boolean walkableR = mapMap[curY][curX + 1].getWalkable();
+        boolean walkableT = mapMap[curY -1][curX].getWalkable();
+        boolean walkableB = mapMap[curY + 1][curX].getWalkable();
+        putString(10,40,terminal," " + curX + " " + curY + " " + walkable + " " + walkableL
+        + " " + walkableR + " " + walkableT + " " + walkableB);
+        */
         putString(10,40,terminal," " + curX + " " + curY);
       }
     }
