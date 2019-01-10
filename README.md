@@ -48,9 +48,7 @@
 > * Changed from using Terminal.color to using rgb values for the map
 > * Created setBg method to use replace how the background is currently set and to be used to reset background color after Pokemon has moved on it.
 > * Dealt with lots of problems after merging before pushing commits and messing up with moving the HEAD. 
-<<<<<<< HEAD
 ### January 8th, 2019:
->>>>>>> parent of 8112fd2... Update 2019-1-9
 #### Qiong Zhou Huang: <img src="https://runes.lol/image/generated/championtiles/Teemo.jpg" width="40" length="40">
 > * Changed setBg
 > * Created method to spawn pokemon at given location
