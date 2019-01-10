@@ -49,11 +49,9 @@
 > * Created setBg method to use replace how the background is currently set and to be used to reset background color after Pokemon has moved on it.
 > * Dealt with lots of problems after merging before pushing commits and messing up with moving the HEAD. 
 <<<<<<< HEAD
-### January 7th, 2019:
-=======
 ### January 8th, 2019:
 >>>>>>> parent of 8112fd2... Update 2019-1-9
-#### Qiong Zhou Huang:
+#### Qiong Zhou Huang: <img src="https://runes.lol/image/generated/championtiles/Teemo.jpg" width="40" length="40">
 > * Changed setBg
 > * Created method to spawn pokemon at given location
 > * Created methods to randomly spawn player pokemon
@@ -62,8 +60,6 @@
 > * Created new branch: "options"
 > * Understand Lanterna implementation
 >> * putString(), refresh(), etc.
-<<<<<<< HEAD
-=======
 ### January 9th, 2019:
 #### Bryan Lai:
 > * Completed transition between options and gameplay.
