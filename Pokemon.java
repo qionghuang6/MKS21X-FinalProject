@@ -77,6 +77,10 @@ public class Pokemon {
                 return 0;
         }
 
+        public int[] getColorArr() {
+                return color;
+        }
+
         //Mutator methods:
         public void addMove(Move n) {
                 moveset.add(n);

@@ -21,8 +21,8 @@ public class Map{
         //}
       }
     }
-    startX =  ((int) (Math.random() * 20) + 10);
-    startY = ((int) (Math.random() * 20) + 10);
+    startY =  ((int) (Math.random() * 50) + 10);
+    startX = ((int) (Math.random() * 10) + 10);
     int currentX = startX;
     int currentY = startY;
     buildArea(startX,startY,3); //makes first area of movable land around start points
@@ -52,9 +52,15 @@ public class Map{
   }
 
   public Map(){
-    this(70,30);
+    this(100,45);
   }
 
+  public int getStartX(){
+    return startX;
+  }
+  public int getStartY(){
+    return startY;
+  }
   //getter for tile array
   public Tile[][] getMap(){
     return tileMap;
@@ -64,8 +70,8 @@ public class Map{
   //width and length are randomly generated from 3 to 9
   //surrounds moveable area in walls
   private boolean buildArea(int xS, int yS, int ranSize){
-    int width = (2 * ((int) (Math.random() * 4))) + Math.abs(ranSize) + 1;
-    int length = (2 * ((int) (Math.random() * 4))) + Math.abs(ranSize) + 1;
+    int width = (2 * ((int) (Math.random() * 4))) + (2 * Math.abs(ranSize)) - 1;
+    int length = (2 * ((int) (Math.random() * 4))) + (2 * Math.abs(ranSize)) - 1;
     //System.out.print(" L" + length + " W" + width);
     // System.out.println("" + length + " " + width);
     //System.out.print(" max x" + (xS - ((length - 1) / 2)) + " " + (xS + ((length - 1) / 2)));
@@ -76,18 +82,18 @@ public class Map{
         }
     for(int x = xS - ((length - 1) / 2); x <= xS + ((length - 1) / 2) ; x++){
       if(tileMap[yS - ((width - 1) / 2)][x].getColor() != 0){
-        tileMap[yS - ((width - 1) / 2)][x].setColor(2);
+        tileMap[yS - ((width - 1) / 2)][x].makeUnwalkable(2);
       }
       if(tileMap[yS + ((width - 1) / 2)][x].getColor() != 0){
-        tileMap[yS + ((width - 1) / 2)][x].setColor(2);
+        tileMap[yS + ((width - 1) / 2)][x].makeUnwalkable(2);
       }
     }
     for(int y = yS - (width - 1) / 2; y <= yS + (width - 1) / 2 ; y++){
       if(tileMap[y][xS - (length - 1) / 2].getColor()!= 0){
-        tileMap[y][xS - (length - 1) / 2].setColor(2);
+        tileMap[y][xS - (length - 1) / 2].makeUnwalkable(2);
       }
       if(tileMap[y][xS + (length - 1) / 2].getColor() != 0){
-        tileMap[y][xS + (length - 1) / 2].setColor(2);
+        tileMap[y][xS + (length - 1) / 2].makeUnwalkable(2);
       }
     }
     for(int x = xS - (length - 1) / 2 + 1; x < xS + (length - 1) / 2 ; x++){
