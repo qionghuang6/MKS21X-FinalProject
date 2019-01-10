@@ -82,18 +82,18 @@ public class Map{
         }
     for(int x = xS - ((length - 1) / 2); x <= xS + ((length - 1) / 2) ; x++){
       if(tileMap[yS - ((width - 1) / 2)][x].getColor() != 0){
-        tileMap[yS - ((width - 1) / 2)][x].setColor(2);
+        tileMap[yS - ((width - 1) / 2)][x].makeUnwalkable(2);
       }
       if(tileMap[yS + ((width - 1) / 2)][x].getColor() != 0){
-        tileMap[yS + ((width - 1) / 2)][x].setColor(2);
+        tileMap[yS + ((width - 1) / 2)][x].makeUnwalkable(2);
       }
     }
     for(int y = yS - (width - 1) / 2; y <= yS + (width - 1) / 2 ; y++){
       if(tileMap[y][xS - (length - 1) / 2].getColor()!= 0){
-        tileMap[y][xS - (length - 1) / 2].setColor(2);
+        tileMap[y][xS - (length - 1) / 2].makeUnwalkable(2);
       }
       if(tileMap[y][xS + (length - 1) / 2].getColor() != 0){
-        tileMap[y][xS + (length - 1) / 2].setColor(2);
+        tileMap[y][xS + (length - 1) / 2].makeUnwalkable(2);
       }
     }
     for(int x = xS - (length - 1) / 2 + 1; x < xS + (length - 1) / 2 ; x++){

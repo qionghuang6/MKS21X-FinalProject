@@ -36,7 +36,7 @@ public class PokemonMysteryD{
     int curY = p.getY();
     //putString(70, 20,t,"" + curX + " " + curY);
     t.moveCursor(curY,curX);
-    t.applyBackgroundColor(131,203,58);
+    setBg(t, mapMap[curY][curX], curX, curY);
     terminal.putCharacter(' ');
     putPokemon(curX + dx, curY + dy, t, p);
   }

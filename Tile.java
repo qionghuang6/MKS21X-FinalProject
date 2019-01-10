@@ -24,6 +24,10 @@ public class Tile{
     setColor(color);
     walkable = true;
   }
+  public void makeUnwalkable(int color){
+    setColor(color);
+    walkable = false;
+  }
   //setter for tile color
   public void setColor(int color){
     this.color = color;
