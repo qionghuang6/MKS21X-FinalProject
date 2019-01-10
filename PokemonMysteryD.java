@@ -77,7 +77,9 @@ public class PokemonMysteryD{
     terminal.moveCursor(5,5);
     terminal.applyBackgroundColor(Terminal.Color.WHITE);
     boolean running = true;
-      boolean optionsOn = false;
+    boolean optionsOn = false;
+    int ySize = options.getTerminalSize().getRows();
+    int xSize = options.getTerminalSize().getColumns();
     while (running){
       Key key = terminal.readInput();
 			if (key != null){
@@ -94,11 +96,11 @@ public class PokemonMysteryD{
                         options.updateScreenSize();
                         for(int i = 0; i < options.getTerminalSize().getRows(); i++) {
                                 for(int x = 0; x < options.getTerminalSize().getColumns(); x++) {
-                                        options.putString(x,i,"#",Terminal.Color.BLACK,null,ScreenCharacterStyle.Bold);
+                                        options.putString(x,i,"\u8656",Terminal.Color.BLACK,null,ScreenCharacterStyle.Bold);
                                 }
                         }
-                        options.putString(80,5,"Instructions & Options:",Terminal.Color.GREEN,null,ScreenCharacterStyle.Bold);
-                        options.putString(65,8, "Instructions:", Terminal.Color.GREEN, null, ScreenCharacterStyle.Underline.Bold);
+                        options.putString(xSize/2 - 10,8,"Instructions & Options:",Terminal.Color.GREEN,null,ScreenCharacterStyle.Bold);
+                        options.putString(xSize/2 - 3,20, "Instructions:", Terminal.Color.GREEN, null, ScreenCharacterStyle.Underline.Bold);
                         options.refresh();
                         optionsOn = true;
                 }
