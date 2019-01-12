@@ -117,18 +117,22 @@ public class PokemonMysteryD{
         }
         if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable()) {
           movePokemon(mapMap, 0,-1,terminal,player.getPlayer());
+          movePokemon(mapMap, 0,-1,terminal,player.getPartner());
 
 				}
-				if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 1][curX ].getWalkable()) {
+				if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable()) {
+          movePokemon(mapMap, 0,1,terminal,player.getPartner());
           movePokemon(mapMap, 0,1,terminal,player.getPlayer());
-
         }
-				if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()) {
+				if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()
+            && mapMap[curY + 1][curX - 1].getWalkable()) {
           movePokemon(mapMap, -1,0,terminal,player.getPlayer());
-
+          movePokemon(mapMap, -1,0,terminal,player.getPartner());
         }
-				if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY][curX + 1].getWalkable()) {
+				if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY][curX + 1].getWalkable()
+            && mapMap[curY + 1][curX + 1].getWalkable()) {
           movePokemon(mapMap, 1,0,terminal,player.getPlayer());
+          movePokemon(mapMap, 1,0,terminal,player.getPartner());
         }
         curX = player.getPlayer().getX();
         curY = player.getPlayer().getY();
