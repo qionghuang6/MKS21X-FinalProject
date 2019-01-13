@@ -11,6 +11,8 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PokemonMysteryD{
   static Terminal terminal;
@@ -85,8 +87,8 @@ public class PokemonMysteryD{
     //defines player pokemons
     int[] charColor = {240,10,23};
     int[] squirtColor = {33,232,233};
-    Pokemon charmander = new Pokemon("charmander", "fire", "@", 30, charColor, 5);
-    Pokemon squirtle = new Pokemon("squirtle", "water", "O", 30, squirtColor, 5);
+    Pokemon charmander = new Pokemon("charmander", "fire", "@", 30, charColor, 5, new ArrayList<Move>());
+    Pokemon squirtle = new Pokemon("squirtle", "water", "O", 30, squirtColor, 5, new ArrayList<Move>());
     Player player = new Player(charmander, squirtle, 300);
 
     //defines lanterna terminal
