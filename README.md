@@ -69,3 +69,7 @@
 > * Figured out how to revert to orignal colors on the path behind pokemon
 > * Made walls not walkable
 > * Made pokemon not move when it reaches a wall, but there's an unknown bug with that that freezes the pokemon
+### January 10th, 2019:
+#### Qiong Zhou Huang:<img src="https://images-na.ssl-images-amazon.com/images/I/8166xCVDGnL._SY355_.jpg" width="40" length="40">
+> * Did lots and lots of debugging and fixed the code such that the player Pokemon stops when it hits a wall
+> * Changed map size
