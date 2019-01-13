@@ -6,10 +6,6 @@ public class Player {
         //private ArrayList<Pokemon> startingOptions: Starting pokemon the player can choose. Should be defined inside of the main program.
 
         //Constructor:
-        //Only defines the pokemon the player is using.
-        public Player(String n, String t, String s, int h, int[] c, int l) {
-                player = new Pokemon(n,t,s,h,c,l);
-        }
 
         //Takes in a pokemon, set its variables = to it. Other params are for partner & gold.
         public Player(Pokemon p, Pokemon pt, int g) {
