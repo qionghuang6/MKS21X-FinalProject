@@ -25,9 +25,15 @@ public class Tile{
     setColor(color);
     walkable = true;
   }
+  public void makeWalkable(){
+    walkable = true;
+  }
   //changes tile to make it unwalkable and sets color
   public void makeUnwalkable(int color){
     setColor(color);
+    walkable = false;
+  }
+  public void makeUnwalkable(){
     walkable = false;
   }
   //checks if a tile is walkable

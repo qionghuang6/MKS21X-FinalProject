@@ -43,9 +43,11 @@ public class PokemonMysteryD{
     //putString(70, 20,t,"" + curX + " " + curY);
     t.moveCursor(curY,curX);
     setBg(t, mapMap[curY][curX], curX, curY);
+    mapMap[curY][curX].makeWalkable();
     t.moveCursor(curY,curX);
     terminal.putCharacter(' ');
     putPokemon(curX + dx, curY + dy, t, p);
+    mapMap[curY + dy ][curX + dx].makeUnwalkable();
     //p.setLocation(curX + dx,y);
   }
   //sets background of a certain location to an rgb value
@@ -78,6 +80,7 @@ public class PokemonMysteryD{
       if(m[r][c].getWalkable()){
         putPokemon(c,r,t,PokemonRandomizer.returnPokemon());
         spawned++;
+        m[r][c].makeUnwalkable();
       }
     }
   }
