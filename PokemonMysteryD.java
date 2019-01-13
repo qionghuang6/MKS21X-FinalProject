@@ -124,7 +124,8 @@ public class PokemonMysteryD{
                                 start.putString(x,i," ",Terminal.Color.BLACK,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
                         }
                 }
-                start.putString(xSize * 3/8,10, "                 Press U to Start!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
+                start.putString(xSize * 3/8,15, "                 Pokemon Mystery Dungeon               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                start.putString(xSize * 3/8,20, "                 Press S to Start!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
                 start.refresh();
         }
 
@@ -335,62 +336,105 @@ public class PokemonMysteryD{
                                         }
                                 }
                                 //Starting the game:
-                                if (key.getCharacter() == 'u' && gameMode == 0) {
+                                if (key.getCharacter() == 's' && gameMode == 0) {
                                         start.stopScreen();
-
                                         gameMode = 1;
                                         generated = false;
                                 }
                                 //GAMEPLAY CONTROLS, ONLY FOR GAMEMODE 1
                                 if(gameMode == 1) {
                                 //This code details facing the enemy before using the skill.
-                                if(key.getCharacter() == 'a' && gameMode == 1) {
-                                        facingX = -1;
-                                        facingY = 0;
+                                if(key.getCharacter() == 'a') {
+                                        facingX = 0;
+                                        facingY = -1;
                                         addMessageToCombat(sideScreen, "Faced Left!", xSize/2 + 8, yMessage, "bold");
                                         yMessage++;
                                 }
-                                if(key.getCharacter() == 'd' && gameMode == 1) {
-                                        facingX = 1;
-                                        facingY = 0;
+                                if(key.getCharacter() == 'd') {
+                                        facingX = 0;
+                                        facingY = 1;
                                         addMessageToCombat(sideScreen, "Faced Right!", xSize/2 + 8, yMessage, "bold");
                                         yMessage++;
                                 }
-                                if(key.getCharacter() == 'w' && gameMode == 1) {
-                                        facingY = 1;
-                                        facingX = 0;
+                                if(key.getCharacter() == 'w') {
+                                        facingX = -1;
+                                        facingY = 0;
                                         addMessageToCombat(sideScreen, "Faced Up!", xSize/2 + 8, yMessage, "bold");
                                         yMessage++;
                                 }
-                                if(key.getCharacter() == 's' && gameMode == 1) {
-                                        facingY = -1;
-                                        facingX = 0;
+                                if(key.getCharacter() == 's') {
+                                        facingX = 1;
+                                        facingY = 0;
                                         addMessageToCombat(sideScreen, "Faced Down!", xSize/2 + 8, yMessage, "bold");
                                         yMessage++;
                                 } 
+                                if(key.getCharacter() == '1') {
+                                       for(Pokemon p : allPokemons) {
+                                               if(p.getX() == player.getPlayer().getX() + facingX && p.getY() == player.getPlayer().getY() + facingY) {
+                                                //Action for dealing damage.
+                                                       player.getPlayer().useMove(player.getPlayer().getMoveset().get(0),p);
+                                                //Adds combat message!
+                                               addMessageToCombat(sideScreen, player.getPlayer().getName() + " used " + player.getPlayer().getMoveset().get(0).getName() + " on " + p.getName() + " dealing " + player.getPlayer().getMoveset().get(0).getBaseDamage() + " HP! " + p.getName() + " has " + p.getHp() + " HP left!", xSize/2 + 8,  yMessage, "bold");
+                                               //moves message coordinate down.
+                                               yMessage++;
+                                               }
+                                       }
+                                }
+                                if(key.getCharacter() == '2') {
+                                       for(Pokemon p : allPokemons) {
+                                               if(p.getX() == player.getPlayer().getX() + facingX && p.getY() == player.getPlayer().getY() + facingY) {
+                                                //Action for dealing damage.
+                                                       player.getPlayer().useMove(player.getPlayer().getMoveset().get(1),p);
+                                                //Adds combat message!
+                                               addMessageToCombat(sideScreen, player.getPlayer().getName() + " used " + player.getPlayer().getMoveset().get(1).getName() + " on " + p.getName() + " dealing " + player.getPlayer().getMoveset().get(1).getBaseDamage() + " HP! " + p.getName() + " has " + p.getHp() + " HP left!", xSize/2 + 8,  yMessage, "bold");
+                                               //moves message coordinate down.
+                                               yMessage++;
+                                               }
+                                       }
+                                }
+                                if(key.getCharacter() == '3') {
+                                       for(Pokemon p : allPokemons) {
+                                               if(p.getX() == player.getPlayer().getX() + facingX && p.getY() == player.getPlayer().getY() + facingY) {
+                                                //Action for dealing damage.
+                                                       player.getPlayer().useMove(player.getPlayer().getMoveset().get(2),p);
+                                                //Adds combat message!
+                                               addMessageToCombat(sideScreen, player.getPlayer().getName() + " used " + player.getPlayer().getMoveset().get(2).getName() + " on " + p.getName() + " dealing " + player.getPlayer().getMoveset().get(2).getBaseDamage() + " HP! " + p.getName() + " has " + p.getHp() + " HP left!", xSize/2 + 8,  yMessage, "bold");
+                                               //moves message coordinate down.
+                                               yMessage++;
+                                               }
+                                       }
+                                }
+                                if(key.getCharacter() == '4') {
+                                       for(Pokemon p : allPokemons) {
+                                               if(p.getX() == player.getPlayer().getX() + facingX && p.getY() == player.getPlayer().getY() + facingY) {
+                                                //Action for dealing damage.
+                                                       player.getPlayer().useMove(player.getPlayer().getMoveset().get(3),p);
+                                                //Adds combat message!
+                                               addMessageToCombat(sideScreen, player.getPlayer().getName() + " used " + player.getPlayer().getMoveset().get(3).getName() + " on " + p.getName() + " dealing " + player.getPlayer().getMoveset().get(3).getBaseDamage() + " HP! " + p.getName() + " has " + p.getHp() + " HP left!", xSize/2 + 8,  yMessage, "bold");
+                                               //moves message coordinate down.
+                                               yMessage++;
+                                               }
+                                       }
+                                }
                                 //Check what arrow keys are pressed and if those locations are walkable and moves Pokemon
-                                if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable()
-                                                && gameMode == 1) {
+                                if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable()) {
                                         movePokemon(mapMap, 0,-1,terminal,player.getPlayer());
                                         movePokemon(mapMap, 0,-1,terminal,player.getPartner());
 
                                                 }
                                 //checks two to the right to account for partner pokemon
-                                if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable()
-                                                && gameMode == 1) {
+                                if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable()) {
                                         movePokemon(mapMap, 0,1,terminal,player.getPartner());
                                         movePokemon(mapMap, 0,1,terminal,player.getPlayer());
                                                 }
                                 if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()
                                                 //additional checks used to check partner pokemon location
-                                                && mapMap[curY + 1][curX - 1].getWalkable() 
-                                                && gameMode == 1) {
+                                                && mapMap[curY + 1][curX - 1].getWalkable()) {
                                         movePokemon(mapMap, -1,0,terminal,player.getPlayer());
                                         movePokemon(mapMap, -1,0,terminal,player.getPartner());
                                                 }
                                 if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY][curX + 1].getWalkable()
-                                                && mapMap[curY + 1][curX + 1].getWalkable()
-                                                && gameMode == 1) {
+                                                && mapMap[curY + 1][curX + 1].getWalkable()) {
                                         movePokemon(mapMap, 1,0,terminal,player.getPlayer());
                                         movePokemon(mapMap, 1,0,terminal,player.getPartner());
                                                 }
@@ -435,9 +479,9 @@ public class PokemonMysteryD{
                                 spawnPlayer(player, terminal, testMap);
                                 terminal.setCursorVisible(false);
                                 allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
-                                addPlayerInfo(sideScreen, player, allPokemons, xSize);
                                 generated = true;
                         }
+                        addPlayerInfo(sideScreen, player, allPokemons, xSize);
                         sideScreen.refresh();
                 }
         }
