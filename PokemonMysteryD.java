@@ -19,7 +19,7 @@ import java.util.List;
 
 public class PokemonMysteryD{
         static Terminal terminal;
-        static TerminalSize terminalSize;
+        static TerminalSize terminalSize; 
 
         //displays text at certain location
         public static void putString(int r, int c,Terminal t, String s){
@@ -281,7 +281,7 @@ public class PokemonMysteryD{
                 //gets map from Map generator class
                 Map testMap = new Map();
                 Tile[][] mapMap = testMap.getMap();
-
+          
                 //calls buildMap to display map and spawns player pokemons 
 
                 //makes sure there isn't a spawn error and runs the map building and spawning process again
