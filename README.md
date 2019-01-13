@@ -1,4 +1,20 @@
 # MKS21X-FinalProject
+## Pokemon Mystery Dungeon: Based off of... 
+<img src="http://guidesmedia.ign.com/guides/image/article/873/873738/pokemonmd_guide_top_1210716707.jpg" width="400"></img>
+### <u> Instructions: </u>
+To compile the program, type:
+~~~
+javac -cp lanterna.jar:. PokemonMysteryD.java
+~~~
+To run the program, type:
+~~~
+java -cp lanterna.jar:. PokemonMysteryD
+~~~
+OR:
+~~~
+java -Djava.awt.headless=true -cp lanterna.jar:. PokemonMysteryD
+~~~
+
 ## Development Logs:
 ### January 3rd, 2019: 
 #### Bryan Lai: <img src="https://i.pinimg.com/originals/8a/8d/4a/8a8d4af305ade9eb43684e83d70874e8.png" width="40" length="40">
