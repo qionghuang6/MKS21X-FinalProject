@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import com.google.common.collect.Lists;
+import java.util.Arrays;
 
 public class PokemonRandomizer{
 
@@ -17,20 +17,20 @@ public class PokemonRandomizer{
   static Move bubble = new Move("Bubble", "Water",15,5,50);
   static Move whirlpool = new Move("Whirlpool", "Water",10,1,25);
 
-  static List fireMoves<Move> = Lists.newArrayList(ember,flameWheel,growl,tackle);
-  static List waterMoves<Move> = Lists.newArrayList(waterGun,bubble,whirlpool,tailWhip);
-  static List normalMoves<Move> = Lists.newArrayList(growl,tackle,tailWhip,defenseCurl);
+  static List<Move> fireMoves = new ArrayList(Arrays.asList(ember,flameWheel,growl,tackle));
+  static List<Move> waterMoves = new ArrayList(Arrays.asList(waterGun,bubble,whirlpool,tailWhip));
+  static List<Move> normalMoves = new ArrayList(Arrays.asList(growl,tackle,tailWhip,defenseCurl));
 
-  static Pokemon charmander = new Pokemon("Charmander", "Fire", "C", 30, {240,10,23}, 1, fireMoves);
-  static Pokemon growlithe = new Pokemon("Growlithe", "Fire", "G", 40, {244,197,66}, 1, fireMoves);
-  static Pokemon squirtle = new Pokemon("Squirtle", "Water", "S", 40, {244,197,66}, 1, waterMoves);
-  static Pokemon vaporeon = new Pokemon("Growlithe", "Water", "V", 40, {244,197,66}, 1, waterMoves);
-  static Pokemon eevee = new Pokemon("Eevee", "Normal", "E", 40, {244,197,66}, 1, normalMoves);
-  static Pokemon meowth = new Pokemon("Meowth", "Normal", "M", 40, {244,197,66}, 1, normalMoves);
+  static Pokemon charmander = new Pokemon("Charmander", "Fire", "C", 30, new int[ ]{240,10,23}, 1, fireMoves);
+  static Pokemon growlithe = new Pokemon("Growlithe", "Fire", "G", 40, new int[ ]{244,197,66}, 1, fireMoves);
+  static Pokemon squirtle = new Pokemon("Squirtle", "Water", "S", 40, new int[ ]{244,197,66}, 1, waterMoves);
+  static Pokemon vaporeon = new Pokemon("Growlithe", "Water", "V", 40, new int[ ]{244,197,66}, 1, waterMoves);
+  static Pokemon eevee = new Pokemon("Eevee", "Normal", "E", 40, new int[ ]{244,197,66}, 1, normalMoves);
+  static Pokemon meowth = new Pokemon("Meowth", "Normal", "M", 40, new int[ ] {244,197,66}, 1, normalMoves);
 
-  List pokemonList<Pokemon> = new ArrayList<Pokemon>({charmander, growlithe,squirtle,vaporeon,eevee,meowth});
+  static List<Pokemon> pokemonList = new ArrayList(Arrays.asList(charmander, growlithe,squirtle,vaporeon,eevee,meowth));
 
-  public static Pokemon returnPokemon(){
+  public static Pokemon returnPokemon() throws CloneNotSupportedException{
     return pokemonList.get((int) (Math.random() * pokemonList.size())).clone();
   }
 }
