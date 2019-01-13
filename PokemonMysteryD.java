@@ -75,17 +75,21 @@ public class PokemonMysteryD{
                 }
         }
 
-        public static void spawnHostilePokemons(Tile[][] m, Terminal t){
+        public static List<Pokemon> spawnHostilePokemons(Tile[][] m, Terminal t){
                 int spawned = 0;
+                List<Pokemon> p = new ArrayList<Pokemon>();
                 while(spawned < 15){
                         int r = (int) (Math.random() * m.length);
                         int c = (int) (Math.random() * m[0].length);
                         if(m[r][c].getWalkable()){
-                                putPokemon(c,r,t,PokemonRandomizer.returnPokemon());
+                                Pokemon newPoke = PokemonRandomizer.returnPokemon();
+                                putPokemon(c,r,t,newPoke);
                                 spawned++;
                                 m[r][c].makeUnwalkable();
+                                p.add(newPoke);
                         }
                 }
+                return p;
         }
         //Uses Map array from Map class to display the map in the beginning of a round
         public static void buildMap(Tile[][] mapMap){
@@ -166,6 +170,7 @@ public class PokemonMysteryD{
         }
 
         public static void main(String[] args) {
+                List<Pokemon> allPokemons = new ArrayList<Pokemon>();
                 Pokemon playerPokemon = PokemonRandomizer.returnPokemon();
                 playerPokemon.setSymbol("\u236b");
                 Pokemon partnerPokemon = PokemonRandomizer.returnPokemon();
@@ -173,6 +178,8 @@ public class PokemonMysteryD{
                         partnerPokemon = PokemonRandomizer.returnPokemon();
                 }
                 Player player = new Player(playerPokemon, partnerPokemon, 300);
+                allPokemons.add(playerPokemon);
+                allPokemons.add(partnerPokemon);
 
                 //defines lanterna terminal
                 terminal = TerminalFacade.createUnixTerminal();
@@ -243,6 +250,9 @@ public class PokemonMysteryD{
                                                 setUpCombatScreen(start, xSize, ySize);
                                                 setUpInfoScreen(start, xSize, ySize);
                                                 buildMap(mapMap);
+                                                for(Pokemon p : allPokemons) {
+                                                        putPokemon(p.getX(),p.getY(),terminal,p);
+                                                }
                                                 terminal.flush();
                                                 terminal.setCursorVisible(false);
                                                 optionsOn = false;
@@ -319,7 +329,7 @@ public class PokemonMysteryD{
                                 setUpInfoScreen(start, xSize, ySize);
                                 buildMap(mapMap);
                                 spawnPlayer(player, terminal, testMap);
-                                spawnHostilePokemons(mapMap, terminal);
+                                allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
                                 generated = true;
                         }
                 }
