@@ -75,17 +75,21 @@ public class PokemonMysteryD{
                 }
         }
 
-        public static void spawnHostilePokemons(Tile[][] m, Terminal t){
+        public static List<Pokemon> spawnHostilePokemons(Tile[][] m, Terminal t){
                 int spawned = 0;
+                List<Pokemon> p= new ArrayList<Pokemon>();
                 while(spawned < 15){
                         int r = (int) (Math.random() * m.length);
                         int c = (int) (Math.random() * m[0].length);
                         if(m[r][c].getWalkable()){
-                                putPokemon(c,r,t,PokemonRandomizer.returnPokemon());
+                                Pokemon newPoke = PokemonRandomizer.returnPokemon();
+                                putPokemon(c,r,t,newPoke);
                                 spawned++;
                                 m[r][c].makeUnwalkable();
+                                p.add(newPoke);
                         }
                 }
+                return p;
         }
         //Uses Map array from Map class to display the map in the beginning of a round
         public static void buildMap(Tile[][] mapMap){
@@ -143,6 +147,7 @@ public class PokemonMysteryD{
         }
 
         public static void main(String[] args) {
+                List<Pokemon> allPokemons = new ArrayList<Pokemon>();
                 Pokemon playerPokemon = PokemonRandomizer.returnPokemon();
                 playerPokemon.setSymbol("@");
                 Pokemon partnerPokemon = PokemonRandomizer.returnPokemon();
@@ -150,6 +155,8 @@ public class PokemonMysteryD{
                         partnerPokemon = PokemonRandomizer.returnPokemon();
                 }
                 Player player = new Player(playerPokemon, partnerPokemon, 300);
+                allPokemons.add(playerPokemon);
+                allPokemons.add(partnerPokemon);
 
                 //defines lanterna terminal
                 terminal = TerminalFacade.createUnixTerminal();
@@ -175,10 +182,10 @@ public class PokemonMysteryD{
                 Map testMap = new Map();
                 Tile[][] mapMap = testMap.getMap();
 
-                //calls buildMap to display map and spawns player pokemons 
+                //calls buildMap to display map and spawns player pokemons
                 buildMap(mapMap);
                 spawnPlayer(player, terminal, testMap);
-                spawnHostilePokemons(mapMap, terminal);
+                allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
 
                 //makes sure there isn't a spawn error and runs the map building and spawning process again
                 //if pokemons spawn improperly (highly unlikely but theoretically possible)
@@ -216,6 +223,9 @@ public class PokemonMysteryD{
                                                 terminal.enterPrivateMode();
                                                 //Generates the map again.
                                                 buildMap(mapMap);
+                                                for(Pokemon p: allPokemons){
+                                                  putPokemon(p.getX(),p.getY(),terminal,p);
+                                                }
                                                 terminal.flush();
                                                 terminal.setCursorVisible(false);
                                                 optionsOn = false;
@@ -264,7 +274,10 @@ public class PokemonMysteryD{
                                         mapMap = testMap.getMap();
                                         buildMap(mapMap);
                                         spawnPlayer(player, terminal, testMap);
-                                        spawnHostilePokemons(mapMap, terminal);
+                                        allPokemons.clear();
+                                        allPokemons.add(player.getPlayer());
+                                        allPokemons.add(player.getPartner());
+                                        allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
                                 }
                                 /*
                                 // Debug Code: Used to display current player location
