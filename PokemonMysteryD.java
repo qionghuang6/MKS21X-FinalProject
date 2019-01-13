@@ -69,7 +69,7 @@ public class PokemonMysteryD{
                                                 options.putString(x,i,"|",Terminal.Color.BLACK,null,ScreenCharacterStyle.Bold);
                                         }
                                 }
-                                start.putString(xSize/8,10, "S     T     A     R     T", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
+                                start.putString(xSize/2,10, "                 Press S to Start!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
                                 start.refresh();
         }
         public static void setUpOptionsScreen(Screen screen, int xSize) {
@@ -123,7 +123,7 @@ public class PokemonMysteryD{
                 boolean musicOn = false;
                 //Game mode 0 --> Represents start screen.
                 //Game mode 1 --> Represents actual gameplay.
-                int gameMode = 1;
+                int gameMode = 0;
                 int ySize = options.getTerminalSize().getRows();
                 int xSize = options.getTerminalSize().getColumns();
                 while (running){
@@ -138,6 +138,7 @@ public class PokemonMysteryD{
                                 if (key.getKind() == Key.Kind.Backspace) {
                                         //This block of code is called when you're not in the options page.
                                         if(!optionsOn) {
+                                                start.stopScreen();
                                                 setUpOptionsScreen(options,xSize);
                                                 optionsOn = true;
                                         }
@@ -150,26 +151,30 @@ public class PokemonMysteryD{
                                                 //Generates the map again.
                                                 generateMap(mapMap);
                                                 optionsOn = false;
-                                                generated = false;
+                                                generated = true;
                                         }
                                         else if(gameMode == 0) {
                                                 terminal.clearScreen();
                                                 options.stopScreen();
                                                 options.completeRefresh();
+                                                //Generates the start screen again:
                                                 terminal.enterPrivateMode();
                                                 setUpStartScreen(start, xSize);
                                                 optionsOn = false;
-                                                generated = false;
+                                                generated = true;
                                         }
                                 }
 
-                                if (key.getCharacter() == 'S' && gameMode == 0) {
+                                if (key.getCharacter() == 's' && gameMode == 0) {
                                         gameMode = 1;
+                                        start.stopScreen();
+                                        generated = false;
                                 }
                         }
                         //below represents closing of running.
                         //Start Screen Controls:
                         if(gameMode == 0 && !generated) {
+                                terminal.enterPrivateMode();
                                 setUpStartScreen(start, xSize);
                                 generated = true;
                         }
