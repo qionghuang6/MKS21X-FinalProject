@@ -101,40 +101,63 @@ public class PokemonMysteryD{
         public static void setUpStartScreen(Screen start, int xSize) {
                 start.startScreen();
                 start.updateScreenSize();
+                //Black area
                 for(int i = 0; i < start.getTerminalSize().getRows();i++) {
                         for(int x = 0; x < start.getTerminalSize().getColumns(); x++) {
-                                start.putString(x,i,"|",Terminal.Color.BLACK,null,ScreenCharacterStyle.Bold);
+                                start.putString(x,i," ",Terminal.Color.BLACK,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
                         }
                 }
-                start.putString(xSize/2,10, "                 Press S to Start!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
+                start.putString(xSize * 3/8,10, "                 Press S to Start!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
                 start.refresh();
         }
         //Sets up option Screen.
         public static void setUpOptionsScreen(Screen options, int xSize) {
                 options.startScreen();
                 options.updateScreenSize();
+                //Black area.
                 for(int i = 0; i < options.getTerminalSize().getRows(); i++) {
                         for(int x = 0; x < options.getTerminalSize().getColumns(); x++) {
-                                options.putString(x,i,"/",Terminal.Color.BLACK,null,ScreenCharacterStyle.Bold);
+                                options.putString(x,i," ",Terminal.Color.BLACK,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
                         }
                 }
                 //This code details the left portion of the screen. (Instructions)
-                options.putString(xSize/2 - 10,8,"Instructions & Options:",Terminal.Color.GREEN,null,ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,15, "Instructions:", Terminal.Color.GREEN, null, ScreenCharacterStyle.Underline);
-                options.putString(xSize/4 - 3,17, "Objective: Reach the stairs of each level!", Terminal.Color.GREEN, null, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,20, "Key Controls:", Terminal.Color.GREEN, null, ScreenCharacterStyle.Underline);
-                options.putString(xSize/4 - 3,22, "1. Enable/Disable Option --> Space Bar", Terminal.Color.GREEN, null, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,24, "2. Move Up --> Up Arrow Key", Terminal.Color.GREEN, null, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,26, "3. Move Down --> Down Arrow Key", Terminal.Color.GREEN, null, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,28, "4. Move Left --> Left Arrow Key", Terminal.Color.GREEN, null, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,30, "5. Move Right --> Right Arrow Key", Terminal.Color.GREEN, null, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,32, "6. Use attacks in moveset --> Press corresponding #s.", Terminal.Color.GREEN, null, ScreenCharacterStyle.Bold);
+                options.putString(xSize/2 - 10,8,"Instructions & Options:",Terminal.Color.GREEN,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,15, "Instructions:", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
+                options.putString(xSize/4 - 3,17, "Objective: Reach the stairs of each level!", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,20, "Key Controls:", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
+                options.putString(xSize/4 - 3,22, "1. Enable/Disable Option --> Space Bar", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,24, "2. Move Up --> Up Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,26, "3. Move Down --> Down Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,28, "4. Move Left --> Left Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,30, "5. Move Right --> Right Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,32, "6. Use attacks in moveset --> Press corresponding #s.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                 //This code details the right portion of the screen. (Options)
-                options.putString(xSize * 3/4 - 10,15, "Options:", Terminal.Color.GREEN, null, ScreenCharacterStyle.Underline);
-                options.putString(xSize * 3/4 - 10,17, "Enable Music Track?", Terminal.Color.GREEN, null, ScreenCharacterStyle.Bold);
+                options.putString(xSize * 3/4 - 10,15, "Options:", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
+                options.putString(xSize * 3/4 - 10,17, "Enable Music Track?", Terminal.Color.GREEN, Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
                 //Implement space bar to set true/false for options later..
-                options.putString(xSize * 3/4 + 12,17, "Status: ", Terminal.Color.GREEN, null, ScreenCharacterStyle.Bold);
+                options.putString(xSize * 3/4 + 12,17, "Status: ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                 options.refresh();
+        }
+        //Sets up Combat Screen.
+        public static void setUpCombatScreen(Screen combat, int xSize, int ySize) {
+                combat.startScreen();
+                for(int y = 0; y < combat.getTerminalSize().getRows()/2; y++) {
+                        for(int x = xSize * 1/2; x < combat.getTerminalSize().getColumns(); x++) {
+                                combat.putString(x,y," ",Terminal.Color.BLACK,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
+                        }
+                }
+                combat.putString(xSize/2 + 10, 3, "COMBAT MESSAGES AND ACTIONS: ", Terminal.Color.GREEN,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
+                combat.refresh();
+        }
+        public static void setUpInfoScreen(Screen info, int xSize, int ySize) {
+                info.startScreen();
+                for(int y = ySize/2; y < info.getTerminalSize().getRows(); y++) {
+                        for(int x = xSize * 1/2; x < info.getTerminalSize().getColumns(); x++) {
+                                info.putString(x,y," ",Terminal.Color.BLACK,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
+                        }
+                }
+                info.putString(xSize/2 + 10, 30, "POKEMON INFORMATION/STATUS:  ", Terminal.Color.GREEN,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
+                info.refresh();
         }
         //spawns player pokemons from player class using putPokemon()
         public static void spawnPlayer(Player player, Terminal t, Map m){
@@ -144,7 +167,7 @@ public class PokemonMysteryD{
 
         public static void main(String[] args) {
                 Pokemon playerPokemon = PokemonRandomizer.returnPokemon();
-                playerPokemon.setSymbol("@");
+                playerPokemon.setSymbol("\u236b");
                 Pokemon partnerPokemon = PokemonRandomizer.returnPokemon();
                 while(partnerPokemon.getName().equals(playerPokemon.getName())){
                         partnerPokemon = PokemonRandomizer.returnPokemon();
@@ -156,9 +179,14 @@ public class PokemonMysteryD{
                 terminal.enterPrivateMode();
                 terminalSize = terminal.getTerminalSize();
                 terminal.setCursorVisible(false);
+
                 //Screen Options:
                 Screen options = new Screen(terminal,terminalSize);
+                int ySize = options.getTerminalSize().getRows();
+                int xSize = options.getTerminalSize().getColumns();
                 Screen start = new Screen(terminal, terminalSize);
+                Screen info = new Screen(terminal, xSize/2, ySize);
+                Screen combat = new Screen(terminal, xSize/2, 0 + ySize/2);
 
                 //Variables:
                 boolean running = true;
@@ -168,17 +196,12 @@ public class PokemonMysteryD{
                 //Game mode 0 --> Represents start screen.
                 //Game mode 1 --> Represents actual gameplay.
                 int gameMode = 0;
-                int ySize = options.getTerminalSize().getRows();
-                int xSize = options.getTerminalSize().getColumns();
 
                 //gets map from Map generator class
                 Map testMap = new Map();
                 Tile[][] mapMap = testMap.getMap();
 
                 //calls buildMap to display map and spawns player pokemons 
-                buildMap(mapMap);
-                spawnPlayer(player, terminal, testMap);
-                spawnHostilePokemons(mapMap, terminal);
 
                 //makes sure there isn't a spawn error and runs the map building and spawning process again
                 //if pokemons spawn improperly (highly unlikely but theoretically possible)
@@ -206,6 +229,8 @@ public class PokemonMysteryD{
                                         //This block of code is called when you're not in the options page.
                                         if(!optionsOn) {
                                                 start.stopScreen();
+                                                info.stopScreen();
+                                                combat.stopScreen();
                                                 setUpOptionsScreen(options,xSize);
                                                 optionsOn = true;
                                         }
@@ -215,6 +240,8 @@ public class PokemonMysteryD{
                                                 options.completeRefresh();
                                                 terminal.enterPrivateMode();
                                                 //Generates the map again.
+                                                setUpCombatScreen(start, xSize, ySize);
+                                                setUpInfoScreen(start, xSize, ySize);
                                                 buildMap(mapMap);
                                                 terminal.flush();
                                                 terminal.setCursorVisible(false);
@@ -235,27 +262,33 @@ public class PokemonMysteryD{
                                 if (key.getCharacter() == 's' && gameMode == 0) {
                                         gameMode = 1;
                                         start.stopScreen();
+                                        setUpCombatScreen(start, xSize, ySize);
+                                        setUpInfoScreen(start, xSize, ySize);
                                         generated = false;
                                 }
                                 //Check what arrow keys are pressed and if those locations are walkable and moves Pokemon
-                                if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable()) {
+                                if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable()
+                                                && gameMode == 1) {
                                         movePokemon(mapMap, 0,-1,terminal,player.getPlayer());
                                         movePokemon(mapMap, 0,-1,terminal,player.getPartner());
 
                                 }
                                 //checks two to the right to account for partner pokemon
-                                if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable()) {
+                                if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable()
+                                                && gameMode == 1) {
                                         movePokemon(mapMap, 0,1,terminal,player.getPartner());
                                         movePokemon(mapMap, 0,1,terminal,player.getPlayer());
                                 }
                                 if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()
                                                 //additional checks used to check partner pokemon location
-                                                && mapMap[curY + 1][curX - 1].getWalkable()) {
+                                                && mapMap[curY + 1][curX - 1].getWalkable() 
+                                                && gameMode == 1) {
                                         movePokemon(mapMap, -1,0,terminal,player.getPlayer());
                                         movePokemon(mapMap, -1,0,terminal,player.getPartner());
                                                 }
                                 if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY][curX + 1].getWalkable()
-                                                && mapMap[curY + 1][curX + 1].getWalkable()) {
+                                                && mapMap[curY + 1][curX + 1].getWalkable()
+                                                && gameMode == 1) {
                                         movePokemon(mapMap, 1,0,terminal,player.getPlayer());
                                         movePokemon(mapMap, 1,0,terminal,player.getPartner());
                                                 }
@@ -282,7 +315,8 @@ public class PokemonMysteryD{
                         }
                         if(gameMode == 1 && !generated) {
                                 terminal.enterPrivateMode();
-                                terminal.setCursorVisible(false);
+                                setUpCombatScreen(start, xSize, ySize);
+                                setUpInfoScreen(start, xSize, ySize);
                                 buildMap(mapMap);
                                 spawnPlayer(player, terminal, testMap);
                                 spawnHostilePokemons(mapMap, terminal);
