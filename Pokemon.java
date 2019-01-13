@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.List;
 
-public class Pokemon {
+public class Pokemon implements Cloneable{
         //Instance Variables:
         private String name;
         private String type;
@@ -14,14 +15,14 @@ public class Pokemon {
         private ArrayList<Move> moveset;
 
         //Constructor:
-        public Pokemon(String n, String t, String s, int h, int[] c, int l) {
+        public Pokemon(String n, String t, String s, int h, int[] c, int l, List<Move> m) {
                exp = 0;
                name = n;
                type = t;
                hp = h;
                level = l;
                symbol = s;
-               moveset = new ArrayList<Move>();
+               moveset = new ArrayList<Move>(m);
                x = 0;
                y = 0;
                //The following below statement doesn't account for values < 0 and > 255.
@@ -116,5 +117,8 @@ public class Pokemon {
         //toString()
         public String toString() {
                 return getName() + " LVL:" + getLevel() + " HP:" + getHp() + " EXP:" + getExp();
+        }
+        public Pokemon clone() throws CloneNotSupportedException{
+          return (Pokemon) super.clone();
         }
 }
