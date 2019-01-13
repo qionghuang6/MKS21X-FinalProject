@@ -31,7 +31,7 @@ public class PokemonMysteryD{
     int[] rgb = p.getColorArr();
     t.moveCursor(y,x);
     t.applyBackgroundColor(rgb[0],rgb[1],rgb[2]);
-    t.applyForegroundColor(Terminal.Color.WHITE);
+    t.applyForegroundColor(Terminal.Color.BLACK);
     t.putCharacter(p.getSymbol().charAt(0));
     p.setLocation(x,y);
   }

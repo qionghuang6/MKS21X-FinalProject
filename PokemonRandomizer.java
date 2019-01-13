@@ -23,14 +23,18 @@ public class PokemonRandomizer{
 
   static Pokemon charmander = new Pokemon("Charmander", "Fire", "C", 30, new int[ ]{240,10,23}, 1, fireMoves);
   static Pokemon growlithe = new Pokemon("Growlithe", "Fire", "G", 40, new int[ ]{244,197,66}, 1, fireMoves);
-  static Pokemon squirtle = new Pokemon("Squirtle", "Water", "S", 40, new int[ ]{244,197,66}, 1, waterMoves);
-  static Pokemon vaporeon = new Pokemon("Growlithe", "Water", "V", 40, new int[ ]{244,197,66}, 1, waterMoves);
-  static Pokemon eevee = new Pokemon("Eevee", "Normal", "E", 40, new int[ ]{244,197,66}, 1, normalMoves);
-  static Pokemon meowth = new Pokemon("Meowth", "Normal", "M", 40, new int[ ] {244,197,66}, 1, normalMoves);
+  static Pokemon squirtle = new Pokemon("Squirtle", "Water", "S", 40, new int[ ]{50, 115, 219}, 1, waterMoves);
+  static Pokemon vaporeon = new Pokemon("Growlithe", "Water", "V", 40, new int[ ]{94, 144, 224}, 1, waterMoves);
+  static Pokemon eevee = new Pokemon("Eevee", "Normal", "E", 40, new int[ ]{198, 171, 31}, 1, normalMoves);
+  static Pokemon meowth = new Pokemon("Meowth", "Normal", "M", 40, new int[ ]{225, 226, 170}, 1, normalMoves);
 
   static List<Pokemon> pokemonList = new ArrayList(Arrays.asList(charmander, growlithe,squirtle,vaporeon,eevee,meowth));
 
-  public static Pokemon returnPokemon() throws CloneNotSupportedException{
-    return pokemonList.get((int) (Math.random() * pokemonList.size())).clone();
+  public static Pokemon returnPokemon(){
+    try {
+      return pokemonList.get((int) (Math.random() * pokemonList.size())).clone();
+    } catch(Exception e) {
+      return null;
+    }
   }
 }
