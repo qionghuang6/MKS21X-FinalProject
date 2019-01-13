@@ -183,9 +183,6 @@ public class PokemonMysteryD{
                 Tile[][] mapMap = testMap.getMap();
 
                 //calls buildMap to display map and spawns player pokemons
-                buildMap(mapMap);
-                spawnPlayer(player, terminal, testMap);
-                allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
 
                 //makes sure there isn't a spawn error and runs the map building and spawning process again
                 //if pokemons spawn improperly (highly unlikely but theoretically possible)
@@ -298,7 +295,7 @@ public class PokemonMysteryD{
                                 terminal.setCursorVisible(false);
                                 buildMap(mapMap);
                                 spawnPlayer(player, terminal, testMap);
-                                spawnHostilePokemons(mapMap, terminal);
+                                allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
                                 generated = true;
                         }
                 }
