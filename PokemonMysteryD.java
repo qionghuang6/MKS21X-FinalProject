@@ -126,7 +126,8 @@ public class PokemonMysteryD{
                         }
                 }
                 start.putString(xSize * 3/8,15, "                 Pokemon Mystery Dungeon               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                start.putString(xSize * 3/8,20, "                 Press S to Start!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
+                start.putString(xSize * 3/8,20, "                    Press S to Start!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
+                start.putString(xSize * 3/8 - 3, 30, " If you wish to look at the instructions and options, press Backspace!    ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                 start.refresh();
         }
 
@@ -145,14 +146,21 @@ public class PokemonMysteryD{
                 //This code details the left portion of the screen. (Instructions)
                 options.putString(xSize/2 - 10,8,"Instructions & Options:",Terminal.Color.GREEN,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
                 options.putString(xSize/4 - 3,15, "Instructions:", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
-                options.putString(xSize/4 - 3,17, "Objective: Reach the stairs of each level!", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,17, "Objective: Reach the stairs of each level! Looks like --> ", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 + 56,17, " ", Terminal.Color.BLACK, Terminal.Color.YELLOW, ScreenCharacterStyle.Bold);
                 options.putString(xSize/4 - 3,20, "Key Controls:", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
                 options.putString(xSize/4 - 3,22, "1. Enable/Disable Option --> Space Bar", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                 options.putString(xSize/4 - 3,24, "2. Move Up --> Up Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                 options.putString(xSize/4 - 3,26, "3. Move Down --> Down Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                 options.putString(xSize/4 - 3,28, "4. Move Left --> Left Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                 options.putString(xSize/4 - 3,30, "5. Move Right --> Right Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,32, "6. Use attacks in moveset --> Press corresponding #s.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,32, "6. To use attacks in the moveset --> You must face a specific pokemon first.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+
+                options.putString(xSize/4 - 3,33, "     6a. To face left --> Press A.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,34, "     6b. To face right --> Press D", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,35, "     6c. To face up --> Press W.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,36, "     6d. To face down --> Press S.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 3,37, "     6e. Then, Look at the blue screen AND: Click on either 1, 2, 3 or 4 to use the move inside of the array!", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                 //This code details the right portion of the screen. (Options)
                 options.putString(xSize * 3/4 - 10,15, "Options:", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
                 options.putString(xSize * 3/4 - 10,17, "Enable Music Track?", Terminal.Color.GREEN, Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
