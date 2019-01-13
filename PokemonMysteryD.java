@@ -154,6 +154,12 @@ public class PokemonMysteryD{
           movePokemon(mapMap, 1,0,terminal,player.getPlayer());
           movePokemon(mapMap, 1,0,terminal,player.getPartner());
         }
+        if(mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getColor() == 10){
+          testMap = new Map();
+          mapMap = testMap.getMap();
+          buildMap(mapMap);
+          spawnPlayer(player, terminal, testMap);
+        }
         /*
         // Debug Code: Used to display current player location
         curX = player.getPlayer().getX();
