@@ -73,6 +73,9 @@
 #### Qiong Zhou Huang:<img src="https://images-na.ssl-images-amazon.com/images/I/8166xCVDGnL._SY355_.jpg" width="40" length="40">
 > * Did lots and lots of debugging and fixed the code such that the player Pokemon stops when it hits a wall
 > * Changed map size
+#### Bryan Lai: 
+> * Worked on creating more instructions and options.
+> * Made things cleare and more visible to cause less problems with merging
 ### January 12th, 2019:
 #### Qiong Zhou Huang:<img src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/c0.76.240.240a/p240x240/36175988_608022832930083_429753688903385088_n.jpg?_nc_cat=111&_nc_ht=scontent-lga3-1.xx&oh=9a19b862eac66ca12b7cd1bed78bfbd1&oe=5CCE39C7" width="40" length="40">
 > * Spawned Partner Pokemon
@@ -81,3 +84,7 @@
 > * Created stairs on map. Starts new level once you reach those stairs 
 > * Used POkemon randomizer class to spawn random pokemons on map
 > * added code to make sure that Pokemons don't walk on top of each other
+#### Bryan Lai: 
+> * Create basic Start Screen template
+> * Merged Qiong's work and mine
+> * Fixed most errors between transitions of start screen and options and dungeon gameplay.
