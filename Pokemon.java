@@ -114,6 +114,11 @@ public class Pokemon implements Cloneable{
                 color[2] = b;
         }
 
+        public String useMove(Move m, Pokemon target) {
+                target.loseHp(m.getBaseDamage());
+                return getName() + " uses " + m.getName() + ", and" + target + " loses " + m.getBaseDamage();
+        }
+
         //toString()
         public String toString() {
                 return getName() + " LVL:" + getLevel() + " HP:" + getHp() + " EXP:" + getExp();
