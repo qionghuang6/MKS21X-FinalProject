@@ -48,3 +48,36 @@
 > * Changed from using Terminal.color to using rgb values for the map
 > * Created setBg method to use replace how the background is currently set and to be used to reset background color after Pokemon has moved on it.
 > * Dealt with lots of problems after merging before pushing commits and messing up with moving the HEAD. 
+### January 8th, 2019:
+#### Qiong Zhou Huang: <img src="https://runes.lol/image/generated/championtiles/Teemo.jpg" width="40" length="40">
+> * Changed setBg
+> * Created method to spawn pokemon at given location
+> * Created methods to randomly spawn player pokemon
+#### Bryan Lai: <img src="http://data.whicdn.com/images/32538816/mudkip_by_cheepers-d46kd61_large.png" width="40" length="40">
+> * Started on options screen.
+> * Created new branch: "options"
+> * Understand Lanterna implementation
+>> * putString(), refresh(), etc.
+### January 9th, 2019:
+#### Bryan Lai:
+> * Completed transition between options and gameplay.
+> * Background and color schemes were edited.
+> * Added new imports for "TerminalSize", etc.
+#### Qiong Zhou Huang:<img src="https://images-na.ssl-images-amazon.com/images/I/8166xCVDGnL._SY355_.jpg" width="40" length="40">
+> * Made sure islands don't spawn on map
+> * Spawns moving pokemon
+> * Figured out how to revert to orignal colors on the path behind pokemon
+> * Made walls not walkable
+> * Made pokemon not move when it reaches a wall, but there's an unknown bug with that that freezes the pokemon
+### January 10th, 2019:
+#### Qiong Zhou Huang:<img src="https://images-na.ssl-images-amazon.com/images/I/8166xCVDGnL._SY355_.jpg" width="40" length="40">
+> * Did lots and lots of debugging and fixed the code such that the player Pokemon stops when it hits a wall
+> * Changed map size
+### January 12th, 2019:
+#### Qiong Zhou Huang:<img src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/c0.76.240.240a/p240x240/36175988_608022832930083_429753688903385088_n.jpg?_nc_cat=111&_nc_ht=scontent-lga3-1.xx&oh=9a19b862eac66ca12b7cd1bed78bfbd1&oe=5CCE39C7" width="40" length="40">
+> * Spawned Partner Pokemon
+> * Move partner Pokemon along with player pokemon
+> * Made Pokemon randomizer class to choose random pokemons to start with
+> * Created stairs on map. Starts new level once you reach those stairs 
+> * Used POkemon randomizer class to spawn random pokemons on map
+> * added code to make sure that Pokemons don't walk on top of each other
