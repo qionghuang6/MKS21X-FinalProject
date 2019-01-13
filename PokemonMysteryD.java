@@ -84,12 +84,9 @@ public class PokemonMysteryD{
   }
 
   public static void main(String[] args) {
-    //defines player pokemons
-    int[] charColor = {240,10,23};
-    int[] squirtColor = {33,232,233};
-    Pokemon charmander = new Pokemon("charmander", "fire", "@", 30, charColor, 5, new ArrayList<Move>());
-    Pokemon squirtle = new Pokemon("squirtle", "water", "O", 30, squirtColor, 5, new ArrayList<Move>());
-    Player player = new Player(charmander, squirtle, 300);
+    Pokemon playerPokemon = PokemonRandomizer.returnPokemon();
+    Pokemon partnerPokemon = PokemonRandomizer.returnPokemon();
+    Player player = new Player(playerPokemon, partnerPokemon, 300);
 
     //defines lanterna terminal
     terminal = TerminalFacade.createUnixTerminal();

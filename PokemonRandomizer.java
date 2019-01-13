@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import com.google.common.collect.Lists;
 
 public class PokemonRandomizer{
 
@@ -16,9 +17,9 @@ public class PokemonRandomizer{
   static Move bubble = new Move("Bubble", "Water",15,5,50);
   static Move whirlpool = new Move("Whirlpool", "Water",10,1,25);
 
-  static List fireMoves<Move> = new ArrayList<Move>({ember,flameWheel,growl,tackle});
-  static List waterMoves<Move> = new ArrayList<Move>({waterGun,bubble,whirlpool,tailWhip});
-  static List normalMoves<Move> = new ArrayList<Move>({growl,tackle,tailWhip,defenseCurl});
+  static List fireMoves<Move> = Lists.newArrayList(ember,flameWheel,growl,tackle);
+  static List waterMoves<Move> = Lists.newArrayList(waterGun,bubble,whirlpool,tailWhip);
+  static List normalMoves<Move> = Lists.newArrayList(growl,tackle,tailWhip,defenseCurl);
 
   static Pokemon charmander = new Pokemon("Charmander", "Fire", "C", 30, {240,10,23}, 1, fireMoves);
   static Pokemon growlithe = new Pokemon("Growlithe", "Fire", "G", 40, {244,197,66}, 1, fireMoves);
@@ -29,7 +30,7 @@ public class PokemonRandomizer{
 
   List pokemonList<Pokemon> = new ArrayList<Pokemon>({charmander, growlithe,squirtle,vaporeon,eevee,meowth});
 
-  public static returnPokemon(){
+  public static Pokemon returnPokemon(){
     return pokemonList.get((int) (Math.random() * pokemonList.size())).clone();
   }
 }
