@@ -70,6 +70,17 @@ public class PokemonMysteryD{
     }
 }
 
+  public static void spawnHostilePokemons(Tile[][] m, Terminal t){
+    int spawned = 0;
+    while(spawned < 15){
+      int r = (int) (Math.random() * m.length);
+      int c = (int) (Math.random() * m[0].length);
+      if(m[r][c].getWalkable()){
+        putPokemon(c,r,t,PokemonRandomizer.returnPokemon());
+        spawned++;
+      }
+    }
+  }
   //Uses Map array from Map class to display the map in the beginning of a round
   public static void buildMap(Tile[][] mapMap){
     for (int x = 0; x < mapMap.length;x++) {
@@ -109,6 +120,7 @@ public class PokemonMysteryD{
     //calls buildMap to display map and spawns player pokemons
     buildMap(mapMap);
     spawnPlayer(player, terminal, testMap);
+    spawnHostilePokemons(mapMap, terminal);
 
     //makes sure there isn't a spawn error and runs the map building and spawning process again
     //if pokemons spawn improperly (highly unlikely but theoretically possible)
@@ -159,6 +171,7 @@ public class PokemonMysteryD{
           mapMap = testMap.getMap();
           buildMap(mapMap);
           spawnPlayer(player, terminal, testMap);
+          spawnHostilePokemons(mapMap, terminal);
         }
         /*
         // Debug Code: Used to display current player location
