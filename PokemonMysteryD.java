@@ -85,7 +85,11 @@ public class PokemonMysteryD{
 
   public static void main(String[] args) {
     Pokemon playerPokemon = PokemonRandomizer.returnPokemon();
+    playerPokemon.setSymbol("@");
     Pokemon partnerPokemon = PokemonRandomizer.returnPokemon();
+    while(partnerPokemon.getName().equals(playerPokemon.getName())){
+      partnerPokemon = PokemonRandomizer.returnPokemon();
+    }
     Player player = new Player(playerPokemon, partnerPokemon, 300);
 
     //defines lanterna terminal
