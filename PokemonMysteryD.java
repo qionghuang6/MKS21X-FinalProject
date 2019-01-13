@@ -65,6 +65,9 @@ public class PokemonMysteryD{
     if(t.getColor() == 4){
       setBg(terminal,x,y,52,111,18);
   }
+    if(t.getColor() == 10){
+      setBg(terminal,x,y,255,255,0);
+    }
 }
 
   //Uses Map array from Map class to display the map in the beginning of a round

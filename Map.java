@@ -51,6 +51,16 @@ public class Map{
         currentY = lastY;
       }
     }
+    boolean hasStairs = false;
+    while(!hasStairs){
+      int r = (int) (Math.random() * tileMap.length);
+      int c = (int) (Math.random() * tileMap[0].length);
+      if(tileMap[r][c].getWalkable()){
+        tileMap[r][c].setColor(10);
+        tileMap[r][c].setStair();
+        hasStairs = true;
+      }
+    }
   }
 
   //default map size is 100 wide and 45 tall

@@ -7,6 +7,7 @@ public class Tile{
   private boolean revealed;
   //whether or not it is displayed
   //not currently used yet
+  private boolean stair;
 
   //constructs Tiles based on givens, starts off as not being revealed
   public Tile(int color, boolean walkable){
@@ -48,5 +49,13 @@ public class Tile{
   //checks if revealed
   public boolean getRevealed(){
     return revealed;
+  }
+  //setter for stair
+  public void setStair(){
+    stair = true;
+  }
+  //getter for if its a stair
+  public boolean isStair(){
+    return stair;
   }
 }
