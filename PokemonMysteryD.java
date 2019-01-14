@@ -572,7 +572,9 @@ public class PokemonMysteryD{
                         if(!playerTurn) {
                                 for(int i = 2; i < allPokemons.size(); i++) {
                                   int[] move = allPokemons.get(i).moveTowards(player.getPlayer());
-                                  movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i));
+                                  if(Math.random()>0.5){
+                                      movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i));
+                                  }
                                 }
                                 playerTurn = true;
                         }
