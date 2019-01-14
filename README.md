@@ -104,3 +104,11 @@ java -Djava.awt.headless=true -cp lanterna.jar:. PokemonMysteryD
 > * Create basic Start Screen template
 > * Merged Qiong's work and mine
 > * Fixed most errors between transitions of start screen and options and dungeon gameplay.
+### January 13th, 2019:
+#### Bryan Lai: <img src="https://media.tenor.com/images/93a53b9095e9b2c402e7d4e29fea8058/tenor.gif"> </img>
+> * Edit pokemon randomizer to only spawn 6 pokemon per floor rather than 15.
+> * Fix bugs and issues when switching from gameplay and the option screen by using the Backspace.
+> * Create messages that appear in the combat box by pressing either WASD to "face" and 1,2,3,4 for specific moves.
+> * Edit instructions slightly by providing some visuals and objectives as well as new key controls.
+> * Clear useless files that existed previously in the project. 
+> * Create Pokemon Information screen that appears below the combat messages. 
