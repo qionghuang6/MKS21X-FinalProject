@@ -227,7 +227,7 @@ public class PokemonMysteryD{
                         addMessageToInfo(sideScreen, all.get(i).toString(), xSize/2 + 8, current);
                         current++;
                 }
-        } 
+        }
 
 
         //spawns player pokemons from player class using putPokemon()
@@ -290,7 +290,7 @@ public class PokemonMysteryD{
                 Map testMap = new Map();
                 Tile[][] mapMap = testMap.getMap();
 
-                //calls buildMap to display map and spawns player pokemons 
+                //calls buildMap to display map and spawns player pokemons
 
 
                 //makes sure there isn't a spawn error and runs the map building and spawning process again
@@ -386,7 +386,7 @@ public class PokemonMysteryD{
                                                 facingY = 0;
                                                 addMessageToCombat(sideScreen, "Faced Down!", xSize/2 + 8, yMessage, "bold");
                                                 yMessage++;
-                                        } 
+                                        }
 
                                         //The reason why we cannot have a separate method for each of the following is BECAUSE OF ymessage++;
                                         //Uses first move in moveset.
@@ -571,6 +571,8 @@ public class PokemonMysteryD{
                         }
                         if(!playerTurn) {
                                 for(int i = 2; i < allPokemons.size(); i++) {
+                                  int[] move = allPokemons.get(i).moveTowards(player.getPlayer());
+                                  movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i));
                                 }
                                 playerTurn = true;
                         }
