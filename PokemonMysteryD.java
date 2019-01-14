@@ -19,7 +19,7 @@ import java.util.List;
 
 public class PokemonMysteryD{
         static Terminal terminal;
-        static TerminalSize terminalSize; 
+        static TerminalSize terminalSize;
 
         //displays text at certain location
         public static void putString(int r, int c,Terminal t, String s){
@@ -45,17 +45,19 @@ public class PokemonMysteryD{
         //gets delta x and delta y and moves pokemon to that location using putPokemon
         //gets information from map to clean up after itself
         public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p){
-                int curX = p.getX();
-                int curY = p.getY();
-                //putString(70, 20,t,"" + curX + " " + curY);
-                t.moveCursor(curY,curX);
-                setBg(t, mapMap[curY][curX], curX, curY);
-                mapMap[curY][curX].makeWalkable();
-                t.moveCursor(curY,curX);
-                terminal.putCharacter(' ');
-                putPokemon(curX + dx, curY + dy, t, p);
-                mapMap[curY + dy ][curX + dx].makeUnwalkable();
-                //p.setLocation(curX + dx,y);
+          int curX = p.getX();
+          int curY = p.getY();
+                if(mapMap[curY + dy][curX + dx].getWalkable()){
+                  //putString(70, 20,t,"" + curX + " " + curY);
+                  t.moveCursor(curY,curX);
+                  setBg(t, mapMap[curY][curX], curX, curY);
+                  mapMap[curY][curX].makeWalkable();
+                  t.moveCursor(curY,curX);
+                  terminal.putCharacter(' ');
+                  putPokemon(curX + dx, curY + dy, t, p);
+                  mapMap[curY + dy ][curX + dx].makeUnwalkable();
+                  //p.setLocation(curX + dx,y);
+                }
         }
 
 
@@ -182,7 +184,7 @@ public class PokemonMysteryD{
                 addMessageToCombat(combat,"Any messages that arrive here will reset all messages above!", xSize/2 + 8, 25, "blinking");
         }
 
-        //updateCombatScreen 
+        //updateCombatScreen
 
         //Method to add message to combatScreen:
         public static void addMessageToCombat(Screen combat, String message, int x, int y, String style) {
@@ -192,7 +194,7 @@ public class PokemonMysteryD{
                 if(style == "blinking") {
                 combat.putString(x,y,message, Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
                 }
-        } 
+        }
 
         //Sets up the info screen.
         public static void setUpInfoScreen(Screen info, int xSize, int ySize) {
@@ -223,7 +225,7 @@ public class PokemonMysteryD{
                                 addMessageToInfo(sideScreen, all.get(i).toString(), xSize/2 + 8, current);
                                 current++;
                         }
-        } 
+        }
 
         //spawns player pokemons from player class using putPokemon()
         public static void spawnPlayer(Player player, Terminal t, Map m){
@@ -281,8 +283,8 @@ public class PokemonMysteryD{
                 //gets map from Map generator class
                 Map testMap = new Map();
                 Tile[][] mapMap = testMap.getMap();
-          
-                //calls buildMap to display map and spawns player pokemons 
+
+                //calls buildMap to display map and spawns player pokemons
 
                 //makes sure there isn't a spawn error and runs the map building and spawning process again
                 //if pokemons spawn improperly (highly unlikely but theoretically possible)
@@ -376,7 +378,7 @@ public class PokemonMysteryD{
                                         facingY = 0;
                                         addMessageToCombat(sideScreen, "Faced Down!", xSize/2 + 8, yMessage, "bold");
                                         yMessage++;
-                                } 
+                                }
 
                                 //The reason why we cannot have a separate method for each of the following is BECAUSE OF ymessage++;
                                 //Uses first move in moveset.

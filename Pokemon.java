@@ -126,4 +126,21 @@ public class Pokemon implements Cloneable{
         public Pokemon clone() throws CloneNotSupportedException{
           return (Pokemon) super.clone();
         }
+        public int[] moveTowards(Pokemon p){
+          int dx = 0;
+          int dy = 0;
+          if(p.getX() > this.getX()){
+            dx = 1;
+          }
+          if(p.getX() < this.getX()){
+            dx = -1;
+          }
+          if(p.getY() < this.getY()){
+            dy = -1;
+          }
+          if(p.getY() > this.getY()){
+            dy = 1;
+          }
+          return new int[]{dx,dy};
+        }
 }
