@@ -548,6 +548,7 @@ public class PokemonMysteryD{
                                           player.getPartner().healHp(healHp);
                                           mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setHealthPotion(0);
                                           mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setColor(0);
+                                          addMessageToCombat(sideScreen, "Healed " + healHp + "HP!", xSize/2 + 8, yMessage, "bold");
                                         }
                                 }
                                 /*
