@@ -30,7 +30,7 @@ public class PokemonRandomizer{
   static Pokemon squirtle = new Pokemon("Squirtle", "Water", "S", 40, new int[ ]{50, 115, 219}, 1, waterMoves);
   static Pokemon vaporeon = new Pokemon("Vaporeon", "Water", "V", 40, new int[ ]{94, 144, 224}, 1, waterMoves);
   static Pokemon eevee = new Pokemon("Eevee", "Normal", "E", 40, new int[ ]{198, 171, 31}, 1, normalMoves);
-  static Pokemon bulbasaur = new Pokemon("Bulbasaur", "Grass", "B", 40, new int[]{66, 244, 75} ,grassMoves);
+  static Pokemon bulbasaur = new Pokemon("Bulbasaur", "Grass", "B", 40, new int[]{66, 244, 75}, 1 ,grassMoves);
   static Pokemon meowth = new Pokemon("Meowth", "Normal", "M", 40, new int[ ]{225, 226, 170}, 1, normalMoves);
 
   static List<Pokemon> pokemonList = new ArrayList(Arrays.asList(charmander, growlithe,squirtle,vaporeon,eevee,meowth));
