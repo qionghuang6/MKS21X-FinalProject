@@ -85,6 +85,9 @@ public class PokemonMysteryD{
                 if(t.getColor() == 10){
                         setBg(terminal,x,y,255,255,0);
                 }
+                if(t.getColor() == 8){
+                        setBg(terminal,x,y,235, 66, 244);
+                }
         }
 
         //Spawns the hostilePokemons.
