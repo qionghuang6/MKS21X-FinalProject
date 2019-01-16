@@ -529,6 +529,7 @@ public class PokemonMysteryD{
                                                 movePokemon(mapMap, 1,0,terminal,player.getPartner());
                                                 playerTurn = false;
                                                         }
+                                          //checks if player is on a stair to start a new level
                                         if(mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getColor() == 10){
                                                 testMap = new Map();
                                                 mapMap = testMap.getMap();
@@ -539,6 +540,14 @@ public class PokemonMysteryD{
                                                 allPokemons.add(player.getPartner());
                                                 allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
                                                 addPlayerInfo(sideScreen, player, allPokemons, xSize);
+                                        }
+                                        //checks if player is on a potion;
+                                        int healHp = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getHealthPotion();
+                                        if(healHp != 0){
+                                          player.getPlayer().healHp(healHp);
+                                          player.getPartner().healHp(healHp);
+                                          mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setHealthPotion(0);
+                                          mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setColor(0);
                                         }
                                 }
                                 /*
