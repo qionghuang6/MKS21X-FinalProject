@@ -116,3 +116,8 @@ java -Djava.awt.headless=true -cp lanterna.jar:. PokemonMysteryD
 #### Qiong Zhou Huang:
 > * Added code to have pokemons move towards player after every step
 > * Made sure that pokemons only moved towards player half the time to prevent swarming 
+### January 16th, 2019:
+#### Qiong Zhou Huang:
+> * Fixed swarming even more
+> * Implemented heal potion tile
+> * Randomly choose between map tile theme
