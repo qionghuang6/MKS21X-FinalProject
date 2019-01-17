@@ -10,12 +10,12 @@ public class PokemonRandomizer{
   static Move tackle = new Move("Growl", "Normal",20,1,10);
   static Move defenseCurl = new Move("Growl", "Normal",5,1,5);
   //Fire moves
-  static Move ember = new Move("Ember","Fire",20,1,50);
-  static Move flameWheel = new Move("Flame Wheel","Fire",25,5,20);
+  static Move ember = new Move("Ember","Fire",20,1,5);
+  static Move flameWheel = new Move("Flame Wheel","Fire",25,5,8);
   //Water Moves
-  static Move waterGun = new Move("Water Gun", "Water",30,10,10);
-  static Move bubble = new Move("Bubble", "Water",15,5,8);
-  static Move whirlpool = new Move("Whirlpool", "Water",10,1,15);
+  static Move waterGun = new Move("Water Gun", "Water",30,10,7);
+  static Move bubble = new Move("Bubble", "Water",15,5,5);
+  static Move whirlpool = new Move("Whirlpool", "Water",10,1,4);
 
   static List<Move> fireMoves = new ArrayList(Arrays.asList(ember,flameWheel,growl,tackle));
   static List<Move> waterMoves = new ArrayList(Arrays.asList(waterGun,bubble,whirlpool,tailWhip));

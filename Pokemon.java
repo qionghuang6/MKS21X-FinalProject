@@ -6,7 +6,7 @@ public class Pokemon implements Cloneable{
         private String name;
         private String type;
         private String symbol;
-        private int hp;
+        private double hp;
         private int[] color;
         private int level;
         private int exp;
@@ -41,7 +41,7 @@ public class Pokemon implements Cloneable{
                 return type;
         }
 
-        public int getHp() {
+        public double getHp() {
                 return hp;
         }
 
@@ -96,11 +96,11 @@ public class Pokemon implements Cloneable{
                 this.y = y;
         }
 
-        public void loseHp(int num) {
+        public void loseHp(double num) {
                 hp -= num;
         }
 
-        public void healHp(int num) {
+        public void healHp(double num) {
                 hp += num;
         }
 
@@ -115,8 +115,39 @@ public class Pokemon implements Cloneable{
         }
 
         public String useMove(Move m, Pokemon target) {
+                String moveType = m.getType();
+                String targetType = target.getType();
+                //Super effective moves: 2x Damage.
+                if(moveType == "Water" && targetType == "Fire") {
+                        target.loseHp(m.getBaseDamage() * 2);
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was super effective!";
+                }
+                if(moveType == "Grass" && targetType == "Water") {
+                        target.loseHp(m.getBaseDamage() * 2);
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was super effective!";
+                }
+                if(moveType == "Fire" && targetType == "Grass") {
+                        target.loseHp(m.getBaseDamage() * 2);
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was super effective!";
+                }
+
+                //Non effective type moves: 0.5x Damage.
+                if(moveType == "Fire" && targetType == "Water") {
+                        target.loseHp(m.getBaseDamage() * 0.5);
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... ";
+                }
+                if(moveType == "Water" && targetType == "Grass") {
+                        target.loseHp(m.getBaseDamage() * 0.5);
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... ";
+                }
+                if(moveType == "Grass" && targetType == "Fire") {
+                        target.loseHp(m.getBaseDamage() * 0.5);
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... ";
+                }
+
+                //Returns regular message if none of the above, and normal base damage.
                 target.loseHp(m.getBaseDamage());
-                return getName() + " uses " + m.getName() + ", and" + target + " loses " + m.getBaseDamage();
+                return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP";
         }
 
         //toString()

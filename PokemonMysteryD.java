@@ -245,9 +245,8 @@ public class PokemonMysteryD{
         }
 
         //Uses moves.
-        public static boolean manageMove(Pokemon a, Pokemon target, int moveIndex) {
-                a.useMove(a.getMoveset().get(moveIndex - 1),target);
-                return true;
+        public static String manageMove(Pokemon a, Pokemon target, int moveIndex) {
+                return a.useMove(a.getMoveset().get(moveIndex - 1),target);
         }
 
 
@@ -409,9 +408,8 @@ public class PokemonMysteryD{
                                                 for(int i = 2; i < allPokemons.size(); i++) {
                                                         if(allPokemons.get(i).getX() == player.getPlayer().getX() + facingX && allPokemons.get(i).getY() == player.getPlayer().getY() + facingY) {
                                                                 //Action for dealing damage.
-                                                                player.getPlayer().useMove(player.getPlayer().getMoveset().get(0),allPokemons.get(i));
                                                                 //Adds combat message!
-                                                                addMessageToCombat(sideScreen, player.getPlayer().getName() + " used " + player.getPlayer().getMoveset().get(0).getName() + " on " + allPokemons.get(i).getName() + " dealing " + player.getPlayer().getMoveset().get(0).getBaseDamage() + " HP! " + allPokemons.get(i).getName() + " has " + allPokemons.get(i).getHp() + " HP left!", xSize/2 + 8,  yMessage, "bold");
+                                                                addMessageToCombat(sideScreen, player.getPlayer().useMove(player.getPlayer().getMoveset().get(0),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 //moves message coordinate down.
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
@@ -424,8 +422,8 @@ public class PokemonMysteryD{
                                                                                         sideScreen.putString(x,y," ",Terminal.Color.BLACK,Terminal.Color.CYAN,ScreenCharacterStyle.Bold);
                                                                                 }
                                                                         }
+                                                                        yMessage++;
                                                                 }
-                                                                yMessage++;
 
                                                         }
                                                 }
@@ -438,9 +436,7 @@ public class PokemonMysteryD{
                                                 for(int i = 2; i < allPokemons.size(); i++) {
                                                         if(allPokemons.get(i).getX() == player.getPlayer().getX() + facingX && allPokemons.get(i).getY() == player.getPlayer().getY() + facingY) {
                                                                 //Action for dealing damage.
-                                                                player.getPlayer().useMove(player.getPlayer().getMoveset().get(1),allPokemons.get(i));
-                                                                //Adds combat message!
-                                                                addMessageToCombat(sideScreen, player.getPlayer().getName() + " used " + player.getPlayer().getMoveset().get(1).getName() + " on " + allPokemons.get(i).getName() + " dealing " + player.getPlayer().getMoveset().get(1).getBaseDamage() + " HP! " + allPokemons.get(i).getName() + " has " + allPokemons.get(i).getHp() + " HP left!", xSize/2 + 8,  yMessage, "bold");
+                                                                addMessageToCombat(sideScreen, player.getPlayer().useMove(player.getPlayer().getMoveset().get(1),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 //moves message coordinate down.
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
@@ -453,8 +449,8 @@ public class PokemonMysteryD{
                                                                                         sideScreen.putString(x,y," ",Terminal.Color.BLACK,Terminal.Color.CYAN,ScreenCharacterStyle.Bold);
                                                                                 }
                                                                         }
-                                                                }
                                                                 yMessage++;
+                                                                }
                                                         }
                                                 }
                                                 playerTurn = false;
@@ -466,10 +462,7 @@ public class PokemonMysteryD{
                                                 for(int i = 2; i < allPokemons.size(); i++) {
                                                         if(allPokemons.get(i).getX() == player.getPlayer().getX() + facingX && allPokemons.get(i).getY() == player.getPlayer().getY() + facingY) {
                                                                 //Action for dealing damage.
-                                                                player.getPlayer().useMove(player.getPlayer().getMoveset().get(2),allPokemons.get(i));
-                                                                //Adds combat message!
-                                                                addMessageToCombat(sideScreen, player.getPlayer().getName() + " used " + player.getPlayer().getMoveset().get(2).getName() + " on " + allPokemons.get(i).getName() + " dealing " + player.getPlayer().getMoveset().get(2).getBaseDamage() + " HP! " + allPokemons.get(i).getName() + " has " + allPokemons.get(i).getHp() + " HP left!", xSize/2 + 8,  yMessage, "bold");
-                                                                //moves message coordinate down.
+                                                                addMessageToCombat(sideScreen, player.getPlayer().useMove(player.getPlayer().getMoveset().get(2),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
                                                                         addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted!", xSize/2 + 8, yMessage, "bold");
@@ -481,8 +474,8 @@ public class PokemonMysteryD{
                                                                                         sideScreen.putString(x,y," ",Terminal.Color.BLACK,Terminal.Color.CYAN,ScreenCharacterStyle.Bold);
                                                                                 }
                                                                         }
-                                                                }
                                                                 yMessage++;
+                                                                }
                                                         }
                                                 }
                                                 playerTurn = false;
@@ -494,9 +487,7 @@ public class PokemonMysteryD{
                                                 for(int i = 2; i < allPokemons.size(); i++) {
                                                         if(allPokemons.get(i).getX() == player.getPlayer().getX() + facingX && allPokemons.get(i).getY() == player.getPlayer().getY() + facingY) {
                                                                 //Action for dealing damage.
-                                                                player.getPlayer().useMove(player.getPlayer().getMoveset().get(3),allPokemons.get(i));
-                                                                //Adds combat message!
-                                                                addMessageToCombat(sideScreen, player.getPlayer().getName() + " used " + player.getPlayer().getMoveset().get(3).getName() + " on " + allPokemons.get(i).getName() + " dealing " + player.getPlayer().getMoveset().get(3).getBaseDamage() + " HP! " + allPokemons.get(i).getName() + " has " + allPokemons.get(i).getHp() + " HP left!", xSize/2 + 8,  yMessage, "bold");
+                                                                addMessageToCombat(sideScreen, player.getPlayer().useMove(player.getPlayer().getMoveset().get(3),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 //moves message coordinate down.
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
@@ -509,8 +500,8 @@ public class PokemonMysteryD{
                                                                                         sideScreen.putString(x,y," ",Terminal.Color.BLACK,Terminal.Color.CYAN,ScreenCharacterStyle.Bold);
                                                                                 }
                                                                         }
-                                                                }
                                                                 yMessage++;
+                                                                }
                                                         }
                                                 }
                                                 playerTurn = false;
@@ -605,22 +596,27 @@ public class PokemonMysteryD{
                                 for(int i = 2; i < allPokemons.size(); i++) {
                                         Pokemon enemy = allPokemons.get(i);
                                         int[] move = allPokemons.get(i).moveTowards(player.getPlayer());
-                                        movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i));
+                                        //If enemy is directly in front of them, attack player, else: just move.
                                 if(isFacing(allPokemons.get(i),player.getPlayer())) {
                                         //Action for dealing damage.
                                         //Uses 1st move for now. Make 1 a variable later for the below.
-                                        manageMove(enemy,player.getPlayer(),1); 
-                                                        //Adds combat message!
-                                                        addMessageToCombat(sideScreen, enemy.getName() + " used " + enemy.getMoveset().get(0).getName() + " on " + player.getPlayer().getName() + " dealing " + enemy.getMoveset().get(0).getBaseDamage() + " HP! " + player.getPlayer().getName() + " has " + player.getPlayer().getHp() + " HP left!", xSize/2 + 8,  yMessage, "bold");
-                                                        yMessage++;
+                                        addMessageToCombat(sideScreen, manageMove(enemy,player.getPlayer(),1),xSize/2+8,yMessage,"bold");
+                                        yMessage++;
+                                }
+                                else {
+                                        movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i));
                                 }
                         }
                                 playerTurn = true;
                         }
 
                         if(player.getPlayer().getHp() <= 0) {
+                                gameMode = 3;
                                 sideScreen.stopScreen();
                                 gameOver.startScreen();
+                gameOver.putString(xSize * 3/8,15, "                 Pokemon Mystery Dungeon               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                gameOver.putString(xSize * 3/8,20, "                    Press S to Start!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
+                start.putString(xSize * 3/8 - 3, 30, " If you wish to look at the instructions and options, press Backspace!    ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                         }
 
                         //Ending updates:
