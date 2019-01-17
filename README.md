@@ -121,3 +121,7 @@ java -Djava.awt.headless=true -cp lanterna.jar:. PokemonMysteryD
 > * Fixed swarming even more
 > * Implemented heal potion tile
 > * Randomly choose between map tile theme
+#### Bryan Lai:
+> * Fixed glitch where you can move your player/pokemon in the options screen.
+> * Implemented combat for the enemies present on the map.
+> > * Puts up a blank screen once game over occurs. (Planning to add messages/graphics for "Game Over" and "Restart" tomorrow.
