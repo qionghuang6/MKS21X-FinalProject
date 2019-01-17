@@ -43,8 +43,7 @@ public class PokemonMysteryD{
         }
 
 
-        //gets delta x and delta y and moves pokemon to that location using putPokemon
-        //gets information from map to clean up after itself
+        //gets delta x and delta y and moves pokemon to that location using putPokemon gets information from map to clean up after itself
         public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p){
           int curX = p.getX();
           int curY = p.getY();
@@ -236,6 +235,20 @@ public class PokemonMysteryD{
                 putPokemon(m.getStartX(),m.getStartY() + 1, t, player.getPartner());
         }
 
+        //Checks to see if a pokemon is facing you before attacking.
+        //Only used for opposing pokemon to face you.
+        public static boolean isFacing(Pokemon a, Pokemon b) {
+                return a.getX() == b.getX() + 1 && a.getY() == b.getY() ||
+                        a.getX() == b.getX() - 1 && a.getY() == b.getY() ||
+                        a.getX() == b.getX() && a.getY() == b.getY() + 1 ||
+                        a.getX() == b.getX() && a.getY() == b.getY() - 1;
+        }
+
+        //Uses moves.
+        public static boolean manageMove(Pokemon a, Pokemon target, int moveIndex) {
+                a.useMove(a.getMoveset().get(moveIndex - 1),target);
+                return true;
+        }
 
 
 
@@ -273,6 +286,7 @@ public class PokemonMysteryD{
                 Screen start = new Screen(terminal, terminalSize);
                 Screen sideScreen = new Screen(terminal, terminalSize);
                 Screen character = new Screen(terminal, terminalSize);
+                Screen gameOver = new Screen(terminal, terminalSize);
 
                 //Variables:
                 boolean running = true;
@@ -502,28 +516,46 @@ public class PokemonMysteryD{
                                                 playerTurn = false;
                                         }
                                         //Check what arrow keys are pressed and if those locations are walkable and moves Pokemon
-                                        if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable()) {
+                                        if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable() && !optionsOn) {
                                                 movePokemon(mapMap, 0,-1,terminal,player.getPlayer());
                                                 movePokemon(mapMap, 0,-1,terminal,player.getPartner());
+                                                facingX = 0;
+                                                facingY = -1;
+                                                addMessageToCombat(sideScreen, "Moved left!", xSize/2 + 8, yMessage, "bold");
+                                                yMessage++;
                                                 playerTurn = false;
                                         }
                                         //checks two to the right to account for partner pokemon
-                                        if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable()) {
+                                        if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable() && !optionsOn) {
                                                 movePokemon(mapMap, 0,1,terminal,player.getPartner());
                                                 movePokemon(mapMap, 0,1,terminal,player.getPlayer());
+                                                facingX = 0;
+                                                facingY = 1;
+                                                addMessageToCombat(sideScreen, "Moved Right!", xSize/2 + 8, yMessage, "bold");
+                                                yMessage++;
                                                 playerTurn = false;
                                         }
                                         if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()
                                                         //additional checks used to check partner pokemon location
-                                                        && mapMap[curY + 1][curX - 1].getWalkable()) {
+                                                        && mapMap[curY + 1][curX - 1].getWalkable()
+                                                        && !optionsOn) {
                                                 movePokemon(mapMap, -1,0,terminal,player.getPlayer());
                                                 movePokemon(mapMap, -1,0,terminal,player.getPartner());
+                                                facingX = -1;
+                                                facingY = 0;
+                                                addMessageToCombat(sideScreen, "Moved Up!", xSize/2 + 8, yMessage, "bold");
+                                                yMessage++;
                                                 playerTurn = false;
                                                         }
                                         if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY][curX + 1].getWalkable()
-                                                        && mapMap[curY + 1][curX + 1].getWalkable()) {
+                                                        && mapMap[curY + 1][curX + 1].getWalkable() 
+                                                        && !optionsOn) {
                                                 movePokemon(mapMap, 1,0,terminal,player.getPlayer());
                                                 movePokemon(mapMap, 1,0,terminal,player.getPartner());
+                                                facingX = 1;
+                                                facingY = 0;
+                                                addMessageToCombat(sideScreen, "Moved Down!", xSize/2 + 8, yMessage, "bold");
+                                                yMessage++;
                                                 playerTurn = false;
                                                         }
                                         if(mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getColor() == 10){
@@ -571,12 +603,25 @@ public class PokemonMysteryD{
                         }
                         if(!playerTurn) {
                                 for(int i = 2; i < allPokemons.size(); i++) {
-                                  int[] move = allPokemons.get(i).moveTowards(player.getPlayer());
-                                  movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i));
+                                        Pokemon enemy = allPokemons.get(i);
+                                        int[] move = allPokemons.get(i).moveTowards(player.getPlayer());
+                                        movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i));
+                                if(isFacing(allPokemons.get(i),player.getPlayer())) {
+                                        //Action for dealing damage.
+                                        //Uses 1st move for now. Make 1 a variable later for the below.
+                                        manageMove(enemy,player.getPlayer(),1); 
+                                                        //Adds combat message!
+                                                        addMessageToCombat(sideScreen, enemy.getName() + " used " + enemy.getMoveset().get(0).getName() + " on " + player.getPlayer().getName() + " dealing " + enemy.getMoveset().get(0).getBaseDamage() + " HP! " + player.getPlayer().getName() + " has " + player.getPlayer().getHp() + " HP left!", xSize/2 + 8,  yMessage, "bold");
+                                                        yMessage++;
                                 }
+                        }
                                 playerTurn = true;
                         }
 
+                        if(player.getPlayer().getHp() <= 0) {
+                                sideScreen.stopScreen();
+                                gameOver.startScreen();
+                        }
 
                         //Ending updates:
                         addPlayerInfo(sideScreen, player, allPokemons, xSize);
