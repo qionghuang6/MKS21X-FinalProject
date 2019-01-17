@@ -45,13 +45,13 @@ public class PokemonMysteryD{
 
         //gets delta x and delta y and moves pokemon to that location using putPokemon
         //gets information from map to clean up after itself
-        public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p, double ranNum){
+        public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p, double level){
           int curX = p.getX();
           int curY = p.getY();
                 if(mapMap[curY + dy][curX + dx].getWalkable()){
                   //putString(70, 20,t,"" + curX + " " + curY);
                   t.moveCursor(curY,curX);
-                  setBg(t, mapMap[curY][curX], curX, curY,ranNum);
+                  setBg(t, mapMap[curY][curX], curX, curY,level);
                   mapMap[curY][curX].makeWalkable();
                   t.moveCursor(curY,curX);
                   terminal.putCharacter(' ');
@@ -71,8 +71,8 @@ public class PokemonMysteryD{
 
 
         //takes in Tile from generated Map 2d array and sets that location to certain colors
-        public static void setBg(Terminal terminal, Tile t, int x, int y, double ranNum){
-          if(ranNum < (0.333333)){
+        public static void setBg(Terminal terminal, Tile t, int x, int y, double level){
+          if(((int)(level / 5.0)) % 3 == 0){
                 if(t.getColor() == 0){
                         setBg(terminal, x,y,131,203,58);
                 }
@@ -90,7 +90,7 @@ public class PokemonMysteryD{
                         setBg(terminal,x,y,235, 66, 244);
                 }
               }
-          if(ranNum >= (0.333333) && ranNum < (0.666666)){
+          if(((int)(level / 5.0)) % 3 == 1){
             if(t.getColor() == 0){
                     setBg(terminal, x,y,9, 71, 16);
             }
@@ -108,7 +108,8 @@ public class PokemonMysteryD{
             if(t.getColor() == 8){
                     setBg(terminal,x,y,235, 66, 244);
             }
-          } else{
+          }
+          if(((int)(level / 5.0)) % 3 == 2){
             //snowy boy
             if(t.getColor() == 0){
                     setBg(terminal, x,y,234, 241, 242);
@@ -150,12 +151,12 @@ public class PokemonMysteryD{
 
 
         //Uses Map array from Map class to display the map in the beginning of a round
-        public static void buildMap(Tile[][] mapMap, double ranNum){
+        public static void buildMap(Tile[][] mapMap, double level){
                 for (int x = 0; x < mapMap.length;x++) {
                         for(int y = 0 ; y < mapMap[0].length;y++){
                                 terminal.putCharacter(' ');
                                 //terminal.putCharacter(("" + y).charAt(0));
-                                setBg(terminal,mapMap[x][y],y,x,ranNum);
+                                setBg(terminal,mapMap[x][y],y,x,level);
                         }
                 }
         }
@@ -289,7 +290,7 @@ public class PokemonMysteryD{
         //MAIN PROGRAM
 
         public static void main(String[] args) {
-                double ranNum = Math.random();
+                double level = 1;
                 List<Pokemon> allPokemons = new ArrayList<Pokemon>();
                 Pokemon playerPokemon = PokemonRandomizer.returnPokemon();
                 playerPokemon.setSymbol("\u237b");
@@ -379,7 +380,7 @@ public class PokemonMysteryD{
                                                 setUpCombatScreen(sideScreen, xSize, ySize);
                                                 setUpInfoScreen(sideScreen, xSize, ySize);
                                                 addPlayerInfo(sideScreen, player, allPokemons, xSize);
-                                                buildMap(mapMap,ranNum);
+                                                buildMap(mapMap,level);
                                                 for(Pokemon p : allPokemons) {
                                                         putPokemon(p.getX(),p.getY(),terminal,p);
                                                 }
@@ -547,41 +548,44 @@ public class PokemonMysteryD{
                                         }
                                         //Check what arrow keys are pressed and if those locations are walkable and moves Pokemon
                                         if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable()) {
-                                                movePokemon(mapMap, 0,-1,terminal,player.getPlayer(),ranNum);
-                                                movePokemon(mapMap, 0,-1,terminal,player.getPartner(),ranNum);
+                                                movePokemon(mapMap, 0,-1,terminal,player.getPlayer(),level);
+                                                movePokemon(mapMap, 0,-1,terminal,player.getPartner(),level);
                                                 playerTurn = false;
                                         }
                                         //checks two to the right to account for partner pokemon
                                         if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable()) {
-                                                movePokemon(mapMap, 0,1,terminal,player.getPartner(),ranNum);
-                                                movePokemon(mapMap, 0,1,terminal,player.getPlayer(),ranNum);
+                                                movePokemon(mapMap, 0,1,terminal,player.getPartner(),level);
+                                                movePokemon(mapMap, 0,1,terminal,player.getPlayer(),level);
                                                 playerTurn = false;
                                         }
                                         if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()
                                                         //additional checks used to check partner pokemon location
                                                         && mapMap[curY + 1][curX - 1].getWalkable()) {
-                                                movePokemon(mapMap, -1,0,terminal,player.getPlayer(),ranNum);
-                                                movePokemon(mapMap, -1,0,terminal,player.getPartner(),ranNum);
+                                                movePokemon(mapMap, -1,0,terminal,player.getPlayer(),level);
+                                                movePokemon(mapMap, -1,0,terminal,player.getPartner(),level);
                                                 playerTurn = false;
                                                         }
                                         if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY][curX + 1].getWalkable()
                                                         && mapMap[curY + 1][curX + 1].getWalkable()) {
-                                                movePokemon(mapMap, 1,0,terminal,player.getPlayer(),ranNum);
-                                                movePokemon(mapMap, 1,0,terminal,player.getPartner(),ranNum);
+                                                movePokemon(mapMap, 1,0,terminal,player.getPlayer(),level);
+                                                movePokemon(mapMap, 1,0,terminal,player.getPartner(),level);
                                                 playerTurn = false;
                                                         }
                                           //checks if player is on a stair to start a new level
                                         if(mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getColor() == 10){
-                                                ranNum = Math.random();
+                                                level++;
                                                 testMap = new Map();
                                                 mapMap = testMap.getMap();
-                                                buildMap(mapMap,ranNum);
+                                                buildMap(mapMap,level);
                                                 spawnPlayer(player, terminal, testMap);
                                                 allPokemons.clear();
                                                 allPokemons.add(player.getPlayer());
                                                 allPokemons.add(player.getPartner());
                                                 allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
                                                 addPlayerInfo(sideScreen, player, allPokemons, xSize);
+                                                addMessageToCombat(sideScreen, "Level: " + level, xSize/2 + 8, yMessage, "bold");
+
+
                                         }
                                         //checks if player is on a potion;
                                         int healHp = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getHealthPotion();
@@ -618,7 +622,7 @@ public class PokemonMysteryD{
                                 setUpCombatScreen(sideScreen, xSize, ySize);
                                 //Setting up bottom portions for info:
                                 setUpInfoScreen(sideScreen, xSize, ySize);
-                                buildMap(mapMap,ranNum);
+                                buildMap(mapMap,level);
                                 spawnPlayer(player, terminal, testMap);
                                 terminal.setCursorVisible(false);
                                 allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
@@ -628,7 +632,7 @@ public class PokemonMysteryD{
                                 for(int i = 2; i < allPokemons.size(); i++) {
                                   int[] move = allPokemons.get(i).moveTowards(player.getPlayer());
                                   if(Math.random()>0.8){
-                                      movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i),ranNum);
+                                      movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i),level);
                                   }
                                 }
                                 playerTurn = true;
