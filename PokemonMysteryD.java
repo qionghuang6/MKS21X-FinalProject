@@ -351,7 +351,12 @@ public class PokemonMysteryD{
                                                 setUpOptionsScreen(options,xSize);
                                                 optionsOn = true;
                                         }
-                                        else if(gameMode == 3) 
+                                        else if(gameMode == 2) {
+                                                start.stopScreen();
+                                                setUpGameOverScreen(gameOver, xSize);
+                                                optionsOn = false;
+                                                generated = true;
+                                        }
                                         //This block of code is called when you're in the options page.
                                         else if(gameMode == 1) {
                                                 options.stopScreen();

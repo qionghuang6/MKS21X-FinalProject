@@ -131,9 +131,13 @@ public class Pokemon implements Cloneable{
                 }
 
                 //Non effective type moves: 0.5x Damage.
+                if(moveType.equals(targetType)) {
+                        target.loseHp(m.getBaseDamage() * 0.5);
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... " + target.getName() + " has " + target.getHp() + " remaining!" ;
+                }
                 if(moveType == "Fire" && targetType == "Water") {
                         target.loseHp(m.getBaseDamage() * 0.5);
-                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... " + target.getName() + " has " + target.getHp() + " remaning!" ;
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... " + target.getName() + " has " + target.getHp() + " remaining!" ;
                 }
                 if(moveType == "Water" && targetType == "Grass") {
                         target.loseHp(m.getBaseDamage() * 0.5);
