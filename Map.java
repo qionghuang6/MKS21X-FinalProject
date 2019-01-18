@@ -69,6 +69,20 @@ public class Map{
         tileMap[r][c].setHealthPotion((int) (10 + (5 * (Math.random() * 3))));
     }
   }
+    for(int x = 0; x < (((int)(Math.random() * 3)) + 1); x++){
+      int ra = 0;
+      int ca = 0;
+      int rb = 0;
+      int cb = 0;
+      while(!tileMap[ra][ca].getWalkable() || !tileMap[rb][ca].getWalkable()){
+        ra = (int) (Math.random() * tileMap.length);
+        ca = (int) (Math.random() * tileMap[0].length);
+        rb = (int) (Math.random() * tileMap.length);
+        cb = (int) (Math.random() * tileMap[0].length);
+      }
+      tileMap[ra][ca].setTp(tileMap[rb][cb]);
+      tileMap[rb][cb].setTp(tileMap[ra][ca]);
+    }
   }
 
   //default map size is 100 wide and 45 tall
