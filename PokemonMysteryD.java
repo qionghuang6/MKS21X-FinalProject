@@ -133,6 +133,18 @@ public class PokemonMysteryD{
                 start.refresh();
         }
 
+        public static void setUpGameOverScreen(Screen gameOver, int xSize) {
+                gameOver.startScreen();
+                for(int i = 0; i < gameOver.getTerminalSize().getRows();i++) {
+                        for(int x = 0; x < gameOver.getTerminalSize().getColumns(); x++) {
+                                gameOver.putString(x,i," ",Terminal.Color.BLACK,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
+                        }
+                }
+                gameOver.putString(xSize * 3/8,15, "                 GAME OVER!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                gameOver.putString(xSize * 3/8,20, "                    Press R to try again?               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
+                gameOver.putString(xSize * 3/8 - 3, 30, " If you wish to look at the instructions and options, press Backspace!    ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                gameOver.refresh();
+        }
 
         //Sets up option Screen.
         public static void setUpOptionsScreen(Screen options, int xSize) {
@@ -339,6 +351,7 @@ public class PokemonMysteryD{
                                                 setUpOptionsScreen(options,xSize);
                                                 optionsOn = true;
                                         }
+                                        else if(gameMode == 3) 
                                         //This block of code is called when you're in the options page.
                                         else if(gameMode == 1) {
                                                 options.stopScreen();
@@ -611,12 +624,9 @@ public class PokemonMysteryD{
                         }
 
                         if(player.getPlayer().getHp() <= 0) {
-                                gameMode = 3;
+                                gameMode = 2;
                                 sideScreen.stopScreen();
-                                gameOver.startScreen();
-                gameOver.putString(xSize * 3/8,15, "                 Pokemon Mystery Dungeon               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                gameOver.putString(xSize * 3/8,20, "                    Press S to Start!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
-                start.putString(xSize * 3/8 - 3, 30, " If you wish to look at the instructions and options, press Backspace!    ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                                setUpGameOverScreen(gameOver, xSize);
                         }
 
                         //Ending updates:

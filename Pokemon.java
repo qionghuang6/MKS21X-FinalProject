@@ -1,6 +1,5 @@
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.List; 
 public class Pokemon implements Cloneable{
         //Instance Variables:
         private String name;
@@ -120,34 +119,34 @@ public class Pokemon implements Cloneable{
                 //Super effective moves: 2x Damage.
                 if(moveType == "Water" && targetType == "Fire") {
                         target.loseHp(m.getBaseDamage() * 2);
-                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was super effective!";
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was super effective! " + target.getName() + " has " + target.getHp() + "remaining!";
                 }
                 if(moveType == "Grass" && targetType == "Water") {
                         target.loseHp(m.getBaseDamage() * 2);
-                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was super effective!";
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was super effective! " + target.getName() + " has " + target.getHp() + " remaining!";
                 }
                 if(moveType == "Fire" && targetType == "Grass") {
                         target.loseHp(m.getBaseDamage() * 2);
-                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was super effective!";
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was super effective! " + target.getName() + " has " + target.getHp() + " remaining!";
                 }
 
                 //Non effective type moves: 0.5x Damage.
                 if(moveType == "Fire" && targetType == "Water") {
                         target.loseHp(m.getBaseDamage() * 0.5);
-                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... ";
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... " + target.getName() + " has " + target.getHp() + " remaning!" ;
                 }
                 if(moveType == "Water" && targetType == "Grass") {
                         target.loseHp(m.getBaseDamage() * 0.5);
-                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... ";
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective..." + target.getName() + " has " + target.getHp() + " remaining!";
                 }
                 if(moveType == "Grass" && targetType == "Fire") {
                         target.loseHp(m.getBaseDamage() * 0.5);
-                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... ";
+                        return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP. It was not effective... " + target.getName() + " has " + target.getHp() + " remaining!";
                 }
 
                 //Returns regular message if none of the above, and normal base damage.
                 target.loseHp(m.getBaseDamage());
-                return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP";
+                return getName() + " uses " + m.getName() + ", and " + target.getName() + " loses " + m.getBaseDamage() + " HP! " + target.getName() + " has " + target.getHp() + " remaining!";
         }
 
         //toString()
