@@ -590,11 +590,19 @@ public class PokemonMysteryD{
                                         }
                                         //checks if player is on a potion;
                                         int healHp = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getHealthPotion();
-                                        if(healHp != 0){
+                                        int partHealHp = mapMap[player.getPartner().getY()][player.getPartner().getX()].getHealthPotion();
+                                        if(healHp != 0 || partHealHp != 0){
                                           player.getPlayer().healHp(healHp);
                                           player.getPartner().healHp(healHp);
-                                          mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setHealthPotion(0);
-                                          mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setColor(0);
+                                          if(healHp != 0){
+                                            mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setHealthPotion(0);
+                                            mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setColor(0);
+                                          }
+                                          if(partHealHp != 0){
+                                            mapMap[player.getPartner().getY()][player.getPartner().getX()].setHealthPotion(0);
+                                            mapMap[player.getPartner().getY()][player.getPartner().getX()].setColor(0);
+                                          }
+
                                           addMessageToCombat(sideScreen, "Healed " + healHp + "HP!", xSize/2 + 8, yMessage, "bold");
                                         }
                                 }
