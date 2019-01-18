@@ -61,6 +61,14 @@ public class Map{
         hasStairs = true;
       }
     }
+    for(int x = 0; x < (int) ((Math.random() * 11) + 5); x++){
+      int r = (int) (Math.random() * tileMap.length);
+      int c = (int) (Math.random() * tileMap[0].length);
+      if(tileMap[r][c].getWalkable()){
+        tileMap[r][c].setColor(8);
+        tileMap[r][c].setHealthPotion((int) (10 + (5 * (Math.random() * 3))));
+    }
+  }
   }
 
   //default map size is 100 wide and 45 tall
