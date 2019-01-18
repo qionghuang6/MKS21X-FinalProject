@@ -572,7 +572,8 @@ public class PokemonMysteryD{
                                                 playerTurn = false;
                                                         }
                                           //checks if player is on a stair to start a new level
-                                        if(mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getColor() == 10){
+                                        if(mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getColor() == 10 ||
+                                            mapMap[player.getPartner().getY()][player.getPartner().getX()].getColor() == 10){
                                                 level++;
                                                 testMap = new Map();
                                                 mapMap = testMap.getMap();
