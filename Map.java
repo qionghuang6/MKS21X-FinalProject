@@ -16,7 +16,7 @@ public class Map{
     //sets up tiles on map
     for (int r = 0; r < tileMap.length; r++) {
       for(int c = 0; c < tileMap[0].length; c++){
-          tileMap[r][c] = new Tile (4,false);
+          tileMap[r][c] = new Tile (4,false,c,r);
       }
     }
     //redomized start location that is at least 10 blocks from edge of map

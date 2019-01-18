@@ -43,7 +43,7 @@ public class PokemonMysteryD{
         }
 
 
-        //gets delta x and delta y and moves pokemon to that location using putPokemon
+        //gets delta x and delta y and moves pokemon to that location using emon
         //gets information from map to clean up after itself
         public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p, double level){
           int curX = p.getX();
@@ -556,7 +556,7 @@ public class PokemonMysteryD{
                                         if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable()) {
                                                 movePokemon(mapMap, 0,1,terminal,player.getPartner(),level);
                                                 movePokemon(mapMap, 0,1,terminal,player.getPlayer(),level);
-                                                playerTurn = false;
+                                                playerTurn = false;mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp();
                                         }
                                         if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()
                                                         //additional checks used to check partner pokemon location
@@ -588,6 +588,33 @@ public class PokemonMysteryD{
 
 
                                         }
+                                        Tile playerTile = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp();
+                                        Tile partnerTile =mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp();
+                                        if(playerTile != null|| partnerTile != null){
+                                               curX = player.getPlayer().getX();
+                                               curY = player.getPlayer().getY();
+
+                                                terminal.moveCursor(curY,curX);
+                                                setBg(terminal, mapMap[curY][curX], curX, curY,level);
+                                                mapMap[curY][curX].makeWalkable();
+                                                terminal.moveCursor(curY,curX);
+                                                terminal.putCharacter(' ');
+                                                terminal.moveCursor(curY,curX + 1);
+                                                terminal.putCharacter(' ');
+                                                setBg(terminal, mapMap[curY][curX + 1], curX + 1, curY,level);
+                                              if(playerTile != null){
+                                                putPokemon(playerTile.getTp().getX(),playerTile.getTp().getY(),terminal,player.getPlayer());
+                                                putPokemon(playerTile.getTp().getX() + 1,playerTile.getTp().getY(),terminal,player.getPartner());
+                                                player.getPlayer().setLocation(playerTile.getTp().getX(),playerTile.getTp().getY());
+                                                  player.getPartner().setLocation(playerTile.getTp().getX() + 1,playerTile.getTp().getY());
+                                              }
+                                              if(partnerTile != null){
+                                                putPokemon(partnerTile.getTp().getX() - 1,partnerTile.getTp().getY(),terminal,player.getPlayer());
+                                                putPokemon(partnerTile.getTp().getX(),partnerTile.getTp().getY(),terminal,player.getPartner());
+                                                player.getPlayer().setLocation(partnerTile.getTp().getX() - 1,partnerTile.getTp().getY());
+                                                  player.getPartner().setLocation(partnerTile.getTp().getX(),partnerTile.getTp().getY());
+                                              }
+                                            }
                                         //checks if player is on a potion;
                                         int healHp = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getHealthPotion();
                                         int partHealHp = mapMap[player.getPartner().getY()][player.getPartner().getX()].getHealthPotion();
