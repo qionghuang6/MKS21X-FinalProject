@@ -594,6 +594,8 @@ public class PokemonMysteryD{
                                         if(healHp != 0 || partHealHp != 0){
                                           player.getPlayer().healHp(healHp);
                                           player.getPartner().healHp(healHp);
+                                          player.getPlayer().healHp(partHealHp);
+                                          player.getPartner().healHp(partHealHp);
                                           if(healHp != 0){
                                             mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setHealthPotion(0);
                                             mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setColor(0);
@@ -602,8 +604,8 @@ public class PokemonMysteryD{
                                             mapMap[player.getPartner().getY()][player.getPartner().getX()].setHealthPotion(0);
                                             mapMap[player.getPartner().getY()][player.getPartner().getX()].setColor(0);
                                           }
-
-                                          addMessageToCombat(sideScreen, "Healed " + healHp + "HP!", xSize/2 + 8, yMessage, "bold");
+                                          //addPlayerInfo(sideScreen, player, allPokemons, xSize);
+                                          addMessageToCombat(sideScreen, "Healed " + (healHp + partHealHp) + "HP!", xSize/2 + 8, yMessage, "bold");
                                         }
                                 }
                                 /*
