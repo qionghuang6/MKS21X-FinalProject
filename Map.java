@@ -51,35 +51,40 @@ public class Map{
         currentY = lastY;
       }
     }
+    //generates random values to put stairs until it finds a suitable place to put stairs
     boolean hasStairs = false;
     while(!hasStairs){
       int r = (int) (Math.random() * tileMap.length);
       int c = (int) (Math.random() * tileMap[0].length);
       if(tileMap[r][c].getWalkable()){
-        tileMap[r][c].setColor(10);
+        tileMap[r][c].setColor(10); //stair color
         tileMap[r][c].setStair();
         hasStairs = true;
       }
     }
+    //finds a random number of tiles that are walkable and changes them to be potions
     for(int x = 0; x < (int) ((Math.random() * 11) + 5); x++){
       int r = (int) (Math.random() * tileMap.length);
       int c = (int) (Math.random() * tileMap[0].length);
       if(tileMap[r][c].getWalkable()){
-        tileMap[r][c].setColor(8);
-        tileMap[r][c].setHealthPotion((int) (10 + (5 * (Math.random() * 3))));
+        tileMap[r][c].setColor(8); //makes it a potion color
+        tileMap[r][c].setHealthPotion((int) (10 + (5 * (Math.random() * 3)))); //randomizes heal value
     }
   }
     for(int x = 0; x < (((int)(Math.random() * 3)) + 1); x++){
+      //choose coords for 2 tiles
       int ra = 0;
       int ca = 0;
       int rb = 0;
       int cb = 0;
+      //runs until it finds two tiles that are both walkable
       while(!tileMap[ra][ca].getWalkable() || !tileMap[rb][cb].getWalkable()){
         ra = (int) (Math.random() * tileMap.length);
         ca = (int) (Math.random() * tileMap[0].length);
         rb = (int) (Math.random() * tileMap.length);
         cb = (int) (Math.random() * tileMap[0].length);
       }
+      //links those two tiles
       tileMap[ra][ca].setColor(12);
       tileMap[ra][ca].setTp(tileMap[rb][cb]);
       tileMap[rb][cb].setTp(tileMap[ra][ca]);

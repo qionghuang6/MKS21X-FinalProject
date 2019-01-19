@@ -72,6 +72,8 @@ public class PokemonMysteryD{
 
         //takes in Tile from generated Map 2d array and sets that location to certain colors
         public static void setBg(Terminal terminal, Tile t, int x, int y, double level){
+          //every 5 levels the map changes
+          //different colors for each of 3 kinds of colors
           if(((int)(level / 5.0)) % 3 == 0){
                 if(t.getColor() == 0){
                         setBg(terminal, x,y,131,203,58);
@@ -115,6 +117,7 @@ public class PokemonMysteryD{
                     setBg(terminal,x,y,235, 66, 244);
             }
           }
+
           if(((int)(level / 5.0)) % 3 == 2){
             //snowy boy
             if(t.getColor() == 0){
@@ -597,37 +600,48 @@ public class PokemonMysteryD{
 
 
                                         }
+                                        //used to move player if they are on a portal
+                                        //gets if tiles the player pokemons are on lead to another tile
                                         Tile playerTile = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp();
                                         Tile partnerTile =mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp();
                                         if(playerTile != null|| partnerTile != null){
-
+                                              //puts coords of player and partner into variables
                                                curX = player.getPlayer().getX();
                                                curY = player.getPlayer().getY();
                                                int pX = player.getPartner().getX();
                                                int pY = player.getPartner().getY();
 
 
-
+                                              // if its the player pokemon that is on a portal
                                               if(playerTile != null){
+                                                //resets portal so it cant  be used again
                                                 mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp().setTp(null);
                                                 mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setTp(null);
+                                                //moves pokemons
                                                 putPokemon(playerTile.getX(),playerTile.getY(),terminal,player.getPlayer());
                                                 putPokemon(playerTile.getX(),playerTile.getY() + 1,terminal,player.getPartner());
+                                                //updates pokemon object coordinates
                                                 player.getPlayer().setLocation(playerTile.getX(),playerTile.getY());
                                                   player.getPartner().setLocation(playerTile.getX(),playerTile.getY() + 1);
+                                                  //changes tile color values to remove portal color
                                                   mapMap[curY][curX].setColor(0);
                                                   playerTile.setColor(0);
                                               }
                                               if(partnerTile != null){
+                                                //resets portal so it cant  be used again
                                                 mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp().setTp(null);
                                                 mapMap[player.getPartner().getY()][player.getPartner().getX()].setTp(null);
+                                                //physically places new pokemons on map
                                                 putPokemon(partnerTile.getX(),partnerTile.getY() - 1, terminal,player.getPlayer());
                                                 putPokemon(partnerTile.getX(),partnerTile.getY(),terminal,player.getPartner());
                                                 player.getPlayer().setLocation(partnerTile.getX(),partnerTile.getY() - 1);
+                                                //updates pokemon object coordinates
                                                   player.getPartner().setLocation(partnerTile.getX(),partnerTile.getY());
+                                                  //removes tile color vlaues
                                                   mapMap[pY][pX].setColor(0);
                                                   partnerTile.setColor(0);
                                               }
+                                              //update to remove portal colors
                                               setBg(terminal, mapMap[curY][curX], curX, curY,level);
                                               mapMap[curY][curX].makeWalkable();
                                               setBg(terminal, mapMap[pY][pX], pX, pY,level);
@@ -637,14 +651,17 @@ public class PokemonMysteryD{
                                         int healHp = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getHealthPotion();
                                         int partHealHp = mapMap[player.getPartner().getY()][player.getPartner().getX()].getHealthPotion();
                                         if(healHp != 0 || partHealHp != 0){
+                                          //healing values of tile that the pokemon is on
                                           player.getPlayer().healHp(healHp);
                                           player.getPartner().healHp(healHp);
                                           player.getPlayer().healHp(partHealHp);
                                           player.getPartner().healHp(partHealHp);
+                                          //if the player pokemon is on a heal tile, heal both
                                           if(healHp != 0){
                                             mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setHealthPotion(0);
                                             mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setColor(0);
                                           }
+                                          //if the partner pokemon is on a heal tile, heal both
                                           if(partHealHp != 0){
                                             mapMap[player.getPartner().getY()][player.getPartner().getX()].setHealthPotion(0);
                                             mapMap[player.getPartner().getY()][player.getPartner().getX()].setColor(0);
@@ -654,11 +671,12 @@ public class PokemonMysteryD{
                                         }
                                 }
 
+                                /*
                                 // Debug Code: Used to display current player location
                                 curX = player.getPlayer().getX();
                                 curY = player.getPlayer().getY();
                                 putString(10,40,terminal," " + curX + " " + curY);
-
+                                */
                         }
                         //Checks to see if the # of combat messages has overflowed:
                         if(yMessage >= 25) {
