@@ -74,14 +74,16 @@ public class Map{
       int ca = 0;
       int rb = 0;
       int cb = 0;
-      while(!tileMap[ra][ca].getWalkable() || !tileMap[rb][ca].getWalkable()){
+      while(!tileMap[ra][ca].getWalkable() || !tileMap[rb][cb].getWalkable()){
         ra = (int) (Math.random() * tileMap.length);
         ca = (int) (Math.random() * tileMap[0].length);
         rb = (int) (Math.random() * tileMap.length);
         cb = (int) (Math.random() * tileMap[0].length);
       }
+      tileMap[ra][ca].setColor(12);
       tileMap[ra][ca].setTp(tileMap[rb][cb]);
       tileMap[rb][cb].setTp(tileMap[ra][ca]);
+      tileMap[rb][cb].setColor(12);
     }
   }
 

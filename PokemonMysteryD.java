@@ -76,6 +76,9 @@ public class PokemonMysteryD{
                 if(t.getColor() == 0){
                         setBg(terminal, x,y,131,203,58);
                 }
+                if(t.getColor() == 12){
+                        setBg(terminal, x,y,0,255,255);
+                }
                 //light orange border
                 if(t.getColor() == 2){
                         setBg(terminal,x,y,201,134,0);
@@ -93,6 +96,9 @@ public class PokemonMysteryD{
           if(((int)(level / 5.0)) % 3 == 1){
             if(t.getColor() == 0){
                     setBg(terminal, x,y,9, 71, 16);
+            }
+            if(t.getColor() == 12){
+                    setBg(terminal, x,y,0,255,255);
             }
             //dark brown border
             if(t.getColor() == 2){
@@ -113,6 +119,9 @@ public class PokemonMysteryD{
             //snowy boy
             if(t.getColor() == 0){
                     setBg(terminal, x,y,234, 241, 242);
+            }
+            if(t.getColor() == 12){
+                    setBg(terminal, x,y,0,255,255);
             }
             //icy
             if(t.getColor() == 2){
@@ -293,7 +302,7 @@ public class PokemonMysteryD{
                 double level = 1;
                 List<Pokemon> allPokemons = new ArrayList<Pokemon>();
                 Pokemon playerPokemon = PokemonRandomizer.returnPokemon();
-                playerPokemon.setSymbol("\u237b");
+                playerPokemon.setSymbol("@");
                 Pokemon partnerPokemon = PokemonRandomizer.returnPokemon();
                 while(partnerPokemon.getName().equals(playerPokemon.getName())){
                         partnerPokemon = PokemonRandomizer.returnPokemon();
@@ -591,6 +600,8 @@ public class PokemonMysteryD{
                                         Tile playerTile = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp();
                                         Tile partnerTile =mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp();
                                         if(playerTile != null|| partnerTile != null){
+
+
                                                curX = player.getPlayer().getX();
                                                curY = player.getPlayer().getY();
 
@@ -603,16 +614,19 @@ public class PokemonMysteryD{
                                                 terminal.putCharacter(' ');
                                                 setBg(terminal, mapMap[curY][curX + 1], curX + 1, curY,level);
                                               if(playerTile != null){
-                                                putPokemon(playerTile.getTp().getX(),playerTile.getTp().getY(),terminal,player.getPlayer());
-                                                putPokemon(playerTile.getTp().getX() + 1,playerTile.getTp().getY(),terminal,player.getPartner());
-                                                player.getPlayer().setLocation(playerTile.getTp().getX(),playerTile.getTp().getY());
-                                                  player.getPartner().setLocation(playerTile.getTp().getX() + 1,playerTile.getTp().getY());
+                                                mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp().setTp(null);
+                                                putPokemon(playerTile.getX(),playerTile.getY(),terminal,player.getPlayer());
+                                                putPokemon(playerTile.getX(),playerTile.getY() + 1,terminal,player.getPartner());
+                                                player.getPlayer().setLocation(playerTile.getX(),playerTile.getY());
+                                                  player.getPartner().setLocation(playerTile.getX(),playerTile.getY() + 1);
                                               }
                                               if(partnerTile != null){
-                                                putPokemon(partnerTile.getTp().getX() - 1,partnerTile.getTp().getY(),terminal,player.getPlayer());
-                                                putPokemon(partnerTile.getTp().getX(),partnerTile.getTp().getY(),terminal,player.getPartner());
-                                                player.getPlayer().setLocation(partnerTile.getTp().getX() - 1,partnerTile.getTp().getY());
-                                                  player.getPartner().setLocation(partnerTile.getTp().getX(),partnerTile.getTp().getY());
+                                                mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp().setTp(null);
+                                                mapMap[player.getPartner().getY()][player.getPartner().getX()].setTp(null);
+                                                putPokemon(partnerTile.getX(),partnerTile.getY() - 1, terminal,player.getPlayer());
+                                                putPokemon(partnerTile.getX(),partnerTile.getY(),terminal,player.getPartner());
+                                                player.getPlayer().setLocation(partnerTile.getX(),partnerTile.getY() - 1);
+                                                  player.getPartner().setLocation(partnerTile.getX(),partnerTile.getY());
                                               }
                                             }
                                         //checks if player is on a potion;
@@ -635,12 +649,12 @@ public class PokemonMysteryD{
                                           addMessageToCombat(sideScreen, "Healed " + (healHp + partHealHp) + "HP!", xSize/2 + 8, yMessage, "bold");
                                         }
                                 }
-                                /*
+
                                 // Debug Code: Used to display current player location
                                 curX = player.getPlayer().getX();
                                 curY = player.getPlayer().getY();
                                 putString(10,40,terminal," " + curX + " " + curY);
-                                */
+
                         }
                         //Checks to see if the # of combat messages has overflowed:
                         if(yMessage >= 25) {
