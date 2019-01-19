@@ -43,7 +43,7 @@ public class PokemonMysteryD{
         }
 
 
-        //gets delta x and delta y and moves pokemon to that location using putPokemon
+        //gets delta x and delta y and moves pokemon to that location using emon
         //gets information from map to clean up after itself
         public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p, double level){
           int curX = p.getX();
@@ -72,9 +72,14 @@ public class PokemonMysteryD{
 
         //takes in Tile from generated Map 2d array and sets that location to certain colors
         public static void setBg(Terminal terminal, Tile t, int x, int y, double level){
+          //every 5 levels the map changes
+          //different colors for each of 3 kinds of colors
           if(((int)(level / 5.0)) % 3 == 0){
                 if(t.getColor() == 0){
                         setBg(terminal, x,y,131,203,58);
+                }
+                if(t.getColor() == 12){
+                        setBg(terminal, x,y,0,255,255);
                 }
                 //light orange border
                 if(t.getColor() == 2){
@@ -94,6 +99,9 @@ public class PokemonMysteryD{
             if(t.getColor() == 0){
                     setBg(terminal, x,y,9, 71, 16);
             }
+            if(t.getColor() == 12){
+                    setBg(terminal, x,y,0,255,255);
+            }
             //dark brown border
             if(t.getColor() == 2){
                     setBg(terminal,x,y,53, 25, 25);
@@ -109,10 +117,14 @@ public class PokemonMysteryD{
                     setBg(terminal,x,y,235, 66, 244);
             }
           }
+
           if(((int)(level / 5.0)) % 3 == 2){
             //snowy boy
             if(t.getColor() == 0){
                     setBg(terminal, x,y,234, 241, 242);
+            }
+            if(t.getColor() == 12){
+                    setBg(terminal, x,y,0,255,255);
             }
             //icy
             if(t.getColor() == 2){
@@ -293,7 +305,7 @@ public class PokemonMysteryD{
                 double level = 1;
                 List<Pokemon> allPokemons = new ArrayList<Pokemon>();
                 Pokemon playerPokemon = PokemonRandomizer.returnPokemon();
-                playerPokemon.setSymbol("\u237b");
+                playerPokemon.setSymbol("@");
                 Pokemon partnerPokemon = PokemonRandomizer.returnPokemon();
                 while(partnerPokemon.getName().equals(playerPokemon.getName())){
                         partnerPokemon = PokemonRandomizer.returnPokemon();
@@ -556,7 +568,7 @@ public class PokemonMysteryD{
                                         if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable()) {
                                                 movePokemon(mapMap, 0,1,terminal,player.getPartner(),level);
                                                 movePokemon(mapMap, 0,1,terminal,player.getPlayer(),level);
-                                                playerTurn = false;
+                                                playerTurn = false;mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp();
                                         }
                                         if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()
                                                         //additional checks used to check partner pokemon location
@@ -588,18 +600,68 @@ public class PokemonMysteryD{
 
 
                                         }
+                                        //used to move player if they are on a portal
+                                        //gets if tiles the player pokemons are on lead to another tile
+                                        Tile playerTile = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp();
+                                        Tile partnerTile =mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp();
+                                        if(playerTile != null|| partnerTile != null){
+                                              //puts coords of player and partner into variables
+                                               curX = player.getPlayer().getX();
+                                               curY = player.getPlayer().getY();
+                                               int pX = player.getPartner().getX();
+                                               int pY = player.getPartner().getY();
+
+
+                                              // if its the player pokemon that is on a portal
+                                              if(playerTile != null){
+                                                //resets portal so it cant  be used again
+                                                mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp().setTp(null);
+                                                mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setTp(null);
+                                                //moves pokemons
+                                                putPokemon(playerTile.getX(),playerTile.getY(),terminal,player.getPlayer());
+                                                putPokemon(playerTile.getX(),playerTile.getY() + 1,terminal,player.getPartner());
+                                                //updates pokemon object coordinates
+                                                player.getPlayer().setLocation(playerTile.getX(),playerTile.getY());
+                                                  player.getPartner().setLocation(playerTile.getX(),playerTile.getY() + 1);
+                                                  //changes tile color values to remove portal color
+                                                  mapMap[curY][curX].setColor(0);
+                                                  playerTile.setColor(0);
+                                              }
+                                              if(partnerTile != null){
+                                                //resets portal so it cant  be used again
+                                                mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp().setTp(null);
+                                                mapMap[player.getPartner().getY()][player.getPartner().getX()].setTp(null);
+                                                //physically places new pokemons on map
+                                                putPokemon(partnerTile.getX(),partnerTile.getY() - 1, terminal,player.getPlayer());
+                                                putPokemon(partnerTile.getX(),partnerTile.getY(),terminal,player.getPartner());
+                                                player.getPlayer().setLocation(partnerTile.getX(),partnerTile.getY() - 1);
+                                                //updates pokemon object coordinates
+                                                  player.getPartner().setLocation(partnerTile.getX(),partnerTile.getY());
+                                                  //removes tile color vlaues
+                                                  mapMap[pY][pX].setColor(0);
+                                                  partnerTile.setColor(0);
+                                              }
+                                              //update to remove portal colors
+                                              setBg(terminal, mapMap[curY][curX], curX, curY,level);
+                                              mapMap[curY][curX].makeWalkable();
+                                              setBg(terminal, mapMap[pY][pX], pX, pY,level);
+                                              mapMap[pY][pX].makeWalkable();
+                                            }
                                         //checks if player is on a potion;
                                         int healHp = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getHealthPotion();
                                         int partHealHp = mapMap[player.getPartner().getY()][player.getPartner().getX()].getHealthPotion();
                                         if(healHp != 0 || partHealHp != 0){
+                                          //healing values of tile that the pokemon is on
                                           player.getPlayer().healHp(healHp);
                                           player.getPartner().healHp(healHp);
                                           player.getPlayer().healHp(partHealHp);
                                           player.getPartner().healHp(partHealHp);
+                                          //if the player pokemon is on a heal tile, heal both
                                           if(healHp != 0){
                                             mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setHealthPotion(0);
                                             mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setColor(0);
                                           }
+                                          //if the partner pokemon is on a heal tile, heal both
                                           if(partHealHp != 0){
                                             mapMap[player.getPartner().getY()][player.getPartner().getX()].setHealthPotion(0);
                                             mapMap[player.getPartner().getY()][player.getPartner().getX()].setColor(0);
@@ -608,6 +670,7 @@ public class PokemonMysteryD{
                                           addMessageToCombat(sideScreen, "Healed " + (healHp + partHealHp) + "HP!", xSize/2 + 8, yMessage, "bold");
                                         }
                                 }
+
                                 /*
                                 // Debug Code: Used to display current player location
                                 curX = player.getPlayer().getX();

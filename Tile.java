@@ -12,11 +12,23 @@ public class Tile{
   //whether or not tile will give simple health potion
   private int healthPotion;
 
+  private Tile tpTo;
+
+  private int x;
+  private int y;
+
   //constructs Tiles based on givens, starts off as not being revealed
   public Tile(int color, boolean walkable){
     this.color = color;
     this.walkable = walkable;
     revealed = false;
+  }
+  public Tile(int color, boolean walkable, int x, int y){
+    this.color = color;
+    this.walkable = walkable;
+    revealed = false;
+    this.x = x;
+    this.y = y;
   }
 
   //default tile
@@ -74,5 +86,17 @@ public class Tile{
   //getter for health potion
   public int getHealthPotion(){
     return healthPotion;
+  }
+  public void setTp(Tile t){
+    tpTo = t;
+  }
+  public Tile getTp(){
+    return tpTo;
+  }
+  public int getX(){
+    return x;
+  }
+  public int getY(){
+    return y;
   }
 }

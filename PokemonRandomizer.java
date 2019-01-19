@@ -20,11 +20,13 @@ public class PokemonRandomizer{
   private static Move razorLeaf = new Move("Razor Leaf", "Grass",15,5,8);
   private static Move vineWhip = new Move("Whirlpool", "Grass",10,1,15);
 
+  //movesets to be used in pokemons
   private static List<Move> fireMoves = new ArrayList(Arrays.asList(ember,flameWheel,growl,tackle));
   private static List<Move> waterMoves = new ArrayList(Arrays.asList(waterGun,bubble,whirlpool,tailWhip));
   private static List<Move> normalMoves = new ArrayList(Arrays.asList(growl,tackle,tailWhip,defenseCurl));
   private static List<Move> grassMoves = new ArrayList(Arrays.asList(razorLeaf,vineWhip,tailWhip,growl));
 
+  //list of pokemons, employ movesets
   private static Pokemon charmander = new Pokemon("Charmander", "Fire", "C", 30, new int[ ]{240,10,23}, 1, fireMoves);
   private static Pokemon growlithe = new Pokemon("Growlithe", "Fire", "G", 40, new int[ ]{244, 152, 14}, 1, fireMoves);
   private static Pokemon squirtle = new Pokemon("Squirtle", "Water", "S", 40, new int[ ]{50, 115, 219}, 1, waterMoves);
@@ -33,8 +35,10 @@ public class PokemonRandomizer{
   private static Pokemon bulbasaur = new Pokemon("Bulbasaur", "Grass", "B", 40, new int[]{66, 244, 75}, 1 ,grassMoves);
   private static Pokemon meowth = new Pokemon("Meowth", "Normal", "M", 40, new int[ ]{225, 226, 170}, 1, normalMoves);
 
+  //llist of all the pokemons
   private static List<Pokemon> pokemonList = new ArrayList(Arrays.asList(charmander, growlithe,squirtle,vaporeon,eevee,meowth));
 
+  //returns a random pokemon from the pokemonlist
   public static Pokemon returnPokemon(){
     try {
       return pokemonList.get((int) (Math.random() * pokemonList.size())).clone();
@@ -42,6 +46,7 @@ public class PokemonRandomizer{
       return null;
     }
   }
+  //returns one of 3 starter pokemons
   public static Pokemon[] getStarters(){
     return new Pokemon[]{charmander,squirtle,bulbasaur};
   }
