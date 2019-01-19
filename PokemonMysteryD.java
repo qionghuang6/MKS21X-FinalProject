@@ -601,24 +601,22 @@ public class PokemonMysteryD{
                                         Tile partnerTile =mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp();
                                         if(playerTile != null|| partnerTile != null){
 
-
                                                curX = player.getPlayer().getX();
                                                curY = player.getPlayer().getY();
+                                               int pX = player.getPartner().getX();
+                                               int pY = player.getPartner().getY();
 
-                                                terminal.moveCursor(curY,curX);
-                                                setBg(terminal, mapMap[curY][curX], curX, curY,level);
-                                                mapMap[curY][curX].makeWalkable();
-                                                terminal.moveCursor(curY,curX);
-                                                terminal.putCharacter(' ');
-                                                terminal.moveCursor(curY,curX + 1);
-                                                terminal.putCharacter(' ');
-                                                setBg(terminal, mapMap[curY][curX + 1], curX + 1, curY,level);
+
+
                                               if(playerTile != null){
                                                 mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp().setTp(null);
+                                                mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setTp(null);
                                                 putPokemon(playerTile.getX(),playerTile.getY(),terminal,player.getPlayer());
                                                 putPokemon(playerTile.getX(),playerTile.getY() + 1,terminal,player.getPartner());
                                                 player.getPlayer().setLocation(playerTile.getX(),playerTile.getY());
                                                   player.getPartner().setLocation(playerTile.getX(),playerTile.getY() + 1);
+                                                  mapMap[curY][curX].setColor(0);
+                                                  playerTile.setColor(0);
                                               }
                                               if(partnerTile != null){
                                                 mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp().setTp(null);
@@ -627,7 +625,13 @@ public class PokemonMysteryD{
                                                 putPokemon(partnerTile.getX(),partnerTile.getY(),terminal,player.getPartner());
                                                 player.getPlayer().setLocation(partnerTile.getX(),partnerTile.getY() - 1);
                                                   player.getPartner().setLocation(partnerTile.getX(),partnerTile.getY());
+                                                  mapMap[pY][pX].setColor(0);
+                                                  partnerTile.setColor(0);
                                               }
+                                              setBg(terminal, mapMap[curY][curX], curX, curY,level);
+                                              mapMap[curY][curX].makeWalkable();
+                                              setBg(terminal, mapMap[pY][pX], pX, pY,level);
+                                              mapMap[pY][pX].makeWalkable();
                                             }
                                         //checks if player is on a potion;
                                         int healHp = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getHealthPotion();
