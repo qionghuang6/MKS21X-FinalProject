@@ -86,15 +86,6 @@ public class Pokemon implements Cloneable{
                 return color;
         }
 
-        //Mutator methods:
-        public void addMove(Move n) {
-                moveset.add(n);
-        }
-
-        public void addMove(String n, String t, int p, int l, int b) {
-                moveset.add(new Move(n, t, p, l, b));
-        }
-
         public void setLocation(int x, int y) {
                 this.x = x;
                 this.y = y;

@@ -112,3 +112,16 @@ java -Djava.awt.headless=true -cp lanterna.jar:. PokemonMysteryD
 > * Edit instructions slightly by providing some visuals and objectives as well as new key controls.
 > * Clear useless files that existed previously in the project. 
 > * Create Pokemon Information screen that appears below the combat messages. 
+### January 14th, 2019:
+#### Qiong Zhou Huang:
+> * Added code to have pokemons move towards player after every step
+> * Made sure that pokemons only moved towards player half the time to prevent swarming 
+### January 16th, 2019:
+#### Qiong Zhou Huang:
+> * Fixed swarming even more
+> * Implemented heal potion tile
+> * Randomly choose between map tile theme
+#### Bryan Lai:
+> * Fixed glitch where you can move your player/pokemon in the options screen.
+> * Implemented combat for the enemies present on the map.
+> > * Puts up a blank screen once game over occurs. (Planning to add messages/graphics for "Game Over" and "Restart" tomorrow.

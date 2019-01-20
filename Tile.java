@@ -2,18 +2,33 @@ public class Tile{
   private int color;
   //colors are to be translated into Lanterna colors
   //0: Normal Grass 1: Special walkable 2: unwalkable 3: special unwalkable 4: none
+  //10: stairs 8 health potion
   private boolean walkable;
   //whether or not a pokemon can move onto it
   private boolean revealed;
   //whether or not it is displayed
   //not currently used yet
   private boolean stair;
+  //whether or not tile will give simple health potion
+  private int healthPotion;
+
+  private Tile tpTo;
+
+  private int x;
+  private int y;
 
   //constructs Tiles based on givens, starts off as not being revealed
   public Tile(int color, boolean walkable){
     this.color = color;
     this.walkable = walkable;
     revealed = false;
+  }
+  public Tile(int color, boolean walkable, int x, int y){
+    this.color = color;
+    this.walkable = walkable;
+    revealed = false;
+    this.x = x;
+    this.y = y;
   }
 
   //default tile
@@ -63,5 +78,25 @@ public class Tile{
   //getter for if its a stair
   public boolean isStair(){
     return stair;
+  }
+  //setter for health potion
+  public void setHealthPotion(int h){
+    healthPotion = h;
+  }
+  //getter for health potion
+  public int getHealthPotion(){
+    return healthPotion;
+  }
+  public void setTp(Tile t){
+    tpTo = t;
+  }
+  public Tile getTp(){
+    return tpTo;
+  }
+  public int getX(){
+    return x;
+  }
+  public int getY(){
+    return y;
   }
 }

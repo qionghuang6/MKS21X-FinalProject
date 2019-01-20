@@ -21,7 +21,7 @@ import java.util.Random;
 public class PokemonMysteryD{
         static Terminal terminal;
         static TerminalSize terminalSize;
-//displays text at certain location 
+//displays text at certain location
 public static void putString(int r, int c,Terminal t, String s){
                 t.moveCursor(r,c);
                 for(int i = 0; i < s.length();i++){
@@ -42,14 +42,15 @@ public static void putString(int r, int c,Terminal t, String s){
         }
 
 
-        //gets delta x and delta y and moves pokemon to that location using putPokemon gets information from map to clean up after itself
-        public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p){
+        //gets delta x and delta y and moves pokemon to that location using emon
+        //gets information from map to clean up after itself
+        public static void movePokemon(Tile[][] mapMap, int dx, int dy, Terminal t, Pokemon p, double level){
           int curX = p.getX();
           int curY = p.getY();
                 if(mapMap[curY + dy][curX + dx].getWalkable()){
                   //putString(70, 20,t,"" + curX + " " + curY);
                   t.moveCursor(curY,curX);
-                  setBg(t, mapMap[curY][curX], curX, curY);
+                  setBg(t, mapMap[curY][curX], curX, curY,level);
                   mapMap[curY][curX].makeWalkable();
                   t.moveCursor(curY,curX);
                   terminal.putCharacter(' ');
@@ -69,9 +70,15 @@ public static void putString(int r, int c,Terminal t, String s){
 
 
         //takes in Tile from generated Map 2d array and sets that location to certain colors
-        public static void setBg(Terminal terminal, Tile t, int x, int y){
+        public static void setBg(Terminal terminal, Tile t, int x, int y, double level){
+          //every 5 levels the map changes
+          //different colors for each of 3 kinds of colors
+          if(((int)(level / 5.0)) % 3 == 0){
                 if(t.getColor() == 0){
                         setBg(terminal, x,y,131,203,58);
+                }
+                if(t.getColor() == 12){
+                        setBg(terminal, x,y,0,255,255);
                 }
                 //light orange border
                 if(t.getColor() == 2){
@@ -83,6 +90,56 @@ public static void putString(int r, int c,Terminal t, String s){
                 if(t.getColor() == 10){
                         setBg(terminal,x,y,255,255,0);
                 }
+                if(t.getColor() == 8){
+                        setBg(terminal,x,y,235, 66, 244);
+                }
+              }
+          if(((int)(level / 5.0)) % 3 == 1){
+            if(t.getColor() == 0){
+                    setBg(terminal, x,y,9, 71, 16);
+            }
+            if(t.getColor() == 12){
+                    setBg(terminal, x,y,0,255,255);
+            }
+            //dark brown border
+            if(t.getColor() == 2){
+                    setBg(terminal,x,y,53, 25, 25);
+            }
+            //swampy water
+            if(t.getColor() == 4){
+                    setBg(terminal,x,y,2, 46, 122);
+            }
+            if(t.getColor() == 10){
+                    setBg(terminal,x,y,255,255,0);
+            }
+            if(t.getColor() == 8){
+                    setBg(terminal,x,y,235, 66, 244);
+            }
+          }
+
+          if(((int)(level / 5.0)) % 3 == 2){
+            //snowy boy
+            if(t.getColor() == 0){
+                    setBg(terminal, x,y,234, 241, 242);
+            }
+            if(t.getColor() == 12){
+                    setBg(terminal, x,y,0,255,255);
+            }
+            //icy
+            if(t.getColor() == 2){
+                    setBg(terminal,x,y,155, 238, 255);
+            }
+            //outside ice
+            if(t.getColor() == 4){
+                    setBg(terminal,x,y,96, 218, 242);
+            }
+            if(t.getColor() == 10){
+                    setBg(terminal,x,y,255,255,0);
+            }
+            if(t.getColor() == 8){
+                    setBg(terminal,x,y,235, 66, 244);
+            }
+          }
         }
 
         //Spawns the hostilePokemons.
@@ -105,12 +162,12 @@ public static void putString(int r, int c,Terminal t, String s){
 
 
         //Uses Map array from Map class to display the map in the beginning of a round
-        public static void buildMap(Tile[][] mapMap){
+        public static void buildMap(Tile[][] mapMap, double level){
                 for (int x = 0; x < mapMap.length;x++) {
                         for(int y = 0 ; y < mapMap[0].length;y++){
                                 terminal.putCharacter(' ');
                                 //terminal.putCharacter(("" + y).charAt(0));
-                                setBg(terminal,mapMap[x][y],y,x);
+                                setBg(terminal,mapMap[x][y],y,x,level);
                         }
                 }
         }
@@ -223,11 +280,11 @@ public static void putString(int r, int c,Terminal t, String s){
         }
 
         //Adds all player information to info screen.
-        public static void addPlayerInfo(Screen sideScreen, Player p, List<Pokemon> all, int xSize) {
+        public static void addPlayerInfo(Screen sideScreen, Player p, List<Pokemon> all, int xSize, double level) {
 
                 addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 31);
-                addMessageToInfo(sideScreen, "Player: " + p.getPlayer().toString() + "                   Gold: " + p.getGold(), xSize/2 + 8, 32);
-                addMessageToInfo(sideScreen, "Partner: " + p.getPartner().toString(), xSize/2 + 8, 33);
+                addMessageToInfo(sideScreen, "Player: " + p.getPlayer().toString() + "            Partner: " + p.getPartner().toString(), xSize/2 + 8, 32);
+                addMessageToInfo(sideScreen, "Gold: " + p.getGold() + "                                    Floor Level: " + level, xSize/2 + 8, 33);
                 addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 34);
                 addMessageToInfo(sideScreen, "POKEMON MOVESETS: ", xSize/2 + 8, 35);
                 addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 36);
@@ -282,9 +339,10 @@ public static void putString(int r, int c,Terminal t, String s){
         //MAIN PROGRAM
 
         public static void main(String[] args) {
+                double level = 1;
                 List<Pokemon> allPokemons = new ArrayList<Pokemon>();
                 Pokemon playerPokemon = PokemonRandomizer.returnPokemon();
-                playerPokemon.setSymbol("\u237b");
+                playerPokemon.setSymbol("@");
                 Pokemon partnerPokemon = PokemonRandomizer.returnPokemon();
                 while(partnerPokemon.getName().equals(playerPokemon.getName())){
                         partnerPokemon = PokemonRandomizer.returnPokemon();
@@ -375,8 +433,8 @@ public static void putString(int r, int c,Terminal t, String s){
                                                 //Generates the map again.
                                                 setUpCombatScreen(sideScreen, xSize, ySize);
                                                 setUpInfoScreen(sideScreen, xSize, ySize);
-                                                addPlayerInfo(sideScreen, player, allPokemons, xSize);
-                                                buildMap(mapMap);
+                                                addPlayerInfo(sideScreen, player, allPokemons, xSize, level);
+                                                buildMap(mapMap,level);
                                                 for(Pokemon p : allPokemons) {
                                                         putPokemon(p.getX(),p.getY(),terminal,p);
                                                 }
@@ -405,6 +463,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                 if (key.getCharacter() == 'r' && gameMode == 2) {
                                         gameOver.stopScreen();
                                         gameMode = 1;
+                                        level = 1;
                                         testMap = new Map();
                                         mapMap = testMap.getMap();
                                         player.getPlayer().resetHp();
@@ -414,7 +473,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                         setUpCombatScreen(sideScreen, xSize, ySize);
                                         //Setting up bottom portions for info:
                                         setUpInfoScreen(sideScreen, xSize, ySize);
-                                        buildMap(mapMap);
+                                        buildMap(mapMap, level);
                                         terminal.setCursorVisible(false);
                                         allPokemons.clear();
                                         spawnPlayer(player, terminal, testMap,partnerFainted);
@@ -561,7 +620,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                                 playerTurn = false;
                                                 if(!partnerFainted) partnerTurn = true;
                                         }
-                                        //Keys 5, 6, 7 and 8 determine the move that the partner will be using since it's only a SIMPLE AI POKEMON. 
+                                        //Keys 5, 6, 7 and 8 determine the move that the partner will be using since it's only a SIMPLE AI POKEMON.
                                         if(key.getCharacter() == '5' && !partnerFainted) {
                                                 partnerMove = player.getPartner().getMoveset().get(0);
                                                 addMessageToCombat(sideScreen, "Your partner's move is set to: " + partnerMove, xSize/2 + 8, yMessage, "bold");
@@ -587,18 +646,31 @@ public static void putString(int r, int c,Terminal t, String s){
                                                         if(isFacing(player.getPartner(), allPokemons.get(i))) {
                                                                 addMessageToCombat(sideScreen, "Partner: " + player.getPartner().useMove(partnerMove, allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 yMessage++;
+                                                                if(allPokemons.get(i).getHp() <= 0) {
+                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted!", xSize/2 + 8, yMessage, "bold");
+                                                                        mapMap[allPokemons.get(i).getY()][allPokemons.get(i).getX()].makeWalkable();
+                                                                        setBg(terminal,allPokemons.get(i).getX(),allPokemons.get(i).getY(),131,203,58);
+                                                                        allPokemons.remove(i);
+                                                                        for(int y = ySize/2 + 10; y < sideScreen.getTerminalSize().getRows(); y++) {
+                                                                                for(int x = xSize * 1/2; x < sideScreen.getTerminalSize().getColumns(); x++) {
+                                                                                        sideScreen.putString(x,y," ",Terminal.Color.BLACK,Terminal.Color.CYAN,ScreenCharacterStyle.Bold);
+                                                                                }
+                                                                        }
+                                                                yMessage++;
                                                         }
                                                 }
+                                              }
                                                 partnerTurn = false;
                                         }
                                         else if(partnerFainted) {
                                                 partnerTurn = false;
                                         }
                                         //Check what arrow keys are pressed and if those locations are walkable and moves Pokemon
+
                                         if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable() && !optionsOn) {
-                                                movePokemon(mapMap, 0,-1,terminal,player.getPlayer());
+                                                movePokemon(mapMap, 0,-1,terminal,player.getPlayer(),level);
                                                 if(!partnerFainted) {
-                                                        movePokemon(mapMap, 0,-1,terminal,player.getPartner());
+                                                    movePokemon(mapMap, 0,-1,terminal,player.getPartner(),level);
                                                 }
                                                 facingX = 0;
                                                 facingY = -1;
@@ -610,23 +682,25 @@ public static void putString(int r, int c,Terminal t, String s){
                                         //checks two to the right to account for partner pokemon
                                         if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable() && !optionsOn) {
                                                 if(!partnerFainted) {
-                                                        movePokemon(mapMap, 0,1,terminal,player.getPartner());
+                                                        movePokemon(mapMap, 0,1,terminal,player.getPartner(),level);
                                                 }
-                                                movePokemon(mapMap, 0,1,terminal,player.getPlayer());
+                                                movePokemon(mapMap, 0,1,terminal,player.getPlayer(),level);
                                                 facingX = 0;
                                                 facingY = 1;
                                                 addMessageToCombat(sideScreen, "Moved Right!", xSize/2 + 8, yMessage, "bold");
                                                 yMessage++;
                                                 playerTurn = false;
                                                 partnerTurn = false;
+                                                mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp();
+
                                         }
                                         if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()
                                                         //additional checks used to check partner pokemon location
                                                         && mapMap[curY + 1][curX - 1].getWalkable()
                                                         && !optionsOn) {
-                                                movePokemon(mapMap, -1,0,terminal,player.getPlayer());
+                                                movePokemon(mapMap, -1,0,terminal,player.getPlayer(),level);
                                                 if(!partnerFainted) {
-                                                        movePokemon(mapMap, -1,0,terminal,player.getPartner());
+                                                     movePokemon(mapMap,-1,0,terminal,player.getPartner(),level);
                                                 }
                                                 facingX = -1;
                                                 facingY = 0;
@@ -636,11 +710,11 @@ public static void putString(int r, int c,Terminal t, String s){
                                                 partnerTurn = false;
                                                         }
                                         if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY][curX + 1].getWalkable()
-                                                        && mapMap[curY + 1][curX + 1].getWalkable() 
+                                                        && mapMap[curY + 1][curX + 1].getWalkable()
                                                         && !optionsOn) {
-                                                movePokemon(mapMap, 1,0,terminal,player.getPlayer());
+                                                movePokemon(mapMap, 1,0,terminal,player.getPlayer(),level);
                                                 if(!partnerFainted) {
-                                                        movePokemon(mapMap, 1,0,terminal,player.getPartner());
+                                                   movePokemon(mapMap, 1,0,terminal,player.getPartner(),level);
                                                 }
                                                 facingX = 1;
                                                 facingY = 0;
@@ -649,18 +723,92 @@ public static void putString(int r, int c,Terminal t, String s){
                                                 playerTurn = false;
                                                 partnerTurn = false;
                                                         }
-                                        if(mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getColor() == 10){
+                                          //checks if player is on a stair to start a new level
+                                        if(mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getColor() == 10 ||
+                                            mapMap[player.getPartner().getY()][player.getPartner().getX()].getColor() == 10){
+                                                level++;
                                                 testMap = new Map();
                                                 mapMap = testMap.getMap();
+                                                buildMap(mapMap,level);
                                                 allPokemons.clear();
-                                                buildMap(mapMap);
                                                 spawnPlayer(player, terminal, testMap,partnerFainted);
                                                 allPokemons.add(player.getPlayer());
                                                 allPokemons.add(player.getPartner());
                                                 allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
-                                                addPlayerInfo(sideScreen, player, allPokemons, xSize);
+                                                addPlayerInfo(sideScreen, player, allPokemons, xSize, level);
+
+                                        }
+                                        //used to move player if they are on a portal
+                                        //gets if tiles the player pokemons are on lead to another tile
+                                        Tile playerTile = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp();
+                                        Tile partnerTile =mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp();
+                                        if(playerTile != null|| partnerTile != null){
+                                              //puts coords of player and partner into variables
+                                               curX = player.getPlayer().getX();
+                                               curY = player.getPlayer().getY();
+                                               int pX = player.getPartner().getX();
+                                               int pY = player.getPartner().getY();
+
+
+                                              // if its the player pokemon that is on a portal
+                                              if(playerTile != null){
+                                                //resets portal so it cant  be used again
+                                                mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp().setTp(null);
+                                                mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setTp(null);
+                                                //moves pokemons
+                                                putPokemon(playerTile.getX(),playerTile.getY(),terminal,player.getPlayer());
+                                                putPokemon(playerTile.getX(),playerTile.getY() + 1,terminal,player.getPartner());
+                                                //updates pokemon object coordinates
+                                                player.getPlayer().setLocation(playerTile.getX(),playerTile.getY());
+                                                  player.getPartner().setLocation(playerTile.getX(),playerTile.getY() + 1);
+                                                  //changes tile color values to remove portal color
+                                                  mapMap[curY][curX].setColor(0);
+                                                  playerTile.setColor(0);
+                                              }
+                                              if(partnerTile != null){
+                                                //resets portal so it cant  be used again
+                                                mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp().setTp(null);
+                                                mapMap[player.getPartner().getY()][player.getPartner().getX()].setTp(null);
+                                                //physically places new pokemons on map
+                                                putPokemon(partnerTile.getX(),partnerTile.getY() - 1, terminal,player.getPlayer());
+                                                putPokemon(partnerTile.getX(),partnerTile.getY(),terminal,player.getPartner());
+                                                player.getPlayer().setLocation(partnerTile.getX(),partnerTile.getY() - 1);
+                                                //updates pokemon object coordinates
+                                                  player.getPartner().setLocation(partnerTile.getX(),partnerTile.getY());
+                                                  //removes tile color vlaues
+                                                  mapMap[pY][pX].setColor(0);
+                                                  partnerTile.setColor(0);
+                                              }
+                                              //update to remove portal colors
+                                              setBg(terminal, mapMap[curY][curX], curX, curY,level);
+                                              mapMap[curY][curX].makeWalkable();
+                                              setBg(terminal, mapMap[pY][pX], pX, pY,level);
+                                              mapMap[pY][pX].makeWalkable();
+                                            }
+                                        //checks if player is on a potion;
+                                        int healHp = mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getHealthPotion();
+                                        int partHealHp = mapMap[player.getPartner().getY()][player.getPartner().getX()].getHealthPotion();
+                                        if(healHp != 0 || partHealHp != 0){
+                                          //healing values of tile that the pokemon is on
+                                          player.getPlayer().healHp(healHp);
+                                          player.getPartner().healHp(healHp);
+                                          player.getPlayer().healHp(partHealHp);
+                                          player.getPartner().healHp(partHealHp);
+                                          //if the player pokemon is on a heal tile, heal both
+                                          if(healHp != 0){
+                                            mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setHealthPotion(0);
+                                            mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setColor(0);
+                                          }
+                                          //if the partner pokemon is on a heal tile, heal both
+                                          if(partHealHp != 0){
+                                            mapMap[player.getPartner().getY()][player.getPartner().getX()].setHealthPotion(0);
+                                            mapMap[player.getPartner().getY()][player.getPartner().getX()].setColor(0);
+                                          }
+                                          //addPlayerInfo(sideScreen, player, allPokemons, xSize);
+                                          addMessageToCombat(sideScreen, "Healed " + (healHp + partHealHp) + "HP!", xSize/2 + 8, yMessage, "bold");
                                         }
                                 }
+
                                 /*
                                 // Debug Code: Used to display current player location
                                 curX = player.getPlayer().getX();
@@ -686,8 +834,8 @@ public static void putString(int r, int c,Terminal t, String s){
                                 setUpCombatScreen(sideScreen, xSize, ySize);
                                 //Setting up bottom portions for info:
                                 setUpInfoScreen(sideScreen, xSize, ySize);
-                                buildMap(mapMap);
-                                spawnPlayer(player, terminal, testMap, partnerFainted);
+                                buildMap(mapMap,level);
+                                spawnPlayer(player, terminal, testMap,partnerFainted);
                                 terminal.setCursorVisible(false);
                                 allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
                                 generated = true;
@@ -698,20 +846,20 @@ public static void putString(int r, int c,Terminal t, String s){
                                         Pokemon enemy = allPokemons.get(i);
                                         int[] move = allPokemons.get(i).moveTowards(player.getPlayer());
                                         //If enemy is directly in front of them, attack player, else: just move.
-                                if(isFacing(allPokemons.get(i),player.getPlayer())) {
+                                if(isFacing(enemy,player.getPlayer())) {
                                         //Action for dealing damage.
                                         //Uses 1st move for now. Make 1 a variable later for the below.
                                         addMessageToCombat(sideScreen, manageMove(enemy,player.getPlayer(),1),xSize/2+8,yMessage,"bold");
                                         yMessage++;
                                 }
-                                else if(!partnerFainted && isFacing(allPokemons.get(i),player.getPartner())) {
+                                else if(!partnerFainted && isFacing(enemy,player.getPartner())) {
                                         addMessageToCombat(sideScreen, manageMove(enemy,player.getPartner(),1),xSize/2+8,yMessage,"bold");
                                         yMessage++;
                                 }
-                                else{
-                                        movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i));
+                                else if(Math.random()>0.8){
+                                      movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i),level);
                                 }
-                        }
+                                }
                                 playerTurn = true;
                         }
 
@@ -733,7 +881,7 @@ public static void putString(int r, int c,Terminal t, String s){
                         }
 
                         //Ending updates:
-                        addPlayerInfo(sideScreen, player, allPokemons, xSize);
+                        addPlayerInfo(sideScreen, player, allPokemons, xSize, level);
                         sideScreen.refresh();
                 }
         }
