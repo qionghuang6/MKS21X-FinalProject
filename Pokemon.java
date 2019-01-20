@@ -159,7 +159,7 @@ public class Pokemon implements Cloneable{
 
                 //Returns regular message if none of the above, and normal base damage.
                 target.loseHp(m.getBaseDamage());
-                return getName() + " uses " + m.getName() + ", " + target.getName() + " has " + target.getHp() + " remaining!";
+                return getName() + " uses " + m.getName() + ", " + target.getName() + " has " + target.getHp() + " HP remaining!";
         }
 
         //toString()

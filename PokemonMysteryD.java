@@ -253,9 +253,11 @@ public static void putString(int r, int c,Terminal t, String s){
 
 
         //spawns player pokemons from player class using putPokemon()
-        public static void spawnPlayer(Player player, Terminal t, Map m){
+        public static void spawnPlayer(Player player, Terminal t, Map m, boolean partnerFainted){
                 putPokemon(m.getStartX(),m.getStartY(), t, player.getPlayer());
+                if(!partnerFainted) {
                 putPokemon(m.getStartX(),m.getStartY() + 1, t, player.getPartner());
+                }
         }
 
         //Checks to see if a pokemon is facing you before attacking.
@@ -315,6 +317,10 @@ public static void putString(int r, int c,Terminal t, String s){
                 boolean optionsOn = false;
                 boolean generated = false;
                 boolean playerTurn = true;
+                boolean partnerTurn = false;
+                boolean partnerFainted = false;
+                //Sets partner move to be the first in the beginning.
+                Move partnerMove = player.getPartner().getMoveset().get(0);
                 Random walkGenerator;
                 Random moveGenerator;
 
@@ -412,6 +418,8 @@ public static void putString(int r, int c,Terminal t, String s){
                                         testMap = new Map();
                                         mapMap = testMap.getMap();
                                         player.getPlayer().resetHp();
+                                        player.getPartner().resetHp();
+                                        partnerFainted = false;
                                         terminal.enterPrivateMode();
                                         setUpCombatScreen(sideScreen, xSize, ySize);
                                         //Setting up bottom portions for info:
@@ -419,7 +427,9 @@ public static void putString(int r, int c,Terminal t, String s){
                                         buildMap(mapMap);
                                         terminal.setCursorVisible(false);
                                         allPokemons.clear();
-                                        spawnPlayer(player, terminal, testMap);
+                                        spawnPlayer(player, terminal, testMap,partnerFainted);
+                                        allPokemons.add(player.getPlayer());
+                                        allPokemons.add(player.getPartner());
                                         allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
                                         generated = true;
                                          }
@@ -461,7 +471,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                                         if(allPokemons.get(i).getX() == player.getPlayer().getX() + facingX && allPokemons.get(i).getY() == player.getPlayer().getY() + facingY) {
                                                                 //Action for dealing damage.
                                                                 //Adds combat message!
-                                                                addMessageToCombat(sideScreen, player.getPlayer().useMove(player.getPlayer().getMoveset().get(0),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
+                                                                addMessageToCombat(sideScreen, "You: " + player.getPlayer().useMove(player.getPlayer().getMoveset().get(0),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 //moves message coordinate down.
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
@@ -480,6 +490,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                                         }
                                                 }
                                                 playerTurn = false;
+                                                if(!partnerFainted) partnerTurn = true;
                                         }
 
                                         //Uses 2nd move in moveset.
@@ -488,7 +499,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                                 for(int i = 2; i < allPokemons.size(); i++) {
                                                         if(allPokemons.get(i).getX() == player.getPlayer().getX() + facingX && allPokemons.get(i).getY() == player.getPlayer().getY() + facingY) {
                                                                 //Action for dealing damage.
-                                                                addMessageToCombat(sideScreen, player.getPlayer().useMove(player.getPlayer().getMoveset().get(1),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
+                                                                addMessageToCombat(sideScreen, "You: " + player.getPlayer().useMove(player.getPlayer().getMoveset().get(1),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 //moves message coordinate down.
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
@@ -506,6 +517,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                                         }
                                                 }
                                                 playerTurn = false;
+                                                if(!partnerFainted) partnerTurn = true;
                                         }
 
                                         //Uses 3rd Move in Moveset.
@@ -514,7 +526,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                                 for(int i = 2; i < allPokemons.size(); i++) {
                                                         if(allPokemons.get(i).getX() == player.getPlayer().getX() + facingX && allPokemons.get(i).getY() == player.getPlayer().getY() + facingY) {
                                                                 //Action for dealing damage.
-                                                                addMessageToCombat(sideScreen, player.getPlayer().useMove(player.getPlayer().getMoveset().get(2),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
+                                                                addMessageToCombat(sideScreen, "You: " + player.getPlayer().useMove(player.getPlayer().getMoveset().get(2),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
                                                                         addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted!", xSize/2 + 8, yMessage, "bold");
@@ -531,6 +543,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                                         }
                                                 }
                                                 playerTurn = false;
+                                                if(!partnerFainted) partnerTurn = true;
                                         }
 
                                         //Uses 4th move in Moveset.
@@ -539,7 +552,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                                 for(int i = 2; i < allPokemons.size(); i++) {
                                                         if(allPokemons.get(i).getX() == player.getPlayer().getX() + facingX && allPokemons.get(i).getY() == player.getPlayer().getY() + facingY) {
                                                                 //Action for dealing damage.
-                                                                addMessageToCombat(sideScreen, player.getPlayer().useMove(player.getPlayer().getMoveset().get(3),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
+                                                                addMessageToCombat(sideScreen, "You: " + player.getPlayer().useMove(player.getPlayer().getMoveset().get(3),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 //moves message coordinate down.
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
@@ -557,56 +570,102 @@ public static void putString(int r, int c,Terminal t, String s){
                                                         }
                                                 }
                                                 playerTurn = false;
+                                                if(!partnerFainted) partnerTurn = true;
+                                        }
+                                        //Keys 5, 6, 7 and 8 determine the move that the partner will be using since it's only a SIMPLE AI POKEMON. 
+                                        if(key.getCharacter() == '5' && !partnerFainted) {
+                                                partnerMove = player.getPartner().getMoveset().get(0);
+                                                addMessageToCombat(sideScreen, "Your partner's move is set to: " + partnerMove, xSize/2 + 8, yMessage, "bold");
+                                                yMessage++;
+                                        }
+                                        if(key.getCharacter() == '6' && !partnerFainted) {
+                                                partnerMove = player.getPartner().getMoveset().get(1);
+                                                addMessageToCombat(sideScreen, "Your partner's move is set to: " + partnerMove, xSize/2 + 8, yMessage, "bold");
+                                                yMessage++;
+                                        }
+                                        if(key.getCharacter() == '7' && !partnerFainted) {
+                                                partnerMove = player.getPartner().getMoveset().get(2);
+                                                addMessageToCombat(sideScreen, "Your partner's move is set to: " + partnerMove, xSize/2 + 8, yMessage, "bold");
+                                                yMessage++;
+                                        }
+                                        if(key.getCharacter() == '8' && !partnerFainted) {
+                                                partnerMove = player.getPartner().getMoveset().get(3);
+                                                addMessageToCombat(sideScreen, "Your partner's move is set to: " + partnerMove, xSize/2 + 8, yMessage, "bold");
+                                                yMessage++;
+                                        }
+                                        if(partnerTurn && !partnerFainted) {
+                                                for(int i = 2; i < allPokemons.size(); i++) {
+                                                        if(isFacing(player.getPartner(), allPokemons.get(i))) {
+                                                                addMessageToCombat(sideScreen, "Partner: " + player.getPartner().useMove(partnerMove, allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
+                                                                yMessage++;
+                                                        }
+                                                }
+                                                partnerTurn = false;
+                                        }
+                                        else if(partnerFainted) {
+                                                partnerTurn = false;
                                         }
                                         //Check what arrow keys are pressed and if those locations are walkable and moves Pokemon
                                         if (key.getKind() == Key.Kind.ArrowLeft && mapMap[curY -1 ][curX].getWalkable() && !optionsOn) {
                                                 movePokemon(mapMap, 0,-1,terminal,player.getPlayer());
-                                                movePokemon(mapMap, 0,-1,terminal,player.getPartner());
+                                                if(!partnerFainted) {
+                                                        movePokemon(mapMap, 0,-1,terminal,player.getPartner());
+                                                }
                                                 facingX = 0;
                                                 facingY = -1;
                                                 addMessageToCombat(sideScreen, "Moved left!", xSize/2 + 8, yMessage, "bold");
                                                 yMessage++;
                                                 playerTurn = false;
+                                                partnerTurn = false;
                                         }
                                         //checks two to the right to account for partner pokemon
                                         if (key.getKind() == Key.Kind.ArrowRight && mapMap[curY + 2][curX ].getWalkable() && !optionsOn) {
-                                                movePokemon(mapMap, 0,1,terminal,player.getPartner());
+                                                if(!partnerFainted) {
+                                                        movePokemon(mapMap, 0,1,terminal,player.getPartner());
+                                                }
                                                 movePokemon(mapMap, 0,1,terminal,player.getPlayer());
                                                 facingX = 0;
                                                 facingY = 1;
                                                 addMessageToCombat(sideScreen, "Moved Right!", xSize/2 + 8, yMessage, "bold");
                                                 yMessage++;
                                                 playerTurn = false;
+                                                partnerTurn = false;
                                         }
                                         if (key.getKind() == Key.Kind.ArrowUp && mapMap[curY][curX - 1].getWalkable()
                                                         //additional checks used to check partner pokemon location
                                                         && mapMap[curY + 1][curX - 1].getWalkable()
                                                         && !optionsOn) {
                                                 movePokemon(mapMap, -1,0,terminal,player.getPlayer());
-                                                movePokemon(mapMap, -1,0,terminal,player.getPartner());
+                                                if(!partnerFainted) {
+                                                        movePokemon(mapMap, -1,0,terminal,player.getPartner());
+                                                }
                                                 facingX = -1;
                                                 facingY = 0;
                                                 addMessageToCombat(sideScreen, "Moved Up!", xSize/2 + 8, yMessage, "bold");
                                                 yMessage++;
                                                 playerTurn = false;
+                                                partnerTurn = false;
                                                         }
                                         if (key.getKind() == Key.Kind.ArrowDown && mapMap[curY][curX + 1].getWalkable()
                                                         && mapMap[curY + 1][curX + 1].getWalkable() 
                                                         && !optionsOn) {
                                                 movePokemon(mapMap, 1,0,terminal,player.getPlayer());
-                                                movePokemon(mapMap, 1,0,terminal,player.getPartner());
+                                                if(!partnerFainted) {
+                                                        movePokemon(mapMap, 1,0,terminal,player.getPartner());
+                                                }
                                                 facingX = 1;
                                                 facingY = 0;
                                                 addMessageToCombat(sideScreen, "Moved Down!", xSize/2 + 8, yMessage, "bold");
                                                 yMessage++;
                                                 playerTurn = false;
+                                                partnerTurn = false;
                                                         }
                                         if(mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getColor() == 10){
                                                 testMap = new Map();
                                                 mapMap = testMap.getMap();
-                                                buildMap(mapMap);
-                                                spawnPlayer(player, terminal, testMap);
                                                 allPokemons.clear();
+                                                buildMap(mapMap);
+                                                spawnPlayer(player, terminal, testMap,partnerFainted);
                                                 allPokemons.add(player.getPlayer());
                                                 allPokemons.add(player.getPartner());
                                                 allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
@@ -639,12 +698,13 @@ public static void putString(int r, int c,Terminal t, String s){
                                 //Setting up bottom portions for info:
                                 setUpInfoScreen(sideScreen, xSize, ySize);
                                 buildMap(mapMap);
-                                spawnPlayer(player, terminal, testMap);
+                                spawnPlayer(player, terminal, testMap, partnerFainted);
                                 terminal.setCursorVisible(false);
                                 allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
                                 generated = true;
                         }
-                        if(!playerTurn) {
+                        if(!playerTurn && !partnerTurn) {
+                                //Goes through all the enemy pokemon for them to make an action.
                                 for(int i = 2; i < allPokemons.size(); i++) {
                                         Pokemon enemy = allPokemons.get(i);
                                         int[] move = allPokemons.get(i).moveTowards(player.getPlayer());
@@ -655,7 +715,11 @@ public static void putString(int r, int c,Terminal t, String s){
                                         addMessageToCombat(sideScreen, manageMove(enemy,player.getPlayer(),1),xSize/2+8,yMessage,"bold");
                                         yMessage++;
                                 }
-                                else {
+                                else if(!partnerFainted && isFacing(allPokemons.get(i),player.getPartner())) {
+                                        addMessageToCombat(sideScreen, manageMove(enemy,player.getPartner(),1),xSize/2+8,yMessage,"bold");
+                                        yMessage++;
+                                }
+                                else{
                                         movePokemon(mapMap, move[0], move[1], terminal, allPokemons.get(i));
                                 }
                         }
@@ -666,6 +730,14 @@ public static void putString(int r, int c,Terminal t, String s){
                                 gameMode = 2;
                                 sideScreen.stopScreen();
                                 setUpGameOverScreen(gameOver, xSize);
+                        }
+
+                        if(player.getPartner().getHp() <= 0 && !partnerFainted) {
+                                addMessageToCombat(sideScreen, "Oh no! Your partner has fainted!", xSize/2+8, yMessage, "bold");
+                                yMessage++;
+                                mapMap[player.getPartner().getY()][player.getPartner().getX()].makeWalkable();
+                                setBg(terminal,player.getPartner().getX(), player.getPartner().getY(), 131,203,58);
+                                partnerFainted = true;
                         }
 
                         //Ending updates:
