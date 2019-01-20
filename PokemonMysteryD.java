@@ -139,9 +139,8 @@ public static void putString(int r, int c,Terminal t, String s){
                                 gameOver.putString(x,i," ",Terminal.Color.BLACK,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
                         }
                 }
-                gameOver.putString(xSize * 3/8,15, "                 GAME OVER!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                gameOver.putString(xSize * 3/8,20, "              Press R to try again?            ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
-                gameOver.putString(xSize * 3/8 - 3, 30, " If you wish to look at the instructions and options, press Backspace!    ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                gameOver.putString(xSize * 3/8,15, "                 GAME OVER! You fainted =(              ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                gameOver.putString(xSize * 3/8,20, "              Continue? Press R to Restart.            ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
                 gameOver.refresh();
         }
 
@@ -362,19 +361,11 @@ public static void putString(int r, int c,Terminal t, String s){
                                 //When you click on Backspace in the game...
                                 if (key.getKind() == Key.Kind.Backspace) {
                                         //This block of code is called when you're not in the options page.
-                                        if(!optionsOn) {
+                                        if(!optionsOn && gameMode != 2) {
                                                 start.stopScreen();
                                                 sideScreen.stopScreen();
                                                 setUpOptionsScreen(options,xSize);
                                                 optionsOn = true;
-                                        }
-                                        else if(gameMode == 2) {
-                                                options.stopScreen();
-                                                options.completeRefresh();
-                                                terminal.enterPrivateMode();
-                                                setUpGameOverScreen(gameOver, xSize);
-                                                optionsOn = false;
-                                                generated = true;
                                         }
                                         //This block of code is called when you're in the options page.
                                         else if(gameMode == 1) {
@@ -411,8 +402,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                 }
                                 //GAME OVER SCREEN CONTROLS
                                 //Press r to restart the game!
-                                if (gameMode == 2) {
-                                        if (key.getCharacter() == 'r') {
+                                if (key.getCharacter() == 'r' && gameMode == 2) {
                                         gameOver.stopScreen();
                                         gameMode = 1;
                                         testMap = new Map();
@@ -432,7 +422,6 @@ public static void putString(int r, int c,Terminal t, String s){
                                         allPokemons.add(player.getPartner());
                                         allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
                                         generated = true;
-                                         }
                                 }
                                 //GAMEPLAY CONTROLS, ONLY FOR GAMEMODE 1
                                 if(gameMode == 1) {
@@ -726,11 +715,14 @@ public static void putString(int r, int c,Terminal t, String s){
                                 playerTurn = true;
                         }
 
-                        if(player.getPlayer().getHp() <= 0) {
-                                gameMode = 2;
+                        if((player.getPlayer().getHp() <= 0)) {
                                 sideScreen.stopScreen();
+                                gameMode = 2;
                                 setUpGameOverScreen(gameOver, xSize);
+                                generated = true;
                         }
+
+
 
                         if(player.getPartner().getHp() <= 0 && !partnerFainted) {
                                 addMessageToCombat(sideScreen, "Oh no! Your partner has fainted!", xSize/2+8, yMessage, "bold");
