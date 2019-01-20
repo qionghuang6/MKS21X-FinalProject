@@ -116,40 +116,42 @@ public class Pokemon implements Cloneable{
         public String useMove(Move m, Pokemon target) {
                 String moveType = m.getType();
                 String targetType = target.getType();
+                //To calculate Damage: 
+                //((((2 * Pokemon Level)/ 5) + 2) * moveDamage) / 50) + 2
                 //Super effective moves: 2x Damage.
                 if(moveType == "Water" && targetType == "Fire") {
-                        target.loseHp(m.getBaseDamage() * 2);
+                        target.loseHp((((((2 * getLevel())/ 5) + 2) * m.getBaseDamage()) / 20 + 2) * 2);
                         return getName() + " uses " + m.getName() + ", It was super effective! " + target.getName() + " has " + target.getHp() + " HP remaining!";
                 }
                 if(moveType == "Grass" && targetType == "Water") {
-                        target.loseHp(m.getBaseDamage() * 2);
+                        target.loseHp((((((2 * getLevel())/ 5) + 2) * m.getBaseDamage()) / 20 + 2) * 2);
                         return getName() + " uses " + m.getName() + ", It was super effective! " + target.getName() + " has " + target.getHp() + " HP remaining!";
                 }
                 if(moveType == "Fire" && targetType == "Grass") {
-                        target.loseHp(m.getBaseDamage() * 2);
+                        target.loseHp((((((2 * getLevel())/ 5) + 2) * m.getBaseDamage()) / 20 + 2) * 2);
                         return getName() + " uses " + m.getName() + ", It was super effective! " + target.getName() + " has " + target.getHp() + " HP remaining!";
                 }
 
                 //Non effective type moves: 0.5x Damage.
                 if(moveType.equals(targetType)) {
-                        target.loseHp(m.getBaseDamage() * 0.5);
+                        target.loseHp((((((2 * getLevel())/ 5) + 2) * m.getBaseDamage()) / 20 + 2) * 0.5);
                         return getName() + " uses " + m.getName() + ", It was not effective... " + target.getName() + " has " + target.getHp() + " HP remaining!" ;
                 }
                 if(moveType == "Fire" && targetType == "Water") {
-                        target.loseHp(m.getBaseDamage() * 0.5);
+                        target.loseHp((((((2 * getLevel())/ 5) + 2) * m.getBaseDamage()) / 20 + 2) * 0.5);
                         return getName() + " uses " + m.getName() + ", It was not effective... " + target.getName() + " has " + target.getHp() + " HP remaining!" ;
                 }
                 if(moveType == "Water" && targetType == "Grass") {
-                        target.loseHp(m.getBaseDamage() * 0.5);
+                        target.loseHp((((((2 * getLevel())/ 5) + 2) * m.getBaseDamage()) / 20 + 2) * 0.5);
                         return getName() + " uses " + m.getName() + ", It was not effective..." + target.getName() + " has " + target.getHp() + " HP remaining!";
                 }
                 if(moveType == "Grass" && targetType == "Fire") {
-                        target.loseHp(m.getBaseDamage() * 0.5);
+                        target.loseHp((((((2 * getLevel())/ 5) + 2) * m.getBaseDamage()) / 20 + 2) * 0.5);
                         return getName() + " uses " + m.getName() + ", It was not effective... " + target.getName() + " has " + target.getHp() + " HP remaining!";
                 }
 
                 //Returns regular message if none of the above, and normal base damage.
-                target.loseHp(m.getBaseDamage());
+                target.loseHp((((((2 * getLevel())/ 5) + 2) * m.getBaseDamage()) / 20 + 2));
                 return getName() + " uses " + m.getName() + ", " + target.getName() + " has " + target.getHp() + " HP remaining!";
         }
 

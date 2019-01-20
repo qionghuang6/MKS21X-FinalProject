@@ -213,28 +213,35 @@ public static void putString(int r, int c,Terminal t, String s){
                 }
 
                 //This code details the left portion of the screen. (Instructions)
-                options.putString(xSize/2 - 10,8,"Instructions & Options:",Terminal.Color.GREEN,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,15, "Instructions:", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
-                options.putString(xSize/4 - 3,17, "Objective: Reach the stairs of each level! Looks like --> ", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 + 56,17, " ", Terminal.Color.BLACK, Terminal.Color.YELLOW, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,20, "Key Controls:", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
-                options.putString(xSize/4 - 3,22, "1. Enable/Disable Option --> Space Bar", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,24, "2. Move Up --> Up Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,26, "3. Move Down --> Down Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,28, "4. Move Left --> Left Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,30, "5. Move Right --> Right Arrow Key", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,32, "6. To use attacks in the moveset --> You must face a specific pokemon first.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-
-                options.putString(xSize/4 - 3,33, "     6a. To face left --> Press A.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,34, "     6b. To face right --> Press D", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,35, "     6c. To face up --> Press W.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,36, "     6d. To face down --> Press S.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                options.putString(xSize/4 - 3,37, "     6e. Then, Look at the blue screen AND: Click on either 1, 2, 3 or 4 to use the move inside of the array!", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                //This code details the right portion of the screen. (Options)
-                options.putString(xSize * 3/4 - 10,15, "Options:", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
-                options.putString(xSize * 3/4 - 10,17, "Enable Music Track?", Terminal.Color.GREEN, Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
-                //Implement space bar to set true/false for options later..
-                options.putString(xSize * 3/4 + 12,17, "Status: ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/2 - 20,4,"Instructions & Options:",Terminal.Color.GREEN,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,6,"Q & A:",Terminal.Color.GREEN,Terminal.Color.BLACK,ScreenCharacterStyle.Underline);
+                options.putString(xSize/4 - 23,8,"Question: Where am I?                                 Answer: Don't fret! You're represented as a @.",Terminal.Color.GREEN,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,9,"Question: Why is there another box following me?      Answer: That's your partner, it's another pokemon to help you on your journey! Represented as a ^.",Terminal.Color.GREEN,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,10,"Question: How do I win?                               Answer: Continue exploring and going up levels! Don't lose all your HP from enemy pokemon, or else it's GAME OVER.",Terminal.Color.GREEN,Terminal.Color.BLACK,ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,13, "Map Information:", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
+                options.putString(xSize/4 - 23,15, "Objective: Reach the stairs of each level! Looks like --> ", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 + 36,15, " ", Terminal.Color.BLACK, Terminal.Color.YELLOW, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,16, "To see what floor level you are on and other info, check the cyan player box in the game!", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,17, "There are also portals that teleport you to another, these look like --> ", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 + 50,17, " ", Terminal.Color.BLACK, Terminal.Color.CYAN, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,18, "Some tiles heal your pokemon to their max HP, these look like --> ", Terminal.Color.GREEN,Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 + 43,18, " ", Terminal.Color.BLACK, Terminal.Color.MAGENTA, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,20, "Controls:", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
+                options.putString(xSize/4 - 23,22, "1. Wait a turn --> Press Q", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,24, "2. Move Up --> Up Arrow Key (Faces up)", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,26, "3. Move Down --> Down Arrow Key (Faces down)", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,28, "4. Move Left --> Left Arrow Key (Faces left)", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,30, "5. Move Right --> Right Arrow Key (Faces Right)", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,32, "6. To use attacks in the moveset --> You must face a pokemon first.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,33, "     6a. To face left --> Press A.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,34, "     6b. To face right --> Press D", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,35, "     6c. To face up --> Press W.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,36, "     6d. To face down --> Press S.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,37, "     6e. Then, Look at the blue screen AND: Click on either 1, 2, 3 or 4 to use that specific move!", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,39, "Partner (AI) Controls:", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Underline);
+                options.putString(xSize/4 - 23,41, "You cannot facilitate movement of your partner, but you can set the move that you want it to use.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,42, "Press either 5, 6, 7, or 8 to set a move for your partner to use. Once it is set, press 'Q' to wait another turn so your partner can attack.", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                options.putString(xSize/4 - 23,43, "Or... you can attack yourself, thus triggering your partner's turn!", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                 options.refresh();
         }
 
