@@ -21,9 +21,8 @@ import java.util.Random;
 public class PokemonMysteryD{
         static Terminal terminal;
         static TerminalSize terminalSize;
-
-        //displays text at certain location
-        public static void putString(int r, int c,Terminal t, String s){
+//displays text at certain location 
+public static void putString(int r, int c,Terminal t, String s){
                 t.moveCursor(r,c);
                 for(int i = 0; i < s.length();i++){
                         t.putCharacter(s.charAt(i));
@@ -141,7 +140,7 @@ public class PokemonMysteryD{
                         }
                 }
                 gameOver.putString(xSize * 3/8,15, "                 GAME OVER!               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                gameOver.putString(xSize * 3/8,20, "                    Press R to try again?               ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
+                gameOver.putString(xSize * 3/8,20, "              Press R to try again?            ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
                 gameOver.putString(xSize * 3/8 - 3, 30, " If you wish to look at the instructions and options, press Backspace!    ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
                 gameOver.refresh();
         }
@@ -227,13 +226,25 @@ public class PokemonMysteryD{
         //Adds all player information to info screen.
         public static void addPlayerInfo(Screen sideScreen, Player p, List<Pokemon> all, int xSize) {
 
+                addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 31);
                 addMessageToInfo(sideScreen, "Player: " + p.getPlayer().toString() + "                   Gold: " + p.getGold(), xSize/2 + 8, 32);
                 addMessageToInfo(sideScreen, "Partner: " + p.getPartner().toString(), xSize/2 + 8, 33);
-                addMessageToInfo(sideScreen, "POKEMON MOVESETS: ", xSize/2 + 8, 38);
-                addMessageToInfo(sideScreen, "Player Movesets: " + p.getPlayer().getMoveset(), xSize/2 + 8, 40);
-                addMessageToInfo(sideScreen, "Partner Movesets: " + p.getPartner().getMoveset(), xSize/2 + 8, 41);
-                addMessageToInfo(sideScreen, "ENEMY POKEMON IN THE MAP: ", xSize/2 + 8, 44);
-                int current = 45;
+                addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 34);
+                addMessageToInfo(sideScreen, "POKEMON MOVESETS: ", xSize/2 + 8, 35);
+                addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 36);
+                addMessageToInfo(sideScreen, "Player Movesets:             Partner Movesets:" , xSize/2 + 8, 37);
+                addMessageToInfo(sideScreen, "1. " + p.getPlayer().getMoveset().get(0), xSize/2 + 8, 38);
+                addMessageToInfo(sideScreen, "2. " + p.getPlayer().getMoveset().get(1), xSize/2 + 8, 39);
+                addMessageToInfo(sideScreen, "3. " + p.getPlayer().getMoveset().get(2), xSize/2 + 8, 40);
+                addMessageToInfo(sideScreen, "4. " + p.getPlayer().getMoveset().get(3), xSize/2 + 8, 41);
+                addMessageToInfo(sideScreen, "Partner Movesets: " , xSize/2 + 8, 43);
+                addMessageToInfo(sideScreen, "5. " + p.getPartner().getMoveset().get(0), xSize/2 + 37, 38);
+                addMessageToInfo(sideScreen, "6. " + p.getPartner().getMoveset().get(1), xSize/2 + 37, 39);
+                addMessageToInfo(sideScreen, "7. " + p.getPartner().getMoveset().get(2), xSize/2 + 37, 40);
+                addMessageToInfo(sideScreen, "8. " + p.getPartner().getMoveset().get(3), xSize/2 + 37, 41);
+                addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 42);
+                addMessageToInfo(sideScreen, "ENEMY POKEMON IN THE MAP: ", xSize/2 + 8, 43);
+                int current = 44;
                 for(int i = 2; i < all.size(); i++) {
                         addMessageToInfo(sideScreen, all.get(i).toString(), xSize/2 + 8, current);
                         current++;
@@ -352,7 +363,9 @@ public class PokemonMysteryD{
                                                 optionsOn = true;
                                         }
                                         else if(gameMode == 2) {
-                                                start.stopScreen();
+                                                options.stopScreen();
+                                                options.completeRefresh();
+                                                terminal.enterPrivateMode();
                                                 setUpGameOverScreen(gameOver, xSize);
                                                 optionsOn = false;
                                                 generated = true;
@@ -389,6 +402,27 @@ public class PokemonMysteryD{
                                         start.stopScreen();
                                         gameMode = 1;
                                         generated = false;
+                                }
+                                //GAME OVER SCREEN CONTROLS
+                                //Press r to restart the game!
+                                if (gameMode == 2) {
+                                        if (key.getCharacter() == 'r') {
+                                        gameOver.stopScreen();
+                                        gameMode = 1;
+                                        testMap = new Map();
+                                        mapMap = testMap.getMap();
+                                        player.getPlayer().resetHp();
+                                        terminal.enterPrivateMode();
+                                        setUpCombatScreen(sideScreen, xSize, ySize);
+                                        //Setting up bottom portions for info:
+                                        setUpInfoScreen(sideScreen, xSize, ySize);
+                                        buildMap(mapMap);
+                                        terminal.setCursorVisible(false);
+                                        allPokemons.clear();
+                                        spawnPlayer(player, terminal, testMap);
+                                        allPokemons.addAll(spawnHostilePokemons(mapMap, terminal));
+                                        generated = true;
+                                         }
                                 }
                                 //GAMEPLAY CONTROLS, ONLY FOR GAMEMODE 1
                                 if(gameMode == 1) {
