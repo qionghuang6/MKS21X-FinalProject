@@ -1,10 +1,10 @@
 //API : http://mabe02.github.io/lanterna/apidocs/2.1/
 import com.googlecode.lanterna.TerminalFacade;
+import java.util.concurrent.ThreadLocalRandom;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.Key.Kind;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.Terminal.Color;
-import com.googlecode.lanterna.terminal.TerminalSize;
+import com.googlecode.lanterna.terminal.Terminal.Color; import com.googlecode.lanterna.terminal.TerminalSize;
 import com.googlecode.lanterna.LanternaException;
 import com.googlecode.lanterna.input.CharacterPattern;
 import com.googlecode.lanterna.input.InputDecoder;
@@ -146,7 +146,7 @@ public static void putString(int r, int c,Terminal t, String s){
         public static List<Pokemon> spawnHostilePokemons(Tile[][] m, Terminal t){
                 int spawned = 0;
                 List<Pokemon> p = new ArrayList<Pokemon>();
-                while(spawned < 6){
+                while(spawned < 10){
                         int r = (int) (Math.random() * m.length);
                         int c = (int) (Math.random() * m[0].length);
                         if(m[r][c].getWalkable()){
@@ -278,7 +278,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                 info.putString(x,y," ",Terminal.Color.BLACK,Terminal.Color.CYAN,ScreenCharacterStyle.Bold);
                         }
                 }
-                info.putString(xSize/2 + 8, 30, "POKEMON INFORMATION/STATUS:  ", Terminal.Color.WHITE,Terminal.Color.CYAN,ScreenCharacterStyle.Bold);
+                info.putString(xSize/2 + 8, 28, "POKEMON INFORMATION/STATUS:  ", Terminal.Color.WHITE,Terminal.Color.CYAN,ScreenCharacterStyle.Bold);
         }
 
         //Adds message to the screen.
@@ -289,25 +289,24 @@ public static void putString(int r, int c,Terminal t, String s){
         //Adds all player information to info screen.
         public static void addPlayerInfo(Screen sideScreen, Player p, List<Pokemon> all, int xSize, double level) {
 
-                addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 31);
-                addMessageToInfo(sideScreen, "Player: " + p.getPlayer().toString() + "            Partner: " + p.getPartner().toString(), xSize/2 + 8, 32);
-                addMessageToInfo(sideScreen, "Gold: " + p.getGold() + "                                    Floor Level: " + level, xSize/2 + 8, 33);
+                addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 29);
+                addMessageToInfo(sideScreen, "Player: " + p.getPlayer().toString() + "            Partner: " + p.getPartner().toString(), xSize/2 + 8, 30);
+                addMessageToInfo(sideScreen, "Gold: " + p.getGold() + "                                    Floor Level: " + level, xSize/2 + 8, 31);
+                addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 32);
+                addMessageToInfo(sideScreen, "POKEMON MOVESETS: ", xSize/2 + 8, 33);
                 addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 34);
-                addMessageToInfo(sideScreen, "POKEMON MOVESETS: ", xSize/2 + 8, 35);
-                addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 36);
-                addMessageToInfo(sideScreen, "Player Movesets:             Partner Movesets:" , xSize/2 + 8, 37);
-                addMessageToInfo(sideScreen, "1. " + p.getPlayer().getMoveset().get(0), xSize/2 + 8, 38);
-                addMessageToInfo(sideScreen, "2. " + p.getPlayer().getMoveset().get(1), xSize/2 + 8, 39);
-                addMessageToInfo(sideScreen, "3. " + p.getPlayer().getMoveset().get(2), xSize/2 + 8, 40);
-                addMessageToInfo(sideScreen, "4. " + p.getPlayer().getMoveset().get(3), xSize/2 + 8, 41);
-                addMessageToInfo(sideScreen, "Partner Movesets: " , xSize/2 + 8, 43);
-                addMessageToInfo(sideScreen, "5. " + p.getPartner().getMoveset().get(0), xSize/2 + 37, 38);
-                addMessageToInfo(sideScreen, "6. " + p.getPartner().getMoveset().get(1), xSize/2 + 37, 39);
-                addMessageToInfo(sideScreen, "7. " + p.getPartner().getMoveset().get(2), xSize/2 + 37, 40);
-                addMessageToInfo(sideScreen, "8. " + p.getPartner().getMoveset().get(3), xSize/2 + 37, 41);
-                addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 42);
-                addMessageToInfo(sideScreen, "ENEMY POKEMON IN THE MAP: ", xSize/2 + 8, 43);
-                int current = 44;
+                addMessageToInfo(sideScreen, "Player Movesets:             Partner Movesets:" , xSize/2 + 8, 35);
+                addMessageToInfo(sideScreen, "1. " + p.getPlayer().getMoveset().get(0), xSize/2 + 8, 36);
+                addMessageToInfo(sideScreen, "2. " + p.getPlayer().getMoveset().get(1), xSize/2 + 8, 37);
+                addMessageToInfo(sideScreen, "3. " + p.getPlayer().getMoveset().get(2), xSize/2 + 8, 38);
+                addMessageToInfo(sideScreen, "4. " + p.getPlayer().getMoveset().get(3), xSize/2 + 8, 39);
+                addMessageToInfo(sideScreen, "5. " + p.getPartner().getMoveset().get(0), xSize/2 + 37, 36);
+                addMessageToInfo(sideScreen, "6. " + p.getPartner().getMoveset().get(1), xSize/2 + 37, 37);
+                addMessageToInfo(sideScreen, "7. " + p.getPartner().getMoveset().get(2), xSize/2 + 37, 38);
+                addMessageToInfo(sideScreen, "8. " + p.getPartner().getMoveset().get(3), xSize/2 + 37, 39);
+                addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 40);
+                addMessageToInfo(sideScreen, "ENEMY POKEMON IN THE MAP: ", xSize/2 + 8, 41);
+                int current = 43;
                 for(int i = 2; i < all.size(); i++) {
                         addMessageToInfo(sideScreen, all.get(i).toString(), xSize/2 + 8, current);
                         current++;
@@ -850,17 +849,19 @@ public static void putString(int r, int c,Terminal t, String s){
                         if(!playerTurn && !partnerTurn) {
                                 //Goes through all the enemy pokemon for them to make an action.
                                 for(int i = 2; i < allPokemons.size(); i++) {
+                                        //random move index for the enemy to use.
+                                        int rmi = ThreadLocalRandom.current().nextInt(1,5);
                                         Pokemon enemy = allPokemons.get(i);
                                         int[] move = allPokemons.get(i).moveTowards(player.getPlayer());
                                         //If enemy is directly in front of them, attack player, else: just move.
                                 if(isFacing(enemy,player.getPlayer())) {
                                         //Action for dealing damage.
                                         //Uses 1st move for now. Make 1 a variable later for the below.
-                                        addMessageToCombat(sideScreen, manageMove(enemy,player.getPlayer(),1),xSize/2+8,yMessage,"bold");
+                                        addMessageToCombat(sideScreen, manageMove(enemy,player.getPlayer(),rmi),xSize/2+8,yMessage,"bold");
                                         yMessage++;
                                 }
                                 else if(!partnerFainted && isFacing(enemy,player.getPartner())) {
-                                        addMessageToCombat(sideScreen, manageMove(enemy,player.getPartner(),1),xSize/2+8,yMessage,"bold");
+                                        addMessageToCombat(sideScreen, manageMove(enemy,player.getPartner(),rmi),xSize/2+8,yMessage,"bold");
                                         yMessage++;
                                 }
                                 else if(Math.random()>0.8){

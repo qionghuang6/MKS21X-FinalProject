@@ -94,7 +94,7 @@ public class Map{
 
   //default map size is 100 wide and 45 tall
   public Map(){
-    this(100,45);
+    this(101,55);
   }
   //get startX coord
   public int getStartX(){
