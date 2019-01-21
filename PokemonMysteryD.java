@@ -189,7 +189,7 @@ public static void putString(int r, int c,Terminal t, String s){
                 start.refresh();
         }
 
-        public static void setUpGameOverScreen(Screen gameOver, int xSize) {
+        public static void setUpGameOverScreen(Screen gameOver, int xSize, double floor) {
                 gameOver.startScreen();
                 for(int i = 0; i < gameOver.getTerminalSize().getRows();i++) {
                         for(int x = 0; x < gameOver.getTerminalSize().getColumns(); x++) {
@@ -197,7 +197,8 @@ public static void putString(int r, int c,Terminal t, String s){
                         }
                 }
                 gameOver.putString(xSize * 3/8,15, "                 GAME OVER! You fainted =(              ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
-                gameOver.putString(xSize * 3/8,20, "              Continue? Press R to Restart.            ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
+                gameOver.putString(xSize * 3/8,18, "                 You reached Floor Level: " + floor + "!            ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Bold);
+                gameOver.putString(xSize * 3/8,21, "                 Continue? Press R to Restart.            ", Terminal.Color.GREEN, Terminal.Color.BLACK, ScreenCharacterStyle.Blinking);
                 gameOver.refresh();
         }
 
@@ -353,6 +354,7 @@ public static void putString(int r, int c,Terminal t, String s){
                 while(partnerPokemon.getName().equals(playerPokemon.getName())){
                         partnerPokemon = PokemonRandomizer.returnPokemon();
                 }
+                partnerPokemon.setSymbol("^");
                 Player player = new Player(playerPokemon, partnerPokemon, 300);
                 allPokemons.add(playerPokemon);
                 allPokemons.add(partnerPokemon);
@@ -491,6 +493,13 @@ public static void putString(int r, int c,Terminal t, String s){
                                 //GAMEPLAY CONTROLS, ONLY FOR GAMEMODE 1
                                 if(gameMode == 1) {
 
+                                        //Pressing Q will make you wait a turn.
+                                        if(key.getCharacter() == 'q') {
+                                                addMessageToCombat(sideScreen, "Waited one turn.", xSize/2 + 8, yMessage, "bold");
+                                                yMessage++;
+                                                playerTurn = false;
+                                                if(!partnerFainted) partnerTurn = true;
+                                        }
                                         //This code details facing the enemy before using the skill.
                                         if(key.getCharacter() == 'a') {
                                                 facingX = 0;
@@ -874,7 +883,7 @@ public static void putString(int r, int c,Terminal t, String s){
                         if((player.getPlayer().getHp() <= 0)) {
                                 sideScreen.stopScreen();
                                 gameMode = 2;
-                                setUpGameOverScreen(gameOver, xSize);
+                                setUpGameOverScreen(gameOver, xSize, level);
                                 generated = true;
                         }
 
