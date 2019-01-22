@@ -105,6 +105,10 @@ public class Pokemon implements Cloneable{
                 level += 1;
         }
 
+        public void resetLevel() {
+                level = 1;
+        }
+
         public void loseHp(double num) {
                 hp -= num;
         }

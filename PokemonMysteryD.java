@@ -475,6 +475,10 @@ public static void putString(int r, int c,Terminal t, String s){
                                         mapMap = testMap.getMap();
                                         player.getPlayer().resetHp();
                                         player.getPartner().resetHp();
+                                        player.getPlayer().resetLevel();
+                                        player.getPartner().resetLevel();
+                                        player.getPlayer().resetExp();
+                                        player.getPartner().resetExp();
                                         partnerFainted = false;
                                         terminal.enterPrivateMode();
                                         setUpCombatScreen(sideScreen, xSize, ySize);
