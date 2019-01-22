@@ -1,4 +1,6 @@
-import java.util.ArrayList; import java.util.List; 
+import java.util.ArrayList; 
+import java.util.List; 
+import java.lang.Math;
 public class Pokemon implements Cloneable{
         //Instance Variables:
         private String name;
@@ -89,6 +91,22 @@ public class Pokemon implements Cloneable{
         public void setLocation(int x, int y) {
                 this.x = x;
                 this.y = y;
+        }
+
+        public void resetExp() {
+                exp = 0;
+        }
+
+        public void gainExp() {
+               exp += (int)(Math.random() * 100);
+        }
+
+        public void levelUp() {
+                level += 1;
+        }
+
+        public void resetLevel() {
+                level = 1;
         }
 
         public void loseHp(double num) {
