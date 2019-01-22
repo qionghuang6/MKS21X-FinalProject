@@ -289,7 +289,6 @@ public static void putString(int r, int c,Terminal t, String s){
 
         //Adds all player information to info screen.
         public static void addPlayerInfo(Screen sideScreen, Player p, List<Pokemon> all, int xSize, double level) {
-
                 addMessageToInfo(sideScreen, "___________________________________________________________________________________", xSize/2 + 8, 29);
                 addMessageToInfo(sideScreen, "Player: " + p.getPlayer().toString() + "            Partner: " + p.getPartner().toString(), xSize/2 + 8, 30);
                 addMessageToInfo(sideScreen, "Gold: " + p.getGold() + "                                    Floor Level: " + level, xSize/2 + 8, 31);
@@ -902,9 +901,10 @@ public static void putString(int r, int c,Terminal t, String s){
                                 generated = true;
                         }
 
+                        //Checks to see if either the player or partner has an exp greater than 200. If they do, they level up!
                         if(player.getPlayer().getExp() > 200) {
                                 player.getPlayer().levelUp();
-                                addMessageToCombat(sideScreen, "Congratulations! Your partner leveled up!", xSize/2+8,yMessage,"bold");
+                                addMessageToCombat(sideScreen, "Congratulations! Your leveled up!", xSize/2+8,yMessage,"bold");
                                 yMessage++;
                                 player.getPlayer().resetExp();
                         }
@@ -914,6 +914,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                 addMessageToCombat(sideScreen, "Congratulations! Your partner leveled up!", xSize/2+8,yMessage,"bold");
                                 yMessage++;
                                 player.getPartner().resetExp();
+                                setUpInfoScreen(sideScreen,xSize,ySize);
                         }
 
 
@@ -923,6 +924,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                 mapMap[player.getPartner().getY()][player.getPartner().getX()].makeWalkable();
                                 setBg(terminal,player.getPartner().getX(), player.getPartner().getY(), 131,203,58);
                                 partnerFainted = true;
+                                setUpInfoScreen(sideScreen,xSize,ySize);
                         }
 
                         //Ending updates:
