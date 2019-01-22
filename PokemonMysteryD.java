@@ -538,7 +538,9 @@ public static void putString(int r, int c,Terminal t, String s){
                                                                 //moves message coordinate down.
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
-                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted!", xSize/2 + 8, yMessage, "bold");
+                                                                        player.getPlayer().gainExp();
+                                                                        player.getPartner().gainExp();
+                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted! You gained exp!", xSize/2 + 8, yMessage, "bold");
                                                                         mapMap[allPokemons.get(i).getY()][allPokemons.get(i).getX()].makeWalkable();
                                                                         setBg(terminal,allPokemons.get(i).getX(),allPokemons.get(i).getY(),131,203,58);
                                                                         allPokemons.remove(i);
@@ -566,7 +568,9 @@ public static void putString(int r, int c,Terminal t, String s){
                                                                 //moves message coordinate down.
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
-                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted!", xSize/2 + 8, yMessage, "bold");
+                                                                        player.getPlayer().gainExp();
+                                                                        player.getPartner().gainExp();
+                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted! You gained exp!", xSize/2 + 8, yMessage, "bold");
                                                                         mapMap[allPokemons.get(i).getY()][allPokemons.get(i).getX()].makeWalkable();
                                                                         setBg(terminal,allPokemons.get(i).getX(),allPokemons.get(i).getY(),131,203,58);
                                                                         allPokemons.remove(i);
@@ -592,7 +596,9 @@ public static void putString(int r, int c,Terminal t, String s){
                                                                 addMessageToCombat(sideScreen, "You: " + player.getPlayer().useMove(player.getPlayer().getMoveset().get(2),allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
-                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted!", xSize/2 + 8, yMessage, "bold");
+                                                                        player.getPlayer().gainExp();
+                                                                        player.getPartner().gainExp();
+                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted! You gained exp!", xSize/2 + 8, yMessage, "bold");
                                                                         mapMap[allPokemons.get(i).getY()][allPokemons.get(i).getX()].makeWalkable();
                                                                         setBg(terminal,allPokemons.get(i).getX(),allPokemons.get(i).getY(),131,203,58);
                                                                         allPokemons.remove(i);
@@ -619,7 +625,9 @@ public static void putString(int r, int c,Terminal t, String s){
                                                                 //moves message coordinate down.
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
-                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted!", xSize/2 + 8, yMessage, "bold");
+                                                                        player.getPlayer().gainExp();
+                                                                        player.getPartner().gainExp();
+                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted! You gained exp!", xSize/2 + 8, yMessage, "bold");
                                                                         mapMap[allPokemons.get(i).getY()][allPokemons.get(i).getX()].makeWalkable();
                                                                         setBg(terminal,allPokemons.get(i).getX(),allPokemons.get(i).getY(),131,203,58);
                                                                         allPokemons.remove(i);
@@ -662,7 +670,9 @@ public static void putString(int r, int c,Terminal t, String s){
                                                                 addMessageToCombat(sideScreen, "Partner: " + player.getPartner().useMove(partnerMove, allPokemons.get(i)), xSize/2 + 8,  yMessage, "bold");
                                                                 yMessage++;
                                                                 if(allPokemons.get(i).getHp() <= 0) {
-                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted!", xSize/2 + 8, yMessage, "bold");
+                                                                        player.getPlayer().gainExp();
+                                                                        player.getPartner().gainExp();
+                                                                        addMessageToCombat(sideScreen, allPokemons.get(i).getName() + " has fainted! You gained exp!", xSize/2 + 8, yMessage, "bold");
                                                                         mapMap[allPokemons.get(i).getY()][allPokemons.get(i).getX()].makeWalkable();
                                                                         setBg(terminal,allPokemons.get(i).getX(),allPokemons.get(i).getY(),131,203,58);
                                                                         allPokemons.remove(i);
@@ -768,6 +778,8 @@ public static void putString(int r, int c,Terminal t, String s){
                                               // if its the player pokemon that is on a portal
                                               if(playerTile != null){
                                                 //resets portal so it cant  be used again
+                                                addMessageToCombat(sideScreen,"You and your partner teleported!", xSize/2 + 8, yMessage, "bold"); 
+                                                yMessage++;
                                                 mapMap[player.getPlayer().getY()][player.getPlayer().getX()].getTp().setTp(null);
                                                 mapMap[player.getPlayer().getY()][player.getPlayer().getX()].setTp(null);
                                                 //moves pokemons
@@ -782,6 +794,8 @@ public static void putString(int r, int c,Terminal t, String s){
                                               }
                                               if(partnerTile != null){
                                                 //resets portal so it cant  be used again
+                                                addMessageToCombat(sideScreen,"You and your partner teleported!", xSize/2 + 8, yMessage, "bold"); 
+                                                yMessage++;
                                                 mapMap[player.getPartner().getY()][player.getPartner().getX()].getTp().setTp(null);
                                                 mapMap[player.getPartner().getY()][player.getPartner().getX()].setTp(null);
                                                 //physically places new pokemons on map
@@ -821,6 +835,7 @@ public static void putString(int r, int c,Terminal t, String s){
                                           }
                                           //addPlayerInfo(sideScreen, player, allPokemons, xSize);
                                           addMessageToCombat(sideScreen, "Healed " + (healHp + partHealHp) + "HP!", xSize/2 + 8, yMessage, "bold");
+                                          yMessage++;
                                         }
                                 }
 
@@ -887,6 +902,19 @@ public static void putString(int r, int c,Terminal t, String s){
                                 generated = true;
                         }
 
+                        if(player.getPlayer().getExp() > 200) {
+                                player.getPlayer().levelUp();
+                                addMessageToCombat(sideScreen, "Congratulations! Your partner leveled up!", xSize/2+8,yMessage,"bold");
+                                yMessage++;
+                                player.getPlayer().resetExp();
+                        }
+
+                        if(player.getPartner().getExp() > 200) {
+                                player.getPartner().levelUp();
+                                addMessageToCombat(sideScreen, "Congratulations! Your partner leveled up!", xSize/2+8,yMessage,"bold");
+                                yMessage++;
+                                player.getPartner().resetExp();
+                        }
 
 
                         if(player.getPartner().getHp() <= 0 && !partnerFainted) {
