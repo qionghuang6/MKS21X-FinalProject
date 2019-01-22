@@ -1,6 +1,7 @@
 # MKS21X-FinalProject
 ## Pokemon Mystery Dungeon: Based off of... 
 <img src="http://guidesmedia.ign.com/guides/image/article/873/873738/pokemonmd_guide_top_1210716707.jpg" width="400"></img>
+### MAKE SURE TO FULL SCREEN YOUR TERMINAL BEFORE PLAYING!!! (Dimensions are specific)
 ### <u> Instructions: </u>
 To compile the program, type:
 ~~~
